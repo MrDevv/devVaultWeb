@@ -1,0 +1,27 @@
+<header class="flex bg-secondary md:flex-row w-full
+        justify-between p-4 text-white">
+    <a href="/"><img src="logo.svg" alt="devVault" class="w-40 z-10"></a>
+
+    <div class="hidden md:flex justify-center items-center gap-3 font-medium">
+        <a class="pr-10 cursor-pointer" href="guide">Documentación</a>
+        <a class="px-5 cursor-pointer" routerLink="auth/login">Iniciar sesión</a>
+        <a class="rounded-md bg-primary px-5 py-2 cursor-pointer" routerLink="auth/register">Registrarse</a>
+    </div> 
+
+    <div class="md:hidden text-2xl">
+        <i 
+            (click)="toggleMenu()" 
+            class="fa-solid" 
+            [ngClass]="isOpen() ? 'fa-xmark' : 'fa-bars'">
+        </i>
+    </div>
+</header>
+
+<div 
+    class="md:hidden -mt-50 -z-10 bg-gradient text-white duration-300 w-full absolute flex flex-col justify-center items-center gap-4 py-5"
+    [ngClass]="isOpen() ? 'mt-0' : '-mt-50'"
+    >
+    <a class="cursor-pointer" href="guide">Documentación</a>
+    <a class=" cursor-pointer" routerLink="auth/login">Iniciar sesión</a>
+    <a class="rounded-md bg-secondary px-5 py-2 cursor-pointer" routerLink="auth/register">Registrarse</a>
+</div>   

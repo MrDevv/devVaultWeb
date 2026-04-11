@@ -1,0 +1,10 @@
+<div class="card h-full py-2 px-3 rounded-2xl grid grid-cols-1 grid-rows-[auto_1fr] bg-gradient-card">
+    <p class="md:text-lg text-left font-semibold">{{ option()?.nombre }}</p>
+    <div class="font-normal self-end justify-self-end ">
+        @if (option()?.icon) {
+            <i class="text-5xl" [ngClass]="option()?.icon"></i>
+        }@else {
+            <img class="w-22" [src]="option()?.svg" [alt]="option()?.nombre">
+        }
+    </div>
+</div>
