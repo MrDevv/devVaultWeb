@@ -1,1 +1,30 @@
-<p>landing-page works!</p>
+<div class="min-h-dvh grid grid-rows-[auto_1fr_auto]">
+    <nav-bar class="sticky top-0 left-0 z-50"/>
+    <main class="w-full flex-1 bg-gradient px-5 py-10 md:py-18 md:px-0">
+        <section class="text-white text-center mb-8 md:mb-15 reveal">
+            <h3 class="text-4xl mb-5 md:text-5xl font-bold max-w-4xl m-auto md:mb-10">El backend de tu portafolio, sin escribir un backend</h3>
+            <p class="text-primary mb-5 font-light md:text-2xl max-w-4xl m-auto md:mb-10">Registra tu perfil profesional en DevVault y consúltalo desde tu portafolio con tu API KEY. Tú diseñas la interfaz, nosotros guardamos los datos.</p>
+            <a 
+                routerLink="auth/register" 
+                class="rounded-md font-semibold outline-2 outline-[#333333] bg-primary px-15 py-2 cursor-pointer hover:bg-[#333333] duration-300">
+                REGISTRARSE
+            </a>
+        </section>
+        
+        <section class="flex flex-col md:flex-row justify-center items-center gap-8 mb-10 md:gap-20 md:mb-20 reveal">
+            @for (feature of features(); track $index) {
+                <card-feature [feature]="feature" />
+            }
+        </section>
+
+        <section class="text-white px-5 text-center md:px-0 md:max-w-3/4 2xl:max-w-3/5 m-auto">
+            <h2 class="text-[1.1rem] md:text-xl font-medium mb-5 reveal">GESTIONA TU INFORMACIÓN</h2>
+            <div class="grid grid-cols-1 grid-rows-4 md:grid-cols-4 md:grid-rows-1 gap-4">
+                @for(option of optionsCards(); track $index){
+                    <card-landing [option]="option" />
+                }
+            </div>
+        </section> 
+    </main>
+    <footer-component/>
+</div>
