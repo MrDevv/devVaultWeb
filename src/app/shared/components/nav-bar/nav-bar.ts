@@ -1,20 +1,24 @@
-import { NgClass } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { NavBarService } from '../../services/nav-bar-service';
+import { SideBarService } from '../../../guide/services/side-bar-service';
 
 @Component({
   selector: 'nav-bar',
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink],
   templateUrl: './nav-bar.html'
 })
 export class NavBar {
 
-  private _isOpen = signal(false);
+  navBarService = inject(NavBarService);
+  sideBarService = inject(SideBarService);
 
-  public isOpen = computed(() => this._isOpen());
+  pageName = input<string>('landing-page');
 
-  toggleMenu():void {
-    this._isOpen.set(!this._isOpen());
+
+  isLadingPage(): boolean {
+    return this.pageName() == 'landing-page';
   }
 
 }

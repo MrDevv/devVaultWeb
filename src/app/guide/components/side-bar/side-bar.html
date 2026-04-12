@@ -1,0 +1,36 @@
+<div 
+    (click)="sideBarService.close()" 
+    [class.hidden]="!sideBarService.isSideBarVisible()"
+    [class.block]="sideBarService.isSideBarVisible()"
+    class="bg-black md:hidden absolute left-0 top-0 w-full h-dvh z-0 select-none opacity-70 "></div>       
+    <aside         
+        [class.-left-40]="!sideBarService.isSideBarVisible()"
+        [class.left-0]="sideBarService.isSideBarVisible()"          
+        class="absolute -left-60 md:left-0 z-20 top-0 h-full w-1/2 md:w-auto
+            grid grid-rows-[auto_auto_1fr] md:relative md:grid-rows-[auto_1fr]
+            gap-4 bg-gradient-card text-white py-4
+            duration-300"
+    >
+    <div class="flex justify-center md:hidden">
+        <div routerLink="/" class="cursor-pointer flex items-center gap-3">
+            <img src="logo_white.png" alt="devVault" class="w-9 z-10">
+            <h1 class="text-2xl font-semibold">DevVault</h1>
+        </div>
+    </div>
+
+    <select class="text-center min-w-30 border-red-500 m-auto" name="version" id="version">
+        <option value="v1">v1</option>
+    </select>
+
+    <div class="flex flex-col">
+        <a (click)="goTo('introduccion')" class="border-b py-2 px-3 cursor-pointer">Introducción</a>
+        <a (click)="goTo('autenticacion')" class="border-b py-2 px-3 cursor-pointer">Autenticación</a>
+        <a (click)="goTo('base_url')" class="border-b py-2 px-3 cursor-pointer">Base URL</a>
+        <a (click)="goTo('endpoints')" class="border-b py-2 px-3 cursor-pointer">Endpoints</a>
+        <a (click)="goTo('datos_desarrollador')" class="border-b py-2 px-3 cursor-pointer">- Obtener datos del desarrollador</a>
+        <a (click)="goTo('tecnologias')" class="border-b py-2 px-3 cursor-pointer">- Obtener tecnologías</a>
+        <a (click)="goTo('experiencia')" class="border-b py-2 px-3 cursor-pointer">- Obtener experiencia</a>
+        <a (click)="goTo('proyectos')" class="border-b py-2 px-3 cursor-pointer">- Obtener proyectos</a>
+    </div>
+</aside>
+     
