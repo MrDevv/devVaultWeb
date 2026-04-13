@@ -4,10 +4,15 @@
         <nav-bar class="sticky left-0 top-0 z-10" pageName="guide-page"/>
         
         <div class="max-w-350 m-auto w-full">
-            <main class="text-white md:p-16 p-5">
+            <main class="text-white md:p-16 p-5">                
                 <h1 class="text-3xl md:text-5xl font-bold  text-primary tracking-tight mb-5 md:mb-10">DevVault API Documentación</h1>
                 <section id="introduccion" class="flex flex-col gap-2 mb-7 md:mb-10">
-                    <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight mb-1 md:mb-2">Introducción</h2>
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight mb-1 md:mb-2">Introducción</h2>                        
+                    </div>
                     <p class="text-sm md:text-lg text-secondary leading-relaxed font-light">Una vez que tienes tu perfil cargado en DevVault, el siguiente paso es conectarlo a tu portafolio. Para eso existe esta API: un conjunto de 4 endpoints que puedes consultar desde cualquier frontend usando tu API KEY personal, que generas luego de registrarte.</p>
                     <p class="text-sm md:text-lg text-secondary leading-relaxed font-light">Esta guía cubre todo lo que necesitas para hacer tus primeras peticiones: cómo incluir tu KEY en los headers, qué devuelve cada endpoint y qué esperar en la respuesta.</p>
                 </section>
@@ -37,7 +42,6 @@
                     <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo:</p>
 
                     <code-block text="Authorization: Bearer 691c3e42-9f1d-162e-9126-30c4d524abca-2032023165314"/>
-
                 </section>
 
                 <section id="endpoints" class="flex flex-col gap-2 mb-7 md:mb-10">
@@ -48,50 +52,14 @@
                         <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Endpoints</h2>
                     </div>
 
-
                     <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:max-w-2/3">
-                        <div class="bg-card p-6 rounded-2xl flex flex-col gap-3">
-                            <div class="flex justify-between items-center">
-                                <span class="px-2 py-1 bg-[#4edea31a] text-[#4edea3] text-sm font-bold rounded tracking-wider">GET</span>
-                                <i (click)="sideBarService.goTo('datos_desarrollador')" class="cursor-pointer fa-solid fa-square-arrow-up-right text-2xl text-primary"></i>
-                            </div>
-                            <p class="md:text-lg font-bold text-primary">/desarrolladores/me/datos</p>
-                            
-                            <p class="text-sm md:text-lg text-secondary leading-relaxed font-light">Obten tus datos profesionales como nombres, correo, github url, linkedin url y más.</p>
-                        </div>
-
-                        <div class="bg-card p-6 rounded-2xl flex flex-col gap-3">
-                            <div class="flex justify-between items-center">
-                                <span class="px-2 py-1 bg-[#4edea31a] text-[#4edea3] text-sm font-bold rounded tracking-wider">GET</span>                            
-                                <i class="cursor-pointer fa-solid fa-square-arrow-up-right text-2xl text-primary"></i>
-                            </div>
-                            <p class="md:text-lg font-bold text-primary">/desarrolladores/me/tecnologias</p>
-                            <p class="text-sm text-secondary font-light leading-relaxed">Obten tus datos profesionales como nombres, correo, github url, linkedin url y más.</p>
-                        </div>
-                        
-                        <div class="bg-card p-6 rounded-2xl flex flex-col gap-3">
-                            <div class="flex justify-between items-center">
-                                <span class="px-2 py-1 bg-[#4edea31a] text-[#4edea3] text-sm font-bold rounded tracking-wider">GET</span>                            
-                                <i  class="cursor-pointer fa-solid fa-square-arrow-up-right text-2xl text-primary"></i>
-                            </div>
-                            <p class="md:text-lg font-bold text-primary">/desarrolladores/me/experiencia</p>
-                            <p class="text-sm text-secondary font-light leading-relaxed">Obten tus datos profesionales como nombres, correo, github url, linkedin url y más.</p>
-                        </div>
-
-                        <div class="bg-card p-6 rounded-2xl flex flex-col gap-3">
-                            <div class="flex justify-between items-center">
-                                <span class="px-2 py-1 bg-[#4edea31a] text-[#4edea3] text-sm font-bold rounded tracking-wider">GET</span>                            
-                                <i class="cursor-pointer fa-solid fa-square-arrow-up-right text-2xl text-primary"></i>
-                            </div>
-                            <p class="md:text-lg font-bold text-primary">/desarrolladores/me/proyectos</p>
-                            <p class="text-sm text-secondary font-light leading-relaxed">Obten tus datos profesionales como nombres, correo, github url, linkedin url y más.</p>
-                        </div>                   
+                        @for (dataEndpoint of dataEndpoints(); track $index) {
+                            <card-endpoint [url]="dataEndpoint.url" [description]="dataEndpoint.description" />
+                        }
                     </div>
-                    
-                    
                 </section>
                 
-                <section id="datos_desarrollador" class="flex flex-col gap-2 mb-7 md:mb-10">                    
+                <section id="datos_desarrollador" class="flex flex-col gap-2 mb-7 md:mb-10">
                     <div class="flex gap-2 items-center mb-2">
                         <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
                             <i class="fa-regular fa-id-card"></i>
@@ -121,7 +89,6 @@
                     <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo en Javascript (Fetch):</p>
                     <code-block [text]="codigo" type="javascript"/>
                 </section>
-        
             </main>
         </div>
 
