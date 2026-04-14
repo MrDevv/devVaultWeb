@@ -1,0 +1,8 @@
+<div class="bg-card p-6 rounded-2xl flex flex-col gap-3">
+    <div class="flex justify-between items-center">
+        <span class="px-2 py-1 bg-[#4edea31a] text-[#4edea3] text-sm font-bold rounded tracking-wider">GET</span>
+        <i (click)="sideBarService.goTo('datos_desarrollador')" class="cursor-pointer fa-solid fa-square-arrow-up-right text-2xl text-primary"></i>
+    </div>
+    <p class="md:text-lg font-bold text-primary">{{ url() }}</p>    
+    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light">{{ description() }}</p>
+</div>

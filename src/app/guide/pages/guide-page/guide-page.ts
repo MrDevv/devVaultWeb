@@ -1,18 +1,42 @@
-import { AfterViewInit, Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NavBar } from "../../../shared/components/nav-bar/nav-bar";
 import { SideBar } from "../../components/side-bar/side-bar";
 import { JsonPipe } from '@angular/common';
-import Prism from 'prismjs';
 
-import 'prismjs/components/prism-json'
-import 'prismjs/components/prism-javascript';
+import { SideBarService } from '../../services/side-bar-service';
+import { CodeBlock } from "../../components/code-block/code-block";
+import { Footer } from "../../../landing/components/footer/footer";
+import { CardEndpoint } from "../../components/card-endpoint/card-endpoint";
+
+const dataEndpoints = [
+  {
+    url: "/desarrolladores/me/datos",
+    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+  },
+  {
+    url: "/desarrolladores/me/tecnologias",
+    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+  },
+  {
+    url: "/desarrolladores/me/experiencia",
+    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+  },
+  {
+    url: "/desarrolladores/me/proyectos",
+    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+  }
+]
 
 @Component({
   selector: 'app-guide-page',
-  imports: [NavBar, SideBar, JsonPipe],
+  imports: [NavBar, SideBar, JsonPipe, CodeBlock, Footer, CardEndpoint],
   templateUrl: './guide-page.html'  
 })
-export class GuidePage implements AfterViewInit {
+export class GuidePage {
+  sideBarService = inject(SideBarService);
+
+  public dataEndpoints = signal(dataEndpoints);
+
   codigo =`const API_KEY = "TU_API_KEY";
 
 fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/desarrolladores/me/datos", {
@@ -43,9 +67,6 @@ fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/desarrolladores/me/dat
   }
 
 
-  ngAfterViewInit(): void {
-    Prism.highlightAll();    
-  }
 
 
 }

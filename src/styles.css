@@ -1,15 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap);
 @import 'tailwindcss';
 @import 'prismjs/themes/prism-tomorrow.css';
 
+
+@layer base {
+    body{
+        font-family: "Manrope", sans-serif;
+    }
+}
+
 @layer components {
+    .bg-navbar { 
+        background-color: rgba(19, 19, 20, 0.8); /* #131314 con opacidad */
+        backdrop-filter: blur(20px);
+    }
+
     .bg-secondary {
-        background-color: #333333;
+        background-color: #0e0e0f;
     }
 
     .bg-primary {
-        background-color: #181819;
+        background-color:#131314;
+    }
+
+    .bg-card {
+        background-color: #1b1b1c;
     }
 
     .bg-gradient {
@@ -21,8 +37,19 @@
     }
 
     .text-primary {
-        color: #CDCDCD;
+        color: #e5e2e3;
     }
+
+    .text-secondary {
+        color: #c7c4d7;
+    }    
+}
+
+
+@layer utilities {
+  .font-manrope {
+    font-family: "Manrope", sans-serif;
+  }
 }
 
 

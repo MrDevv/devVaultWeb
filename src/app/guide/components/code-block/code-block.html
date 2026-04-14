@@ -1,0 +1,23 @@
+<div class="bg-card text-[#CDCDCD] rounded-lg overflow-hidden flex flex-col justify-between max-w-3xl">
+    <div class="bg-card px-4 py-3 flex justify-between items-center">
+        <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full bg-[#ffb4ab66]"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-[#b9c7e066]"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-[#4edea366]"></div>
+        </div>
+        <div class="flex gap-2 items-center cursor-pointer hover:text-gray-50">
+            <i class="ml-2 fa-regular fa-clipboard"></i>
+            <span class="font-light text-sm">COPIAR</span>
+        </div>
+    </div>
+    <div class="bg-secondary">
+        <pre class="px-4 py-3 bg-transparent! overflow-x-auto text-sm! flex justify-start">
+            <code 
+                class="whitespace-nowrap text-sm"
+                [class.language-javascript]="isJavascript()"
+                [class.language-json]="isJson()"
+                [innerHTML]="text()"
+            ></code>
+        </pre>
+    </div>
+</div>

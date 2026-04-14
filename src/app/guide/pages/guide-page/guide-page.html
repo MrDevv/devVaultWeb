@@ -1,75 +1,97 @@
-<div class="h-dvh flex flex-col">
-    <nav-bar class="z-10" pageName="guide-page"/>
-    <div class="flex-1 w-full bg-primary grid grid-cols-1 md:grid-cols-[auto_1fr] grid-rows-1 font-semibold min-h-0">
-        <app-side-bar/>
-        <main class="text-white p-5 overflow-y-auto">
-            <h1 class="text-2xl">DevVault API Documentación</h1>
-            <section id="introduccion" class="border-b-[#CDCDCD] border-solid border-b flex flex-col gap-2 py-3">
-                <h2 class="text-xl">Introducción</h2>
-                <p class="font-light">Una vez que tienes tu perfil cargado en DevVault, el siguiente paso es conectarlo a tu portafolio. Para eso existe esta API: un conjunto de 4 endpoints que puedes consultar desde cualquier frontend usando tu API KEY personal, que generas luego de registrarte.</p>
-                <p class="font-light">Esta guía cubre todo lo que necesitas para hacer tus primeras peticiones: cómo incluir tu KEY en los headers, qué devuelve cada endpoint y qué esperar en la respuesta.</p>
-            </section>
-    
-            <section id="autenticacion" class="border-b-[#CDCDCD] border-solid border-b flex flex-col gap-2 py-3">
-                <h2 class="text-xl">Autenticación</h2>
-                <p class="font-light">Todas las peticiones requieren enviar la API Key en el header:</p>
-                <div class="bg-secondary overflow-x-auto text-[#CDCDCD] px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer hover:bg-gray-800 transition max-w-3xl">
-                    <code class="whitespace-nowrap flex-1 text-sm">
-                        Authorization: Bearer TU_API_KEY
-                    </code>
-                    <i class="ml-2 fa-regular fa-clipboard"></i>
-                </div>
-                <p class="font-light">Ejemplo:</p>
-                <div class="bg-secondary overflow-x-auto text-[#CDCDCD] px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer hover:bg-gray-800 transition max-w-3xl">
-                    <code class="whitespace-nowrap flex-1 text-sm">
-                        Authorization: Bearer 691c3e42-9f1d-162e-9126-30c4d524abca-2032023165314
-                    </code>
-                    <i class="ml-2 fa-regular fa-clipboard"></i>
-                </div>
-                <h2 id="base_url" class="text-xl">Base URL</h2>
-                <div class="bg-secondary overflow-x-auto text-[#CDCDCD] px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer hover:bg-gray-800 transition max-w-3xl">
-                    <code class="whitespace-nowrap flex-1 text-sm">
-                        https://servermrdevv2.duckdns.org/portfolio/api/v1
-                    </code>
-                    <i class="ml-2 fa-regular fa-clipboard"></i>
-                </div>
-            </section>
+<div class="h-full grid md:grid-cols-[auto_1fr] grid-rows-1 bg-primary">
+    <app-side-bar/>
+    <div class="flex-1 w-full bg-primary grid grid-cols-1 grid-rows-[auto_1fr] font-semibold h-dvh overflow-y-auto">
+        <nav-bar class="sticky left-0 top-0 z-10" pageName="guide-page"/>
+        
+        <div class="max-w-350 m-auto w-full">
+            <main class="text-white md:p-16 p-5">                
+                <h1 class="text-3xl md:text-5xl font-bold  text-primary tracking-tight mb-5 md:mb-10">DevVault API Documentación</h1>
+                <section id="introduccion" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight mb-1 md:mb-2">Introducción</h2>                        
+                    </div>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light">Una vez que tienes tu perfil cargado en DevVault, el siguiente paso es conectarlo a tu portafolio. Para eso existe esta API: un conjunto de 4 endpoints que puedes consultar desde cualquier frontend usando tu API KEY personal, que generas luego de registrarte.</p>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light">Esta guía cubre todo lo que necesitas para hacer tus primeras peticiones: cómo incluir tu KEY en los headers, qué devuelve cada endpoint y qué esperar en la respuesta.</p>
+                </section>
 
-            <section></section>
+                <section id="base_url" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Base URL</h2>
+                    </div>
+                    <code-block text="https://servermrdevv2.duckdns.org/portfolio/api/v1"/>
+                </section>
+        
+                <section id="autenticacion" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="text-lg fa-solid fa-key"></i>
+                        </div>            
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Autenticación</h2>
+                    </div>
+                    
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Todas las peticiones requieren enviar la API Key en el header:</p>
+                    
+                    <code-block text="Authorization: Bearer TU_API_KEY"/>
 
-            <section id="endpoints" class="border-b-[#CDCDCD] border-solid border-b flex flex-col gap-2 py-3">
-                <h2 class="text-xl">Endpoints</h2>
-                <h3>1. Obtener datos del desarrollador</h3>
-                <h4>Endpoint</h4>
-                <div class="bg-secondary text-[#CDCDCD] rounded-lg overflow-x-auto flex gap-3 items-stretch justify-between cursor-pointer hover:bg-gray-800 transition max-w-3xl">
-                    <span class="bg-[#305E3C] text-[#B4FFBF] flex items-center px-2">GET</span>
-                    <code class="whitespace-nowrap flex-1 flex items-center text-sm">
-                        /desarrolladores/me/datos
-                    </code>
-                    <i class="py-3 px-4 fa-regular fa-clipboard"></i>
-                </div>
-                <h4>Descripción</h4>
-                <p class="font-light">Obtiene la información general del desarrollador:</p>
-                <ul class="list-disc pl-5 font-light">
-                    <li>desarrollador ID</li>
-                    <li>nombres</li>
-                    <li>apellidos</li>
-                    <li>correo</li>
-                    <li>github url</li>
-                    <li>linkedin url</li>
-                    <li>cv url</li>
-                    <li>logo url</li>
-                    <li>prefijo telefónico</li>
-                    <li>teléfono</li>
-                    <li>biografía</li>
-                    <li>puesto</li>
-                </ul>
-                <h3>Ejemplo respuesta JSON</h3>
-                <pre class="rounded-lg overflow-x-auto max-w-fit text-sm!"><code class="language-json">{{ data_desarrollador | json }}</code></pre>
-                <h3>Ejemplo en Javascript (Fetch)</h3>
-                <pre class="rounded-lg overflow-x-auto max-w-fit text-sm!"><code class="language-javascript" [innerHTML]="codigo"></code></pre>
-            </section>            
-    
-        </main>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo:</p>
+
+                    <code-block text="Authorization: Bearer 691c3e42-9f1d-162e-9126-30c4d524abca-2032023165314"/>
+                </section>
+
+                <section id="endpoints" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Endpoints</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 md:max-w-2/3">
+                        @for (dataEndpoint of dataEndpoints(); track $index) {
+                            <card-endpoint [url]="dataEndpoint.url" [description]="dataEndpoint.description" />
+                        }
+                    </div>
+                </section>
+                
+                <section id="datos_desarrollador" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-regular fa-id-card"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Obtener datos profesionales</h2>
+                    </div>
+
+                    <code-block text="/desarrolladores/me/datos"/>
+                    
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Lista de datos profesionales:</p>
+                    <ul class="list-disc pl-5 text-sm md:text-lg text-secondary leading-relaxed font-light">
+                        <li>desarrollador ID</li>
+                        <li>nombres</li>
+                        <li>apellidos</li>
+                        <li>correo</li>
+                        <li>github url</li>
+                        <li>linkedin url</li>
+                        <li>cv url</li>
+                        <li>logo url</li>
+                        <li>prefijo telefónico</li>
+                        <li>teléfono</li>
+                        <li>biografía</li>
+                        <li>puesto</li>
+                    </ul>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo respuesta JSON:</p>
+                    <code-block [text]="data_desarrollador | json" type="json"/>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo en Javascript (Fetch):</p>
+                    <code-block [text]="codigo" type="javascript"/>
+                </section>
+            </main>
+        </div>
+
+        <footer-component/>
     </div>
 </div>
