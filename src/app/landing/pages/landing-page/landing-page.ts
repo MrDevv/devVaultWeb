@@ -6,54 +6,66 @@ import { ScrollTrigger } from 'gsap/all';
 import { Footer } from '../../components/footer/footer';
 import { CardLanding } from "../../components/card-landing/card-landing";
 import { CardFeature } from '../../components/card-feature/card-feature';
+import { NgClass } from '@angular/common';
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 const optionsArray = [
   {
-    nombre: 'DATOS DE CONTACTO', 
-    icon: 'fa-regular fa-address-card',
-    svg: null
+    nombre: 'Datos de contacto', 
+    icon: 'fa-solid fa-at',
+    description: 'Email, redes sociales, puesto y links profesionales.',
+    bgClass: 'bg-[#c0c1ff1a]',
+    textClass: 'text-[#c0c1ff]'
   },
   {
-    nombre: 'TECNOLOGÍAS', 
-    icon: null,
-    svg: 'tecnologias_icon_landing.svg'
+    nombre: 'Tecnologías',
+    icon: 'fa-solid fa-terminal',
+    description: 'Stack técnico categorizado: Frontend, Backend, DevOps y Herramientas.',
+    bgClass: 'bg-[#4edea31a]',
+    textClass: 'text-[#4edea3]'
   },
   {
-    nombre: 'EXPERIENCIA', 
+    nombre: 'Experiencia', 
     icon: 'fa-solid fa-briefcase',
-    svg: null
+    description: 'Historial laboral con fechas, logros y tecnologías aplicadas en cada rol.',
+    bgClass: 'bg-[#bdc2ff1a]',
+    textClass: 'text-[#bdc2ff]'
   },
   {
-    nombre: 'PROYECTOS', 
-    icon: 'fa-solid fa-laptop-code',
-    svg: null
+    nombre: 'Proyectos', 
+    icon: 'fa-regular fa-folder-open',
+    description: 'Tus trabajos con links a GitHub, demos en vivo y etiquetas.',
+    bgClass: 'bg-[#8083ff1a]',
+    textClass: 'text-[#8083ff]'
   },
 ]
 
 const features = [
-  {
-    nombre: 'Seguridad',
+  {    
+    nombre: 'Seguridad Total',
     descripcion: 'Obten tus datos con una API KEY propia y privada.',
+    extra: 'Tus datos están protegidos y solo son accesibles mediante autenticación con tu API KEY.',
     icon: 'fa-shield-halved'
   },
   {
-    nombre: 'Centralizada',
+    nombre: 'Centralización',
     descripcion: 'Mantén tu información centralizada en un solo lugar.',
-    icon: 'fa-cube'
+    extra: null,
+    icon: null,
   },
-    {
+  {
     nombre: 'Ahorro de tiempo',
     descripcion: 'Crea y obten tus datos de forma rápida y sencilla.',
-    icon: 'fa-stopwatch'
+    extra: 'Sin configuraciones complejas de bases de datos. Un endpoint, todos tus datos.',
+    icon: null
   }
 ]
 
 @Component({
   selector: 'app-landing-page',
-  imports: [RouterLink, NavBar, Footer, CardLanding, CardFeature],
+  imports: [RouterLink, NavBar, Footer, CardLanding, CardFeature, NgClass],
   templateUrl: './landing-page.html'  
 })
 export class LandingPage implements AfterViewInit{
@@ -87,7 +99,19 @@ export class LandingPage implements AfterViewInit{
       stagger: 0.2,
       ease: 'power3.out'
     });
-
   }
+
+  getGridClass(index: number): string {
+    switch (index) {
+      case 0:
+        return 'md:col-span-3';
+      case 1:
+        return 'md:col-span-2';
+      case 2:
+        return 'md:col-start-2 md:col-end-5';
+      default:
+        return '';
+    }
+}
 
 }

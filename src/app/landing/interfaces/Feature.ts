@@ -1,5 +1,6 @@
-export interface Feature{
+export interface Feature{  
   nombre: string;
   descripcion: string;
-  icon: string;
+  extra: string | null;
+  icon: string | null;
 }

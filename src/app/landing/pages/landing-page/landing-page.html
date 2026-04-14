@@ -1,10 +1,10 @@
 <div class="min-h-dvh grid grid-rows-[auto_1fr_auto]">
     <nav-bar class="fixed top-0 left-0 right-0 z-50"/>
-    <main class=" w-full bg-primary px-5 md:px-30 py-10 pt-25 md:pt-50">
-        <section class="flex flex-col items-start max-w-4xl mb-8 md:mb-15 reveal">
-            <h3 class="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 text-primary">El backend de tu portafolio, <span class="italic text-secondary mr-4">sin escribir</span>  un backend</h3>
-            <p class="text-lg md:text-xl text-secondary max-w-2xl mb-6 md:mb-12 leading-relaxed">Registra tu perfil profesional en DevVault y consúltalo desde tu portafolio con tu API KEY. Tú diseñas la interfaz, nosotros guardamos los datos.</p>
-            <div class="flex flex-col md:flex-row gap-4 md:gap-8">
+    <main class=" w-full bg-primary pt-30 md:pt-50">
+        <section class="flex flex-col items-start max-w-6xl mb-8 md:mb-15 px-5 md:px-30">
+            <h3 class="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 text-primary reveal">El backend de tu portafolio, <span class="italic text-secondary mr-4">sin escribir</span>  un backend</h3>
+            <p class="text-lg md:text-xl text-secondary max-w-2xl mb-6 md:mb-12 leading-relaxed reveal">Registra tu perfil profesional en DevVault y consúltalo desde tu portafolio con tu API KEY. Tú diseñas la interfaz, nosotros guardamos los datos.</p>
+            <div class="flex flex-col md:flex-row gap-4 md:gap-8 reveal">
                 <a 
                     routerLink="auth/register" 
                     class="text-center rounded-md text-primary font-semibold outline-2 outline-[#1b1b1c] bg-[#333333] px-15 py-3 md:py-5 cursor-pointer hover:bg-[#131314] duration-300">
@@ -19,17 +19,24 @@
 
         </section>
         
-        <section class="flex flex-col md:flex-row justify-center items-center gap-8 mb-10 md:gap-20 md:mb-20 reveal">
-            @for (feature of features(); track $index) {
-                <card-feature [feature]="feature" />
-            }
+        <section class="bg-secondary py-20">
+            <div class="max-w-7xl mx-auto px-8 md:px-0 grid grid-cols-1 md:grid-cols-5 items-stretch gap-6">
+                @for (feature of features(); track $index; let i = $index) {
+                    <card-feature
+                        [ngClass]="getGridClass(i)"
+                        [feature]="feature" />
+                }
+            </div>
         </section>
 
-        <section class="text-white px-5 text-center md:px-0 md:max-w-3/4 2xl:max-w-3/5 m-auto">
-            <h2 class="text-[1.1rem] md:text-xl font-medium mb-5 reveal">GESTIONA TU INFORMACIÓN</h2>
+        <section class="text-white px-5 py-20 md:px-0 md:max-w-7xl m-auto">
+            <div class="mb-15 max-w-2xl">
+                <h2 class="text-4xl md:text-6xl font-bold tracking-tighter text-primary mb-4 reveal">La Bóveda del Desarrollador</h2>
+                <p class="text-secondary text-lg reveal">Módulos estructurados diseñados específicamente para lo que un portafolio técnico necesita.</p>
+            </div>
             <div class="grid grid-cols-1 grid-rows-4 md:grid-cols-4 md:grid-rows-1 gap-4">
                 @for(option of optionsCards(); track $index){
-                    <card-landing [option]="option" />
+                    <card-landing class="card" [option]="option" />
                 }
             </div>
         </section> 

@@ -1,10 +1,14 @@
-<div class="card h-full py-2 px-3 rounded-2xl grid grid-cols-1 grid-rows-[auto_1fr] bg-gradient-card">
-    <p class="md:text-lg text-left font-semibold">{{ option()?.nombre }}</p>
-    <div class="font-normal self-end justify-self-end ">
-        @if (option()?.icon) {
-            <i class="text-5xl" [ngClass]="option()?.icon"></i>
-        }@else {
-            <img class="w-22" [src]="option()?.svg" [alt]="option()?.nombre">
-        }
+<div class="bg-card hover:bg-secondary h-full p-8 rounded-xl transition-all hover:bg-[#333333] duration-300">
+    <div 
+        class="w-12 h-12 rounded-lg flex items-center justify-center mb-8 group-hover:scale-110 transition-transform"
+        [ngClass]="option()?.bgClass"
+    >
+        <i 
+            class="text-xl"
+            [ngClass]="[option()?.icon, option()?.textClass]"
+            
+        ></i>
     </div>
+    <h3 class="text-xl font-bold text-primary mb-3">{{ option()?.nombre }}</h3>
+    <p class="text-secondary text-sm leading-relaxed"> {{ option()?.description }} </p>
 </div>
