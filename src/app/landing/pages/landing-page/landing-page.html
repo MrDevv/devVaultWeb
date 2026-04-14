@@ -1,14 +1,22 @@
 <div class="min-h-dvh grid grid-rows-[auto_1fr_auto]">
     <nav-bar class="fixed top-0 left-0 right-0 z-50"/>
-    <main class=" w-full flex-1 bg-gradient px-5 py-10 md:pt-34 md:px-0">
-        <section class="text-white text-center mb-8 md:mb-15 reveal">
-            <h3 class="text-4xl mb-5 md:text-5xl font-bold max-w-4xl m-auto md:mb-10">El backend de tu portafolio, sin escribir un backend</h3>
-            <p class="text-primary mb-5 font-light md:text-2xl max-w-4xl m-auto md:mb-10">Registra tu perfil profesional en DevVault y consúltalo desde tu portafolio con tu API KEY. Tú diseñas la interfaz, nosotros guardamos los datos.</p>
-            <a 
-                routerLink="auth/register" 
-                class="rounded-md font-semibold outline-2 outline-[#333333] bg-[#004B96] px-15 py-2 cursor-pointer hover:bg-[#333333] duration-300">
-                REGISTRARSE
-            </a>
+    <main class=" w-full bg-primary px-5 md:px-30 py-10 pt-25 md:pt-50">
+        <section class="flex flex-col items-start max-w-4xl mb-8 md:mb-15 reveal">
+            <h3 class="text-5xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 text-primary">El backend de tu portafolio, <span class="italic text-secondary mr-4">sin escribir</span>  un backend</h3>
+            <p class="text-lg md:text-xl text-secondary max-w-2xl mb-6 md:mb-12 leading-relaxed">Registra tu perfil profesional en DevVault y consúltalo desde tu portafolio con tu API KEY. Tú diseñas la interfaz, nosotros guardamos los datos.</p>
+            <div class="flex flex-col md:flex-row gap-4 md:gap-8">
+                <a 
+                    routerLink="auth/register" 
+                    class="text-center rounded-md text-primary font-semibold outline-2 outline-[#1b1b1c] bg-[#333333] px-15 py-3 md:py-5 cursor-pointer hover:bg-[#131314] duration-300">
+                    REGISTRARSE
+                </a>
+                <a 
+                    routerLink="auth/register" 
+                    class="text-center rounded-md text-primary font-semibold outline-2 outline-[#333333] bg-primary px-15 py-3 md:py-5 cursor-pointer hover:bg-[#1b1b1c] duration-300">
+                    VER DOCUMENTACION
+                </a>
+            </div>
+
         </section>
         
         <section class="flex flex-col md:flex-row justify-center items-center gap-8 mb-10 md:gap-20 md:mb-20 reveal">
