@@ -1,1 +1,24 @@
-<p>Login</p>
+<div class="h-svh w-full bg-card flex justify-center items-center flex-col gap-6">    
+        <div class="bg-secondary rounded-4xl">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="bg-white text-primary-dark rounded-4xl flex flex-col items-center">
+                    <div class="bg-secondary w-25 h-25 -mt-10 rounded-full border-6 border-white flex justify-center items-center">
+                        <img class="w-15" src="logo_white.png" alt="logo">
+                    </div>
+                    <h1 routerLink="/" class="cursor-pointer text-3xl font-extrabold tracking-tighter mb-4">DevVault</h1>
+                    <div class="flex flex-col gap-4 pb-9 px-6">
+                        <div class="min-w-2xs border-b-3 border-[#0e0e0f] py-2 px-4 rounded-sm flex items-center gap-2">
+                            <i class="fa-solid fa-at text-primary-dark"></i>
+                            <input formControlName="email" class="text-sm outline-0 text-primary-dark w-full" type="text" placeholder="example@devvault.io">
+                        </div>
+                        <div class="min-w-2xs border-b-3 border[#0e0e0f] py-2 px-4 rounded-sm flex items-center gap-2">
+                            <i class="fa-solid fa-lock text-primary-dark"></i>
+                            <input formControlName="password" class="text-sm outline-0 text-primary-dark" type="password" placeholder="*****************">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="cursor-pointer text-white font-bold py-4 text-center w-full">INICIAR SESIÓN</button>
+            </form>
+        </div>
+        <p class="text-primary text-sm">¿no tienes una cuenta? <a routerLink="/auth/register" class="font-bold cursor-pointer">registrate ahora</a></p>    
+</div>                                
