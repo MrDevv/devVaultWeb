@@ -25,7 +25,7 @@
     }
 
     .bg-card {
-        background-color: #1b1b1c;
+        background-color: #201F20;        
     }
 
     .bg-gradient {
@@ -43,6 +43,10 @@
     .text-secondary {
         color: #c7c4d7;
     }    
+
+    .text-primary-dark {
+        color: #0e0e0f;
+    }
 }
 
 
