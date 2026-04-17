@@ -71,3 +71,11 @@
 ::-webkit-scrollbar-track {
   background: #222a35;
 }
+
+.swal2-confirm {
+    background-color: #0e0e0f;
+}
+
+.swal2-confirm:hover {
+    background-color: #201F20;
+}

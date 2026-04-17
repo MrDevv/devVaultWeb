@@ -21,4 +21,10 @@
             </form>
         </div>
         <p class="text-primary text-sm">¿no tienes una cuenta? <a routerLink="/auth/register" class="font-bold cursor-pointer">registrate ahora</a></p>    
-</div>                                
+</div>
+
+@if (authService.authStatus() == 'checking') {
+    <div class="absolute top-0 left-0 flex justify-center items-center w-full h-dvh bg-black/50">
+        <span class="loader z-20"></span>
+    </div>
+}
