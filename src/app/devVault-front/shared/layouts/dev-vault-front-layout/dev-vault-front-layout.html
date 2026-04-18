@@ -1,0 +1,84 @@
+<div class="h-full grid grid-cols-[auto_1fr] grid-rows-1">
+    <div
+    (click)="sideBarService.close()" 
+    [class.hidden]="!sideBarService.isSideBarVisible()"
+    [class.block]="sideBarService.isSideBarVisible()"
+    class="bg-black md:hidden absolute touch-none left-0 top-0 w-full h-dvh z-0 opacity-70"></div>
+    <aside 
+        [class.-left-40]="!sideBarService.isSideBarVisible()"
+        [class.left-0]="sideBarService.isSideBarVisible()"
+        class="
+        h-full
+        md:max-w-64 
+        absolute 
+        md:relative
+        -left-100 md:left-0 
+        z-20 
+        md:h-dvh
+        py-8 px-4
+        md:w-auto
+        grid grid-rows-[auto_auto_1fr]
+        gap-4 bg-secondary text-white
+        duration-300
+    "
+        >
+        <div class="flex items-center justify-center px-4 mb-5 md:mb-5">
+            <div (click)="sideBarService.toDirectLanding()" class="cursor-pointer flex items-center gap-3">
+                <img src="logo_white.png" alt="devVault" class="w-9 z-10">
+                <h1 class="text-2xl font-semibold">DevVault</h1>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+            routerLink="/home"
+            routerLinkActive="bg-card border-[#6366F1]">
+                <i class="fa-solid fa-house"></i>
+                <a>Inicio</a>
+            </div>
+            
+            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+            routerLink="/data"
+            routerLinkActive="bg-card border-[#6366F1]">
+                <i class="fa-regular fa-user"></i>
+                <a>Datos Profesionales</a>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-code"></i>
+                <a>Tecnologías</a>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-briefcase"></i>
+                <a>Experiencias</a>
+            </div>
+        
+            <div class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-regular fa-folder-open"></i>
+                <a>Proyectos</a>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-globe"></i>
+                <a>Administrar API</a>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-gear"></i>
+                <a>Configuración</a>
+            </div>
+
+            <div class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="text-lg fa-solid fa-key"></i>
+                <a>- Obtener proyectos</a>
+            </div>
+
+
+        </div>
+    </aside>
+    <div class="w-full h-dvh overflow-y-hidden bg-primary">
+        <nav-bar class="sticky md:hidden left-0 top-0 z-10" pageName="home-page"/>
+        <router-outlet/>
+    </div>
+</div>

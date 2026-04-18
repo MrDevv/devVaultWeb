@@ -1,1 +1,81 @@
-<p>home</p>
+<div class="w-full h-full overflow-y-auto">
+    <!-- Navbar -->
+    <div class="w-full sticky hidden md:block top-0 bg-primary">
+        <div class="w-full flex gap-3 justify-end px-5 py-3">
+            <div class="flex flex-col justify-center items-end">
+                <p class="text-primary font-bold">{{ authService.user()?.nombres }}</p>
+                <p class="text-[#C7C4D7]">{{ authService.user()?.puesto }}</p>
+            </div>
+            <div class="w-10 h-10 border-3 rounded-xl flex justify-center items-center border-gray-500">
+                <i class="text-primary fa-solid fa-user"></i>
+            </div>
+        </div>
+    </div>
+<!-- main -->
+     <main class="p-5">
+        <!-- header main -->
+        <div class="flex flex-col gap-3 mb-4">
+            <h2 class="font-extrabold text-4xl text-primary">Bienvenido, <span class="text-[#C0C1FF]">Miguel Angel</span></h2>
+            <div class="flex gap-3 items-center bg-card max-w-fit py-2 px-4 text-secondary text-[12px] rounded-2xl">
+                <span class="w-3 h-3 rounded-full block bg-green-300"></span>
+                Perfil 92% completado
+            </div>            
+        </div>
+        <!-- content main -->
+        <div class="grid grid-cols-[1fr_auto]">
+            <div>
+
+            </div>
+            <div class="flex flex-col gap-6">
+                <div class="bg-[#181819] p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="text-secondary text-sm uppercase font-extrabold">Autorización</h3>
+                        <i class="text-[#4EDEA3] fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="flex justify-between bg-secondary rounded-lg min-w-50 p-4 mb-5">
+                        <div>
+                            <p class="text-secondary text-[12px]">Estado de API KEY</p>
+                            <p class="text-[#4EDEA3] font-bold text-[18px]">Habilitado</p>
+                        </div>
+                        <div class="bg-[#4EDEA3]/10 w-10 h-10 flex justify-center items-center rounded-xl">
+                            <i class="text-xl text-[#4EDEA3] fa-regular fa-circle-check"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-lg mb-5">
+                        <p class="text-[12px] font-medium text-secondary">API KEY</p>
+                        <div class="bg-secondary flex justify-between items-center gap-3 p-3 rounded-sm">
+                            <p class="text-secondary">************************</p>
+                            <i class="text-secondary cursor-pointer fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+                    <span class="block w-full h-px bg-[#464554]/10 mb-4"></span>
+                    <p class="max-w-3/4 text-[12px] text-secondary">Gestiona tu API KEY en la página de "Administrar API"</p>
+                </div>
+
+                <div class="bg-[#181819] p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="text-secondary text-sm uppercase font-extrabold">Conectividad</h3>
+                        <i class="text-[#4EDEA3] fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="flex justify-between bg-secondary rounded-lg min-w-50 p-4 mb-5">
+                        <div>
+                            <p class="text-secondary text-[12px]">Estado de CORS</p>
+                            <p class="text-[#4EDEA3] font-bold text-[18px]">Habilitado</p>
+                        </div>
+                        <div class="bg-[#4EDEA3]/10 w-10 h-10 flex justify-center items-center rounded-xl">
+                            <i class="text-xl text-[#4EDEA3] fa-regular fa-circle-check"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-lg mb-5">
+                        <p class="text-[12px] font-medium text-secondary">Dominio Autorizado</p>
+                        <div class="bg-secondary flex justify-between items-center gap-3 p-3 rounded-sm">
+                            <p class="text-secondary">https://miportafolio.dev</p>
+                        </div>
+                    </div>
+                    <span class="block w-full h-px bg-[#464554]/10 mb-4"></span>
+                    <p class="max-w-3/4 text-[12px] text-secondary">Gestiona los CORS en la página de "Administrar API"</p>
+                </div>
+            </div>
+        </div>
+     </main>
+</div>

@@ -5,6 +5,7 @@ import { HomePage } from './devVault-front/home/pages/home-page/home-page';
 import { RegisterPage } from './auth/pages/register/register-page';
 import { LandingPage } from './landing/pages/landing-page/landing-page';
 import { GuidePage } from './guide/pages/guide-page/guide-page';
+import { DevVaultFrontLayout } from './devVault-front/shared/layouts/dev-vault-front-layout/dev-vault-front-layout';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
     },
     {
         path: '',
+        component: DevVaultFrontLayout,
         children: [
             {
                 path: 'home',

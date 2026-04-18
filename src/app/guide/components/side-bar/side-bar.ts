@@ -11,10 +11,7 @@ import { Router } from '@angular/router';
 export class SideBar {
 
   sideBarService = inject(SideBarService);
-  route = inject(Router)
 
-  toDirectLanding(){
-    this.route.navigate(["/"])
-  }
+
 
 }

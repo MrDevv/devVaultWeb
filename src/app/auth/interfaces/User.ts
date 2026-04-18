@@ -1,7 +1,7 @@
 import { Rol } from "./Rol";
 
 export interface User {
-    usuario_id: string;
+    usuario_uuid: string;
     email: string;
     nombres: string;
     apellidos: string;

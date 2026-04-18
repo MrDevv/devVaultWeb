@@ -1,10 +1,13 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SideBarService {
-    
+  
+  private router = inject(Router);
+
   private statusSidebar = signal<boolean>(false);
 
   isSideBarVisible: Signal<boolean> = computed(()=> this.statusSidebar());
@@ -20,6 +23,10 @@ export class SideBarService {
 
   public changeValue():void {
     this.statusSidebar.set(!this.isSideBarVisible())
+  }
+
+  toDirectLanding(){
+    this.router.navigate(["/"])
   }
 
   goTo(fragment: string) {
