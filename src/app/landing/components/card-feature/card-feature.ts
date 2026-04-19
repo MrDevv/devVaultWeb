@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { Feature } from '../../interfaces/Feature';
+
+import { Feature } from '@landing/interfaces/Feature';
 
 
 @Component({

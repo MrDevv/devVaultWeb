@@ -1,5 +1,6 @@
 import { Component, inject, input } from '@angular/core';
-import { SideBarService } from '../../services/side-bar-service';
+import { SideBarService } from '@guide/services/side-bar-service';
+
 
 @Component({
   selector: 'card-endpoint',

@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { Option } from '../../interfaces/Option';
+
+import { Option } from '@landing/interfaces/Option';
 
 @Component({
   selector: 'card-landing',

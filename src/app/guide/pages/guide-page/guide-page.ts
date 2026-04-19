@@ -1,12 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
-import { NavBar } from "../../../shared/components/nav-bar/nav-bar";
-import { SideBar } from "../../components/side-bar/side-bar";
 import { JsonPipe } from '@angular/common';
 
-import { SideBarService } from '../../services/side-bar-service';
-import { CodeBlock } from "../../components/code-block/code-block";
-import { Footer } from "../../../landing/components/footer/footer";
-import { CardEndpoint } from "../../components/card-endpoint/card-endpoint";
+import { NavBar } from '@shared/components/nav-bar/nav-bar';
+import { SideBar } from '@shared/components/side-bar/side-bar';
+import { CodeBlock } from '@guide/components/code-block/code-block';
+import { CardEndpoint } from '@guide/components/card-endpoint/card-endpoint';
+import { SideBarService } from '@guide/services/side-bar-service';
+import { Footer } from '@landing/components/footer/footer';
+
 
 const dataEndpoints = [
   {

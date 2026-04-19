@@ -1,0 +1,131 @@
+<div 
+    (click)="sideBarService.close()" 
+    [class.hidden]="!sideBarService.isSideBarVisible()"
+    [class.block]="sideBarService.isSideBarVisible()"
+    class="bg-black md:hidden absolute left-0 top-0 w-full h-dvh z-0 select-none opacity-70 "></div>       
+<aside         
+    [class.-left-40]="!sideBarService.isSideBarVisible()"
+    [class.left-0]="sideBarService.isSideBarVisible()"          
+    class="
+    h-full
+    md:max-w-64 
+    absolute 
+    md:relative
+    -left-100 md:left-0 
+    z-20 
+    md:h-dvh
+    py-8 px-4
+    md:w-auto
+    grid grid-rows-[auto_auto_1fr]
+    gap-4 bg-secondary text-white
+    duration-300"
+    >
+    <div class="flex flex-col gap-4 items-center justify-center px-4 mb-5"
+    [class.md:mb-5]="page()!='guide'"
+    [class.md:mb-10]="page()=='guide'"
+    >
+        <div (click)="sideBarService.toDirectLanding()" class="cursor-pointer flex items-center gap-3">
+            <img src="logo_white.png" alt="devVault" class="w-9 z-10">
+            <h1 class="text-2xl font-semibold">DevVault</h1>
+        </div>
+
+        @if (page() == 'guide') {
+            <select class="appearance-none text-center min-w-30 border rounded border-[#212121] focus:outline-none py-1 m-auto" name="version" id="version">
+                <option value="v1">v1</option>
+            </select>
+        }
+    </div>
+
+    <div class="flex flex-col"
+    [class.gap-2]="page()!='guide'">
+
+        @if (page() == 'guide') {
+            <div (click)="sideBarService.goTo('introduccion')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-book-open"></i>
+                <a>Introducción</a>
+            </div>
+            
+            <div (click)="sideBarService.goTo('base_url')" class="flex  items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-globe"></i>
+                <a>Base URL</a>
+            </div>
+    
+            <div (click)="sideBarService.goTo('autenticacion')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="text-lg fa-solid fa-key"></i>
+                <a>Autenticación</a>
+            </div>
+    
+            <div (click)="sideBarService.goTo('endpoints')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-network-wired"></i>
+                <a>Endpoints</a>            
+            </div>
+        
+            <div (click)="sideBarService.goTo('datos_desarrollador')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-regular fa-id-card"></i>
+                <a>Obtener datos profesionales</a>
+            </div>
+    
+            <div (click)="sideBarService.goTo('tecnologias')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="text-lg fa-solid fa-key"></i>
+                <a>- Obtener tecnologías</a>            
+            </div>
+    
+            <div (click)="sideBarService.goTo('experiencia')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="text-lg fa-solid fa-key"></i>            
+                <a>- Obtener experiencia</a>
+            </div>
+    
+            <div (click)="sideBarService.goTo('proyectos')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="text-lg fa-solid fa-key"></i>
+                <a>- Obtener proyectos</a>
+            </div>
+        }@else {
+
+            <div 
+                class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+                routerLink="/home"
+                routerLinkActive="bg-card border-[#6366F1]"
+            >
+                <i class="fa-solid fa-house"></i>
+                <a>Inicio</a>
+            </div>
+            
+            <div 
+                class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+                routerLink="/data"
+                routerLinkActive="bg-card border-[#6366F1]"
+            >
+                <i class="fa-regular fa-user"></i>
+                <a>Datos Profesionales</a>
+            </div>
+
+            <div 
+                class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+            >
+                <i class="fa-solid fa-code"></i>
+                <a>Tecnologías</a>
+            </div>
+
+            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-briefcase"></i>
+                <a>Experiencias</a>
+            </div>
+        
+            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-regular fa-folder-open"></i>
+                <a>Proyectos</a>
+            </div>
+
+            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-globe"></i>
+                <a>Administrar API</a>
+            </div>
+
+            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-gear"></i>
+                <a>Configuración</a>
+            </div>
+        }
+    </div>
+</aside>
+     
