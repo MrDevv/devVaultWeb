@@ -44,7 +44,7 @@ export class AuthService {
     this._token.set(user.token)
     this._user.set(user)
     this._authStatus.set('authenticated')
-    localStorage.setItem('token_devVault', JSON.stringify(user.token))
+    localStorage.setItem('token_devVault', user.token)
   }
 
 }

@@ -1,0 +1,16 @@
+<div class="bg-card rounded-lg p-6">
+    <span class="font-bold text-[12px] block mb-3"
+    [class.text-[#00A572]]="experiencia()?.fecha_inicio"
+    [class.text-[#C7C4D7]]="experiencia()?.fecha_fin">
+            {{ experiencia()?.fecha_fin ? 'Previo' : 'Actual' }}
+    </span>
+    <h3 class="text-[16px] font-bold text-primary">{{ experiencia()?.titulo }}</h3>
+    <p class="text-[14px] text-secondary font-medium mb-3">{{ experiencia()?.nombre_empresa }}</p>
+    <div class="flex gap-2 items-center text-secondary font-light text-[12px]">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>{{ experiencia()?.fecha_inicio | date: "MMMM 'del' yyyy" : '' : 'es' | titlecase }} 
+            - 
+            {{ experiencia()?.fecha_fin ? ('2026-02-01' | date: "MMMM 'del' yyyy" : '' : 'es') : 'Actual' }}
+        </span>
+    </div>
+</div>
