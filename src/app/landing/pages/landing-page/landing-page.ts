@@ -1,12 +1,14 @@
 import { Component, signal, computed, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NavBar } from "../../../shared/components/nav-bar/nav-bar";
+import { NgClass } from '@angular/common';
+
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { Footer } from '../../components/footer/footer';
-import { CardLanding } from "../../components/card-landing/card-landing";
-import { CardFeature } from '../../components/card-feature/card-feature';
-import { NgClass } from '@angular/common';
+
+import { NavBar } from '@shared/components/nav-bar/nav-bar';
+import { Footer } from '@landing/components/footer/footer';
+import { CardLanding } from '@landing/components/card-landing/card-landing';
+import { CardFeature } from '@landing/components/card-feature/card-feature';
 
 
 gsap.registerPlugin(ScrollTrigger);

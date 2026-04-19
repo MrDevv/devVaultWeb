@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { AfterViewInit, Component, input } from '@angular/core';
 import Prism from 'prismjs';
 

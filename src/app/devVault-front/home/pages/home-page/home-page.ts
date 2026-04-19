@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+
+import { AuthService } from '@auth/services/auth-service';
+import { NavbarAdministrativo } from '@devVault-front/shared/components/navbar-administrativo/navbar-administrativo';
 
 @Component({
-  selector: 'app-home-page',
-  imports: [],
+  selector: 'home-page',  
+  imports: [NavbarAdministrativo],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
-export class HomePage {}
+export class HomePage {
+  public authService = inject(AuthService);
+
+  
+
+}

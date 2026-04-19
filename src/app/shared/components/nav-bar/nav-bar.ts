@@ -1,8 +1,9 @@
 
 import { Component, inject, input} from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { NavBarService } from '../../services/nav-bar-service';
-import { SideBarService } from '../../../guide/services/side-bar-service';
+
+import { SideBarService } from '@guide/services/side-bar-service';
+import { NavBarService } from '@shared/services/nav-bar-service';
 
 @Component({
   selector: 'nav-bar',
