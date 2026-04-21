@@ -11,6 +11,7 @@
       "@guide/*": ["./src/app/guide/*"],
       "@landing/*": ["./src/app/landing/*"],
       "@experience/*": ["./src/app/devVault-administrativa/experience/*"],
+      "@professional-data/*": ["./src/app/devVault-administrativa/professional-data/*"],
     },
     "strict": true,
     "noImplicitOverride": true,

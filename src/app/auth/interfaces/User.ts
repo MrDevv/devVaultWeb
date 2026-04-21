@@ -10,4 +10,6 @@ export interface User {
     estado: string;
     token: string;
     api_key: string | null;
+    origen_permitido: string | null;
+    estado_origen: string | null;
 }
