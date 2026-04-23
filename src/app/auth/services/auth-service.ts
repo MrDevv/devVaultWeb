@@ -40,11 +40,37 @@ export class AuthService {
     );
   }
 
+  public validateToken() {
+    const token = localStorage.getItem('token_devVault');
+
+    if (!token) {      
+      this.clearData();
+      return;
+    }
+
+    return this._http.get<APIResponse<User>>(`${BASEURL}/auth/validate-token`)
+    .pipe(
+      tap((resp: APIResponse<User>) => {
+        this.successLogin(resp.data)
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.clearData();
+        return throwError(() => error.error)
+      })
+    ).subscribe();
+  }
+
   successLogin(user: User): void {
     this._token.set(user.token)
     this._user.set(user)
     this._authStatus.set('authenticated')
     localStorage.setItem('token_devVault', user.token)
+  }
+
+  clearData(): void{
+    this._user.set(null);
+    this._token.set(null);
+    this._authStatus.set('not-authenticated');    
   }
 
 }
