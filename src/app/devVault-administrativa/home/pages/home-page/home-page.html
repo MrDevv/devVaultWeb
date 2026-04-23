@@ -21,7 +21,7 @@
                 <!-- ultimas experiencias -->
                 <section>
                     <!-- header -->
-                    <div class="flex flex-col md:flex-row justify-between gap-3 text-primary mb-4">
+                    <header class="flex flex-col md:flex-row justify-between gap-3 text-primary mb-4">
                         <div class="flex gap-2 items-center">
                             <i class="fa-solid fa-briefcase"></i>
                             <p class="font-bold text-lg">
@@ -35,7 +35,7 @@
                                 Añadir Nueva
                             </a>
                         </div>
-                    </div>
+                    </header>
                     <!-- body -->
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         @for (experiencia of experiencesResource.value()?.data?.content; track $index) {
@@ -46,7 +46,7 @@
                 <!-- ultimos proyectos -->
                 <section>
                     <!-- header -->
-                    <div class="flex flex-col md:flex-row justify-between gap-3 text-primary mb-4">
+                    <header class="flex flex-col md:flex-row justify-between gap-3 text-primary mb-4">
                         <div class="flex gap-2 items-center">
                             <i class="fa-regular fa-folder-open"></i>
                             <p class="font-bold text-lg">
@@ -60,88 +60,12 @@
                                 Añadir Nueva
                             </a>
                         </div>
-                    </div>
+                    </header>
                     <!-- body -->
                      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-card rounded-lg overflow-hidden">
-                            <div class="relative">
-                                <img class="w-full h-40 object-cover" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Spider-Man.jpg/1280px-Spider-Man.jpg" alt="">
-                                <div class="absolute bottom-0 left-0 p-4">
-                                    <span>Backend</span>
-                                </div>
-                            </div>
-                            <div class="p-6 flex flex-col gap-3">
-                                <div>
-                                    <h3 class="text-[16px] font-bold text-primary">Senior Frontend Enginner</h3>
-                                    <p class="text-[14px] text-secondary font-medium mb-3">TechFlow Solutions</p>
-                                    <span class="font-medium text-[12px] block text-[#C0C1FF]">
-                                        <i class="fa-solid fa-link"></i>
-                                        Core Infrastructure System
-                                    </span>
-                                </div>
-                                <div class="flex flex-wrap gap-1 justify-center">
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                </div>
-
-                                <div class="flex gap-2 items-center justify-around text-secondary font-light text-[12px]">
-                                    <a href="" target="_blank" class="py-1 px-2 text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <a href="" target="_blank" class="py-1 px-2 text-secondary text-lg bg-secondary rounded-sm">
-                                        <i class="fa-brands fa-github"></i>
-                                    </a>
-                                    <a href="" target="_blank" class="py-1 px-2 text-secondary text-lg bg-secondary rounded-sm">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="" target="_blank" class="py-1 px-2 text-secondary text-lg bg-secondary rounded-sm">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>   
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="bg-card rounded-lg overflow-hidden">                            
-                                <img class="w-full h-40 object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaB6qXmmkFpFswsLVt6qz5swbXSeJkwG9XDQ&s" alt="">                            
-                            <div class="p-6 flex flex-col gap-3">
-                                <div>
-                                    <h3 class="text-[16px] font-bold text-primary">Senior Frontend Enginner</h3>
-                                    <p class="text-[14px] text-secondary font-medium mb-3">TechFlow Solutions</p>
-                                    <span class="font-medium text-[12px] block text-[#C0C1FF]">
-                                        <i class="fa-solid fa-link"></i>
-                                        Core Infrastructure System
-                                    </span>
-                                </div>
-                                <div class="flex flex-wrap gap-1 justify-center">
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                    <div class="py-1 px-3 bg-[#353436] text-[12px] text-secondary rounded-lg">Rust</div>
-                                </div>
-
-                                <div class="flex gap-2 items-center justify-around text-secondary font-light text-[12px]">
-                                    <a href="" target="_blank" class="py-1 px-2 text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <a href="" target="_blank" class="py-1 px-2 text-secondary text-lg bg-secondary rounded-sm">
-                                        <i class="fa-brands fa-github"></i>
-                                    </a>
-                                    <a href="" target="_blank" class="py-1 px-2 text-secondary text-lg bg-secondary rounded-sm">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="" target="_blank" class="py-1 px-2 text-secondary text-lg bg-secondary rounded-sm">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>   
-                                </div>
-                            </div>
-
-                        </div>
-
+                        @for (project of projectResource.value()?.data?.content; track $index) {
+                            <card-project [project]="project" />
+                        }
                      </div>
                 </section>
             </div>
@@ -216,7 +140,7 @@
                             [class.bg-[#4EDEA3]/10]="authService.user()?.estado_origen == 'activo'"
                         >
                             <i 
-                                class="text-xl fa-regular"                                
+                                class="text-xl fa-regular"
                                 [ngClass]="authService.user()?.estado_origen == 'activo' ? 'fa-circle-check' : 'fa-circle-xmark'"
                                 [class.text-[#F87C63]]="authService.user()?.estado_origen == 'inactivo'"
                                 [class.text-[#4EDEA3]]="authService.user()?.estado_origen == 'activo'"
@@ -242,7 +166,7 @@
  </div>
 </div>
 
-@if (experiencesResource.isLoading() || professionalDataResource.isLoading()) {
+@if (experiencesResource.isLoading() || professionalDataResource.isLoading() || projectResource.isLoading()) {
     <div class="absolute top-0 left-0 flex justify-center items-center w-full h-dvh bg-black">
         <span class="loader z-20"></span>
     </div>

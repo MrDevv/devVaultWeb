@@ -1,6 +1,7 @@
 import { Component, effect, inject, ResourceRef, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { rxResource } from '@angular/core/rxjs-interop';
+import { NgClass } from '@angular/common';
 
 import { AuthService } from '@auth/services/auth-service';
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
@@ -12,18 +13,22 @@ import { APIResponse } from '@shared/interfaces/APIResponse';
 import { Experience } from '@devVault-administrativa/experience/interfaces/Experience';
 import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { ClipboardService } from '@shared/services/clipboard-service';
-import { NgClass } from '@angular/common';
+import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
+import { Project } from '@devVault-administrativa/projects/interfaces/project';
+import { CardProject } from "@devVault-administrativa/projects/components/card-project/card-project";
 
 
 @Component({
   selector: 'home-page',  
-  imports: [NavbarAdministrativo, CardExperienceSimple, RouterLink, NgClass],
+  imports: [NavbarAdministrativo, CardExperienceSimple, RouterLink, NgClass, CardProject],
   templateUrl: './home-page.html'  
 })
 export class HomePage {
   public authService = inject(AuthService);
   private experienceService = inject(ExperienceService);
   private professionalService = inject(ProfessionalDataService);
+  private projectService = inject(ProjectService);
+
   public porcentageProfile = signal(0);
   public clipboardService = inject(ClipboardService);
 
@@ -33,9 +38,13 @@ export class HomePage {
   private page = signal(0);
 
   constructor() {
-    effect(() => {
+    effect(() => {      
       this.obtenerPorcentajePerfil();
     })
+  }
+
+  get professionalData(): Developer | undefined {
+    return this.professionalDataResource.value()?.data?.[0];
   }
 
   experiencesResource: ResourceRef<APIResponse<APIResponseWithPageable<Experience>> | undefined> = rxResource({
@@ -45,14 +54,15 @@ export class HomePage {
     }
   })
 
-  get professionalData(): Developer | undefined {
-    return this.professionalDataResource.value()?.data?.[0];
-  }
-
-
   professionalDataResource: ResourceRef<APIResponse<Developer[]> | undefined> = rxResource({
     stream: () =>{
       return this.professionalService.obtenerDatosProfesionales();
+    }
+  })
+
+  projectResource: ResourceRef<APIResponse<APIResponseWithPageable<Project>> | undefined> = rxResource({
+    stream: () => {
+      return this.projectService.obtenerProyectos();
     }
   })
 
@@ -64,6 +74,5 @@ export class HomePage {
       this.porcentageProfile.set(Math.round((completed.length / values.length) * 100));
     }
   }
-  
 
 }

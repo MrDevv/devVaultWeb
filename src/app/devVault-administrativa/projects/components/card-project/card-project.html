@@ -1,0 +1,49 @@
+<div class="bg-card rounded-lg overflow-hidden grid grid-rows-[auto_1fr]">
+    <div class="relative">
+        <img class="w-full h-40 object-cover" [src]="project()?.url_imagen_presentacion" [alt]="project()?.titulo">
+        <div 
+            class="absolute bottom-2 left-2 rounded-md bg-secondary"
+        >
+            <span 
+                class="text-[11px] uppercase block py-1 px-2 font-extrabold"
+                [ngClass]="[obtenerBgColor(project()?.tipo_proyecto?.descripcion!), obtenerTextColor(project()?.tipo_proyecto?.descripcion!)]"
+            >
+                {{ project()?.tipo_proyecto?.descripcion }}
+            </span>
+        </div>
+    </div>
+    <div class="px-6 py-5 flex flex-col gap-3">
+        <div class="">
+            <h3 class="text-[16px] font-bold text-primary">{{ project()?.titulo }}</h3>
+            <p class="text-[14px] text-secondary line-clamp-2 mb-2">{{ project()?.descripcion }}</p>
+            <span class="font-medium text-[13px] block text-[#C0C1FF] cursor-pointer">
+                <i class="fa-solid fa-link"></i>
+                {{ project()?.experiencia?.titulo }}
+            </span>
+        </div>
+        <div class="flex flex-wrap gap-1 justify-center">
+            @for (tag of project()?.etiquetas; track $index) {
+                <div class="py-1 px-3 bg-[#353436] text-[11px] text-secondary rounded-lg">{{ tag.descripcion }}</div>
+            }
+        </div>
+
+        <div class="grid grid-cols-4 place-items-center mt-auto text-secondary font-light text-[12px]">
+            @if (project()?.url_produccion != null) {
+                <a href="" target="_blank" class="py-1 col-start-1 col-end-2 px-2.5 max-w-fit text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+            }
+            @if (project()?.url_repositorio != null) {
+                <a [href]="project()?.url_repositorio" target="_blank" class="py-1 col-start-2 col-end-3 px-3 max-w-fit text-secondary text-lg bg-secondary rounded-sm">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            }
+            <a href="" target="_blank" class="py-1 col-start-3 col-end-4 px-3 max-w-fit text-secondary text-lg bg-secondary rounded-sm">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+            <a href="" target="_blank" class="text-[#F87C63] bg-[#F87C63]/10 py-1 col-start-4 col-end-5 px-3 max-w-fit text-lg rounded-sm">
+                <i class="fa-solid fa-trash"></i>
+            </a>   
+        </div>
+    </div>    
+</div>
