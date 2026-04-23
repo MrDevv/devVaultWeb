@@ -6,6 +6,7 @@ import { APIResponse } from '@shared/interfaces/APIResponse';
 import { User } from '@auth/interfaces/User';
 
 import { environment } from '@environments/environment';
+import { AuthStatus } from '@auth/types/auth-status';
 
 const BASEURL = environment.API_URL;
 
@@ -16,7 +17,7 @@ export class AuthService {
   private _http = inject(HttpClient);
   private _user = signal<null | User>(null);
   private _token = signal<null | string>(null);
-  private _authStatus = signal('not-authenticated');
+  private _authStatus = signal<AuthStatus>('checking');
 
   public user = computed(() => this._user());
   public token = computed(() => this._token());
@@ -70,7 +71,8 @@ export class AuthService {
   clearData(): void{
     this._user.set(null);
     this._token.set(null);
-    this._authStatus.set('not-authenticated');    
+    this._authStatus.set('not-authenticated');
+    localStorage.removeItem('token_devVault')
   }
 
 }

@@ -13,7 +13,6 @@ export class App implements OnInit{
   authService = inject(AuthService);
 
   ngOnInit(): void {
-    console.log('validando token');    
     this.authService.validateToken();
   }
 }
