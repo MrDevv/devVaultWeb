@@ -10,7 +10,7 @@
         <i class="fa-solid fa-calendar-days"></i>
         <span>{{ experiencia()?.fecha_inicio | date: "MMMM 'del' yyyy" : '' : 'es' | titlecase }} 
             - 
-            {{ experiencia()?.fecha_fin ? ('2026-02-01' | date: "MMMM 'del' yyyy" : '' : 'es' | titlecase) : 'Actual' }}
+            {{ experiencia()?.fecha_fin ? ( experiencia()?.fecha_fin | date: "MMMM 'del' yyyy" : '' : 'es' | titlecase) : 'Actual' }}
         </span>
     </div>
 </div>
