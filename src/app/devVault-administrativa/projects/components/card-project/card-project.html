@@ -6,7 +6,7 @@
         >
             <span 
                 class="text-[11px] uppercase block py-1 px-2 font-extrabold"
-                [ngClass]="[obtenerBgColor(project()?.tipo_proyecto?.descripcion!), obtenerTextColor(project()?.tipo_proyecto?.descripcion!)]"
+                [ngClass]="obtenerColor(project()?.tipo_proyecto?.descripcion!)"
             >
                 {{ project()?.tipo_proyecto?.descripcion }}
             </span>

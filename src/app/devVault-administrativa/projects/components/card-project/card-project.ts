@@ -11,11 +11,7 @@ import { colorTags } from '@devVault-administrativa/projects/utils/color-tags';
 export class CardProject {
   public project = input<Project>();
 
-  obtenerTextColor(tipoTag :string){
-    return `text-[${colorTags[tipoTag]}]`;
-  }
-
-  obtenerBgColor(tipoTag :string){
-    return `bg-[${colorTags[tipoTag]}]/45`;
+  obtenerColor(tipoTag :string){
+    return colorTags[tipoTag];
   }
 }
