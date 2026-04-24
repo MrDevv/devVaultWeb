@@ -1,5 +1,6 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@auth/services/auth-service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +8,10 @@ import { Router } from '@angular/router';
 export class SideBarService {
   
   private router = inject(Router);
+  public authService = inject(AuthService);
 
   private statusSidebar = signal<boolean>(false);
+
 
   isSideBarVisible: Signal<boolean> = computed(()=> this.statusSidebar());
 
@@ -27,6 +30,12 @@ export class SideBarService {
 
   toDirectLanding(){
     this.router.navigate(["/"])
+  }
+
+  logout() {
+    this.authService.clearData();
+    this.close();
+    this.router.navigateByUrl('/auth/login');
   }
 
   goTo(fragment: string) {

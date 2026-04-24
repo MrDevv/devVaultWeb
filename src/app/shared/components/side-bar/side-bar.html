@@ -36,7 +36,7 @@
         }
     </div>
 
-    <div class="flex flex-col"
+    <div class="flex flex-col overflow-y-auto"
     [class.gap-2]="page()!='guide'">
 
         @if (page() == 'guide') {
@@ -84,7 +84,8 @@
             <div 
                 class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
                 routerLink="/home"
-                routerLinkActive="bg-card border-[#6366F1]"
+                routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                (click)="sideBarService.close()"
             >
                 <i class="fa-solid fa-house"></i>
                 <a>Inicio</a>
@@ -92,8 +93,9 @@
             
             <div 
                 class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
-                routerLink="/data"
-                routerLinkActive="bg-card border-[#6366F1]"
+                routerLink="/professional-data"
+                routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                (click)="sideBarService.close()"
             >
                 <i class="fa-regular fa-user"></i>
                 <a>Datos Profesionales</a>
@@ -102,7 +104,8 @@
             <div 
                 class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
                 routerLink="/technologies"
-                routerLinkActive="bg-card border-[#6366F1]"
+                routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                (click)="sideBarService.close()"
             >
                 <i class="fa-solid fa-code"></i>
                 <a>Tecnologías</a>
@@ -111,7 +114,8 @@
             <div 
                 class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
                 routerLink="/experience"
-                routerLinkActive="bg-card border-[#6366F1]"
+                routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                (click)="sideBarService.close()"
             >
                 <i class="fa-solid fa-briefcase"></i>
                 <a>Experiencias</a>
@@ -120,7 +124,8 @@
             <div 
                 class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
                 routerLink="/projects"
-                routerLinkActive="bg-card border-[#6366F1]"    
+                routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                (click)="sideBarService.close()"
             >
                 <i class="fa-regular fa-folder-open"></i>
                 <a>Proyectos</a>
@@ -135,7 +140,48 @@
                 <i class="fa-solid fa-gear"></i>
                 <a>Configuración</a>
             </div>
+
+            @if (sideBarService.authService.user()?.rol?.descripcion == 'admin') {
+                <span class="min-h-px w-full bg-card my-6"></span>
+    
+                <span class="px-4 text-[14px] font-bold text-[#727272]">Administración</span>
+    
+    
+                <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-users"></i>
+                    <a>Gestión de Usuarios</a>
+                </div>
+    
+                <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-terminal"></i>
+                    <a>Tecnologías (Admin)</a>
+                </div>
+    
+                <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-tags"></i>
+                    <a>Etiquetas</a>
+                </div>
+    
+                <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <a>Tipos de Proyectos</a>
+                </div>
+    
+                <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <a>Tipos de Tecnologías</a>
+                </div>
+            }
+
         }
+    </div>
+
+    <div 
+    class="flex items-center self-end gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+    (click)="sideBarService.logout()"    
+    >
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <a>Cerrar sesión</a>
     </div>
 </aside>
      
