@@ -167,7 +167,5 @@
 </div>
 
 @if (experiencesResource.isLoading() || professionalDataResource.isLoading() || projectResource.isLoading()) {
-    <div class="absolute top-0 left-0 flex justify-center items-center w-full h-dvh bg-black">
-        <span class="loader z-20"></span>
-    </div>
+    <loading-overlay/>
 }

@@ -1,0 +1,30 @@
+<a
+    [href]="url()" target="_blank" 
+    [class.pointer-events-none]="!url()"
+    class="flex gap-4 items-center py-4 px-3 bg-secondary rounded-2xl"
+    [class.bg-secondary]="url()"
+    [class.bg-[#464554]/20]="!url()"
+>
+    <div 
+        class="flex justify-center min-w-10 min-h-10 rounded-lg items-center text-primary"
+        [ngClass]="bgColor()"
+    >
+        <i class="text-lg" [ngClass]="icon()"></i>
+    </div>
+    <div class="flex justify-between items-center w-full overflow-x-hidden">
+        <div class="flex flex-col overflow-x-hidden">
+            <h3 class="text-[#C0C1FF] text-sm font-bold uppercase">{{ title() }}</h3>
+            <span 
+                class="truncate"
+                [class.text-primary]="url()"
+                [class.text-secondary]="!url()"
+            >
+                {{ url() ? url() : 'No específicado' }}
+            </span>
+        </div>
+        <i 
+            class="text-primary text-2xl fa-solid fa-angle-right"
+            [class.invisible]="!url()">
+        </i>
+    </div>
+</a>

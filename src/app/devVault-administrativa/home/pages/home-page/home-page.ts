@@ -16,11 +16,12 @@ import { ClipboardService } from '@shared/services/clipboard-service';
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
 import { Project } from '@devVault-administrativa/projects/interfaces/project';
 import { CardProject } from "@devVault-administrativa/projects/components/card-project/card-project";
+import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overlay';
 
 
 @Component({
   selector: 'home-page',  
-  imports: [NavbarAdministrativo, CardExperienceSimple, RouterLink, NgClass, CardProject],
+  imports: [NavbarAdministrativo, CardExperienceSimple, RouterLink, NgClass, CardProject, LoadingOverlay],
   templateUrl: './home-page.html'  
 })
 export class HomePage {

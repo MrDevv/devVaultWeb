@@ -1,0 +1,10 @@
+<div class="md:col-start-1 md:col-end-4 bg-card p-8 rounded-2xl">
+    <h2 class="text-[#C0C1FF] font-bold text-lg uppercase mb-5">Biografía</h2>
+    <p
+        [class.text-primary]="bio()"
+        [class.text-secondary]="!bio()"
+        [class.text-center]="!bio()"
+    > 
+        {{ bio() ? bio() : 'No específicado' }} 
+    </p>
+</div>

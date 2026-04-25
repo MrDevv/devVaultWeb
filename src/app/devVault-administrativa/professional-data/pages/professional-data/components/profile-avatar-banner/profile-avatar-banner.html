@@ -1,0 +1,19 @@
+<div class="bg-secondary h-20 rounded-xl grid grid-cols-[80px_auto] gap-4 mb-6 pr-4 overflow-hidden">
+    <div class="flex justify-center items-center">
+        @if (logoUrl()) {
+            <img class="w-full object-cover" [src]="logoUrl()" alt="logo_url">
+        }@else {
+            <i class="text-secondary text-3xl fa-solid fa-user"></i>
+        }
+    </div>
+    <div class="flex flex-col justify-center gap-1 overflow-x-hidden">
+        <h3 class="text-[#C0C1FF] font-bold text-sm uppercase">Logo</h3>
+        <span 
+            class="truncate"
+            [class.text-primary]="logoUrl()"
+            [class.text-secondary]="!logoUrl()"
+        >
+            {{ logoUrl() ? logoUrl() : 'No específicado' }}
+        </span>
+    </div>
+</div>
