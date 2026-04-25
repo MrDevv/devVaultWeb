@@ -1,7 +1,8 @@
 <div class="h-full grid grid-cols-[auto_1fr] grid-rows-1">
     <side-bar/>
-    <div class="w-full h-dvh overflow-y-hidden bg-primary">
+    <div class="w-full h-dvh overflow-y-auto bg-primary">
         <nav-bar class="sticky md:hidden left-0 top-0 z-10" pageName="home-page"/>
+        <navbar-administrativo [dataDeveloper]="professionalData"/>
         <router-outlet/>
     </div>
 </div>

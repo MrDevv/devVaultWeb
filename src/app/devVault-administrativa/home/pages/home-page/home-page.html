@@ -1,13 +1,10 @@
-<div class="w-full h-dvh overflow-y-auto">    
-    <navbar-administrativo [dataDeveloper]="professionalData"/>
-<!-- main -->
 <div class="max-w-350 m-auto">
      <main class="py-5 px-10">
         <!-- header main -->
         <header class="flex flex-col gap-3 mb-4">
             <h2 class="font-extrabold text-4xl text-primary">Bienvenido(a), <span class="text-[#C0C1FF]">{{ authService.user()?.nombres }}</span></h2>
             <div class="flex gap-3 items-center bg-card max-w-fit py-2 px-4 text-secondary text-[12px] rounded-2xl">
-                <span 
+            <span 
                 class="w-3 h-3 rounded-full block"
                 [class.bg-green-300]="porcentageProfile() > 50"
                 [class.bg-amber-300]="porcentageProfile() <= 50"
@@ -164,7 +161,7 @@
         </div>
      </main>
  </div>
-</div>
+
 
 @if (experiencesResource.isLoading() || professionalDataResource.isLoading() || projectResource.isLoading()) {
     <loading-overlay/>

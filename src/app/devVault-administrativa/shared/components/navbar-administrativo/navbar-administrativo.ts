@@ -7,7 +7,7 @@ import { Developer } from '@devVault-administrativa/professional-data/interfaces
   templateUrl: './navbar-administrativo.html'
 })
 export class NavbarAdministrativo {  
-  dataDeveloper = input<Developer | undefined>(undefined);
+  dataDeveloper = input<Developer | undefined>(undefined)  
 
   get obtenerNombresCompletos() {
     const nombres = this.dataDeveloper()?.nombres.split(' ')[0];

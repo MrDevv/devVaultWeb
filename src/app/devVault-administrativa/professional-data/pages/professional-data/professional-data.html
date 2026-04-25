@@ -1,68 +1,63 @@
-<div class="w-full h-dvh overflow-y-auto">
-    <navbar-administrativo [dataDeveloper]="professionalData"/>
-    
-    <div class="max-w-350 m-auto">
-        <main class="py-5 px-10">
-            <div class="flex flex-col md:flex-row items-end justify-between">
-                <page-header firstTitle="Datos" secondTitle="Profesionales" description="Gestiona tus datos profesionales y de contacto. Esta información es útil para que las empresas te contacten y conozca más de ti." />
+<div class="max-w-350 m-auto">
+    <main class="py-5 px-10">
+        <div class="flex flex-col md:flex-row items-end justify-between">
+            <page-header firstTitle="Datos" secondTitle="Profesionales" description="Gestiona tus datos profesionales y de contacto. Esta información es útil para que las empresas te contacten y conozca más de ti." />
 
-                <a [routerLink]="['/professional-data', professionalData?.desarrollador_uuid]" class="bg-card cursor-pointer flex gap-2 items-center mb-4 text-[#C0C1FF] text-sm py-2 px-4 rounded-sm border-2 border-[#C0C1FF]/10">
-                    <i class="fa-solid fa-pen"></i>
-                    Editar Datos
-                </a>
+            <a [routerLink]="['/professional-data', professionalData?.desarrollador_uuid]" class="bg-card cursor-pointer flex gap-2 items-center mb-4 text-[#C0C1FF] text-sm py-2 px-4 rounded-sm border-2 border-[#C0C1FF]/10">
+                <i class="fa-solid fa-pen"></i>
+                Editar Datos
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="md:col-start-1 md:col-end-3 bg-card p-8 rounded-2xl">
+                <profile-avatar-banner [logoUrl]="professionalData?.logo_url"/>
+
+                <div class="grid md:grid-cols-2 gap-6 px-4">
+                    <data-field title="nombres" [value]="professionalData?.nombres"/>
+
+                    <data-field title="apellidos" [value]="professionalData?.apellidos"/>
+
+                    <data-field title="correo de contacto" [value]="professionalData?.correo_contacto"/>
+
+                    <data-field title="teléfono" [value]="professionalData?.telefono"/>
+
+                    <data-field title="puesto" [value]="professionalData?.puesto"/>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="md:col-start-1 md:col-end-3 bg-card p-8 rounded-2xl">
-                    <profile-avatar-banner [logoUrl]="professionalData?.logo_url"/>
+            <div class="md:col-start-3 md:col-end-4 bg-card p-8 rounded-2xl">
+                <h2 class="text-[#C0C1FF] font-bold text-lg uppercase mb-5">Redes y Curriculum</h2>
+                <div class="flex flex-col gap-3">
+                    <social-link-item 
+                        title="github"
+                        [url]="professionalData?.github_url" 
+                        bgColor="bg-[#2B3137]"
+                        icon="fa-brands fa-github"
+                    />
 
-                    <div class="grid md:grid-cols-2 gap-6 px-4">
-                        <data-field title="nombres" [value]="professionalData?.nombres"/>
+                    <social-link-item 
+                        title="linkedin"
+                        [url]="professionalData?.linkedin_url" 
+                        bgColor="bg-[#026397]"
+                        icon="fa-brands fa-linkedin"
+                    />
 
-                        <data-field title="apellidos" [value]="professionalData?.apellidos"/>
-
-                        <data-field title="correo de contacto" [value]="professionalData?.correo_contacto"/>
-
-                        <data-field title="teléfono" [value]="professionalData?.telefono"/>
-
-                        <data-field title="puesto" [value]="professionalData?.puesto"/>
-                    </div>
+                    <social-link-item 
+                        title="curriculum vitae"
+                        [url]="professionalData?.cv_url" 
+                        bgColor="bg-[#2A2A2B]"
+                        icon="fa-solid fa-file"
+                    />
                 </div>
-
-                <div class="md:col-start-3 md:col-end-4 bg-card p-8 rounded-2xl">
-                    <h2 class="text-[#C0C1FF] font-bold text-lg uppercase mb-5">Redes y Curriculum</h2>
-                    <div class="flex flex-col gap-3">
-                        <social-link-item 
-                            title="github"
-                            [url]="professionalData?.github_url" 
-                            bgColor="bg-[#2B3137]"
-                            icon="fa-brands fa-github"
-                        />
-
-                        <social-link-item 
-                            title="linkedin"
-                            [url]="professionalData?.linkedin_url" 
-                            bgColor="bg-[#026397]"
-                            icon="fa-brands fa-linkedin"
-                        />
-
-                        <social-link-item 
-                            title="curriculum vitae"
-                            [url]="professionalData?.cv_url" 
-                            bgColor="bg-[#2A2A2B]"
-                            icon="fa-solid fa-file"
-                        />
-                    </div>
-                </div>
-
-                <biography-card [bio]="professionalData?.biografia"/>
-
-                <span class="md:hidden h-15 w-full"></span>
             </div>
 
-        </main>
-    </div>
+            <biography-card [bio]="professionalData?.biografia"/>
 
+            <span class="md:hidden h-15 w-full"></span>
+        </div>
+
+    </main>
 </div>
 
 @if (professionalDataResource.isLoading()) {

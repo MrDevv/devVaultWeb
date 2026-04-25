@@ -5,7 +5,6 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
-import { NavbarAdministrativo } from "@devVault-administrativa/shared/components/navbar-administrativo/navbar-administrativo";
 import { SocialLinkItem } from "@devVault-administrativa/professional-data/pages/professional-data/components/social-link-item/social-link-item";
 import { DataField } from "@devVault-administrativa/professional-data/pages/professional-data/components/data-field/data-field";
 import { ProfileAvatarBanner } from "@devVault-administrativa/professional-data/pages/professional-data/components/profile-avatar-banner/profile-avatar-banner";
@@ -15,7 +14,7 @@ import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overl
 
 @Component({
   selector: 'professional-data',
-  imports: [NavbarAdministrativo, RouterLink, SocialLinkItem, DataField, ProfileAvatarBanner, PageHeader, BiographyCard, LoadingOverlay],
+  imports: [RouterLink, SocialLinkItem, DataField, ProfileAvatarBanner, PageHeader, BiographyCard, LoadingOverlay],
   templateUrl: './professional-data.html'  
 })
 export class ProfessionalData {

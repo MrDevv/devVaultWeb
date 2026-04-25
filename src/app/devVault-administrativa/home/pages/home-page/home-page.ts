@@ -5,7 +5,6 @@ import { NgClass } from '@angular/common';
 
 import { AuthService } from '@auth/services/auth-service';
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
-import { NavbarAdministrativo } from '@devVault-administrativa/shared/components/navbar-administrativo/navbar-administrativo';
 import { CardExperienceSimple } from "@devVault-administrativa/experience/components/card-experience-simple/card-experience-simple";
 import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
@@ -21,7 +20,7 @@ import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overl
 
 @Component({
   selector: 'home-page',  
-  imports: [NavbarAdministrativo, CardExperienceSimple, RouterLink, NgClass, CardProject, LoadingOverlay],
+  imports: [CardExperienceSimple, RouterLink, NgClass, CardProject, LoadingOverlay],
   templateUrl: './home-page.html'  
 })
 export class HomePage {
@@ -42,10 +41,6 @@ export class HomePage {
     effect(() => {      
       this.obtenerPorcentajePerfil();
     })
-  }
-
-  get professionalData(): Developer | undefined {
-    return this.professionalDataResource.value()?.data?.[0];
   }
 
   experiencesResource: ResourceRef<APIResponse<APIResponseWithPageable<Experience>> | undefined> = rxResource({
