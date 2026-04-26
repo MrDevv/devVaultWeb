@@ -23,6 +23,7 @@ export class EditProfessionalData {
     logo_url: [''],
     github_url: [''],
     linkedin_url: [''],
+    cv_url: [''],
     prefijo_telefono: ['', Validators.pattern('^[0-9]+$')],
     telefono: ['', Validators.pattern('^[0-9]+$')]
 
