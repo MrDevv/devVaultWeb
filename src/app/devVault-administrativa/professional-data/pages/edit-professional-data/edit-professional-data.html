@@ -1,1 +1,182 @@
-<p>edit-professional-data works!</p>
+<div class="max-w-350 m-auto">
+     <main class="py-5 md:px-10 px-5">
+        <span class="font-medium text-secondary block mb-4">Datos profesionales > <span class="text-primary"> Editar</span></span>
+        <form [formGroup]="formProfessionalData" (ngSubmit)="editarDatos()">
+            <div class="grid md:grid-cols-[1fr_auto] gap-3">
+                <div class="flex flex-col gap-3">
+                    <div class="p-5 bg-card rounded-xl flex flex-col gap-4">
+                        <div class="flex gap-2 items-center text-secondary">
+                            <i class="fa-regular fa-user"></i>
+                            <h2 class="font-bold text-lg capitalize">datos básicos</h2>
+                        </div>
+                        <div class="flex flex-col gap-5">
+                            <div class="flex flex-col md:flex-row w-full gap-7">
+                                <div class="flex flex-col w-full gap-1">
+                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Nombres (*)</label>
+                                    <input 
+                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                        type="text" 
+                                        placeholder="Ej. Tom"
+                                        formControlName="nombres"
+                                    >
+                                </div>
+                                <div class="flex flex-col w-full gap-1">
+                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Apellidos (*)</label>
+                                    <input 
+                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                        type="text" 
+                                        placeholder="Ej. Ramírez"
+                                        formControlName="apellidos"
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex flex-col w-full gap-1">
+                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Puesto</label>
+                                <input 
+                                    class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                    type="text" 
+                                    placeholder="Ej. Desarrollador Fullstack "
+                                    formControlName="puesto"
+                                >
+                            </div>
+                            <div class="flex flex-col w-full gap-1">
+                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Biografía</label>
+                                <textarea 
+                                    class="bg-primary h-40 resize-none rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none mb-2" 
+                                    placeholder="Escribe una breve descripción que resuma tu perfil profesional"
+                                    formControlName="biografia"
+                                ></textarea>
+                                <span class="text-secondary font-light text-end text-sm">Máximo 4 000 caracteres.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-card rounded-xl flex flex-col gap-4">
+                        <div class="flex gap-2 items-center text-secondary">
+                            <i class="fa-solid fa-link"></i>
+                            <h2 class="font-bold text-lg">Redes y Curriculum Vitae</h2>
+                        </div>
+                        <div class="flex flex-col gap-5">
+                            <div class="flex flex-col md:flex-row w-full gap-7">
+                                <div class="flex flex-col w-full gap-1">
+                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">url linkedin</label>
+                                    <div class="bg-primary rounded-lg py-2 px-3 text-primary flex items-center gap-2">
+                                        <i class="fa-brands fa-linkedin"></i>
+                                        <input
+                                            class="bg-primary w-full appearance-none focus-within:outline-none"
+                                            type="url"
+                                            placeholder="linkedin.com/in/username"
+                                            formControlName="linkedin_url"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="flex flex-col w-full gap-1">
+                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">url github</label>
+                                    <div class="bg-primary rounded-lg py-2 px-3 text-primary flex items-center gap-2">
+                                        <i class="fa-brands fa-github"></i>
+                                        <input
+                                            class="bg-primary w-full appearance-none focus-within:outline-none"
+                                            type="url" 
+                                            placeholder="Ej. Desarrollador Fullstack "
+                                            formControlName="github_url" 
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col w-full gap-1">
+                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">curriculum vitae</label>
+                                <div class="bg-primary rounded-lg py-2 px-3 text-primary flex items-center gap-2">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                    <input
+                                        class="bg-primary w-full appearance-none focus-within:outline-none"
+                                        type="url"
+                                        placeholder="https://mi-curriculum.org"
+                                        formControlName="linkedin_url"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="p-5 bg-card rounded-xl flex flex-col gap-4">
+                        <div class="flex gap-2 items-center text-secondary">
+                            <i class="fa-regular fa-user"></i>
+                            <h2 class="font-bold text-lg capitalize">Contacto</h2>
+                        </div>
+                        <div class="flex flex-col gap-5">
+                            <div class="flex flex-col md:flex-row w-full gap-7">
+                                <div class="flex flex-col w-fit gap-1">
+                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">prefijo</label>
+                                    <select 
+                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                        name="prefijo" 
+                                        id="prefijo"
+                                        formControlName="prefijo_telefono"
+                                    >
+                                        <option [ngValue]="null">Seleccionar</option>
+                                        <option ngValue="51">+51(PE)</option>
+                                        <option ngValue="54">+34(COL)</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col w-full gap-1">
+                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">teléfono</label>
+                                    <input 
+                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                        type="text" 
+                                        placeholder="999 999 999"
+                                        formControlName="telefono"
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex flex-col w-full gap-1">
+                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">correo de contacto</label>
+                                <input 
+                                    class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                    type="email" 
+                                    placeholder="tom@dev.io"
+                                    formControlName="puesto"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <div class="p-5 bg-card rounded-xl flex flex-col gap-3">
+                        <div class="flex gap-2 items-center text-secondary">
+                            <i class="fa-solid fa-palette"></i>
+                            <h2 class="font-bold text-lg capitalize">Logo</h2>
+                        </div>
+                        <span class="text-secondary uppercase font-semibold text-[13px]">previsualización de logo</span>
+                        <div class="bg-secondary rounded-2xl w-full flex justify-center items-center h-80 overflow-hidden">
+                            @if (formProfessionalData.get('logo_url')?.value) {
+                                <img class="w-full object-cover" [src]="formProfessionalData.get('logo_url')?.value" alt="logo">
+                            }@else{
+                                <i class="text-secondary text-9xl fa-solid fa-user"></i>
+                            }
+                        </div>
+                        <div class="flex flex-col w-full gap-1">
+                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">URL del logo</label>
+                                <input 
+                                    type="text" 
+                                    class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none mb-2" 
+                                    placeholder="https://storage.io/mi-logo.png"
+                                    formControlName="logo_url"
+                                />
+                                <span class="text-secondary font-light text-end text-[13px] flex gap-1 items-center">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    Sube tu imagén a un servicio web y copia su URL aquí.
+                                </span>
+                            </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <button type="submit" class="w-full cursor-pointer px-4 py-2 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">                        
+                            Guardar Cambios
+                        </button>
+                        <button routerLink="/professional-data" class="cursor-pointer w-full px-4 py-2 bg-transparent border-2 border-[#464554]/30 rounded-sm text-[#C0C1FF]">                        
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
