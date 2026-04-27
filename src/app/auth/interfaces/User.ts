@@ -6,6 +6,7 @@ export interface User {
     nombres: string;
     apellidos: string;
     puesto: string;
+    logo_url: string;
     rol: Rol;
     estado: string;
     token: string;

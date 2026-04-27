@@ -2,13 +2,13 @@
         <div class="w-full flex gap-3 justify-end px-5 py-3">
             <div class="flex flex-col justify-center items-end">
                 <p class="text-primary font-bold">{{ obtenerNombresCompletos }}</p>
-                <p class="text-[#C7C4D7] text-[12px]">{{ dataDeveloper()?.puesto }}</p>
+                <p class="text-[#C7C4D7] text-[12px]">{{ authService.user()?.puesto }}</p>
             </div>
             <div class="w-10 h-10 border-3 rounded-xl overflow-hidden flex justify-center items-center border-gray-500">
-                @if (dataDeveloper()?.logo_url == null) {
+                @if (authService.user()?.logo_url == null) {
                     <i class="text-primary fa-solid fa-user"></i>
                 }@else{
-                    <img [src]="dataDeveloper()?.logo_url" alt="logo_developer">
+                    <img [src]="authService.user()?.logo_url" alt="logo_developer">
                 }
             </div>
         </div>
