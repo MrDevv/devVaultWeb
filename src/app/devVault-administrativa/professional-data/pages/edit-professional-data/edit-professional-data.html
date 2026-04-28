@@ -133,7 +133,7 @@
                                     class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
                                     type="email" 
                                     placeholder="tom@dev.io"
-                                    formControlName="puesto"
+                                    formControlName="correo_contacto"
                                 >
                             </div>
                         </div>
@@ -180,3 +180,9 @@
         </form>
     </main>
 </div>
+
+@if (isLoading()) {
+    <div class="absolute top-0 left-0 flex justify-center items-center w-full h-dvh bg-black/50">
+        <loader/>
+    </div>
+}

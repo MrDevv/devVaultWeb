@@ -7,6 +7,7 @@ import { User } from '@auth/interfaces/User';
 
 import { environment } from '@environments/environment';
 import { AuthStatus } from '@auth/types/auth-status';
+import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
 
 const BASEURL = environment.API_URL;
 
@@ -59,6 +60,24 @@ export class AuthService {
         return throwError(() => error.error)
       })
     ).subscribe();
+  }
+
+  public updateNamesAndAvatar(developer: Developer){        
+    if (developer.nombres != this.user()?.nombres ||
+        developer.apellidos != this.user()?.apellidos ||
+        developer.puesto != this.user()?.puesto ||
+        developer.logo_url != this.user()?.logo_url) {
+          console.log('actualizar data');
+          this._user.update((user:any) => (
+            {
+              ...user,
+              nombres: developer.nombres,
+              apellidos: developer.apellidos,
+              logo_url: developer.logo_url,
+              puesto: developer.puesto
+            }
+          ));
+    }
   }
 
   successLogin(user: User): void {
