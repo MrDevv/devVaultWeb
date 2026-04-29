@@ -1,0 +1,10 @@
+<div class="flex flex-col w-full gap-1">
+    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Biografía</label>
+    <textarea 
+        class="bg-primary h-40 resize-none rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none mb-2" 
+        [placeholder]="placeholder()"
+        [formControl]="$any(control())"
+        [maxlength]="maxLength()"
+    ></textarea>
+    <span class="text-secondary font-light text-end text-sm">{{ descriptionMaxLength() }}</span>
+</div>

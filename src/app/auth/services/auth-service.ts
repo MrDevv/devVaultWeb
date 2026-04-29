@@ -66,8 +66,7 @@ export class AuthService {
     if (developer.nombres != this.user()?.nombres ||
         developer.apellidos != this.user()?.apellidos ||
         developer.puesto != this.user()?.puesto ||
-        developer.logo_url != this.user()?.logo_url) {
-          console.log('actualizar data');
+        developer.logo_url != this.user()?.logo_url) {          
           this._user.update((user:any) => (
             {
               ...user,
