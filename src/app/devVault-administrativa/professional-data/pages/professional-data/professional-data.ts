@@ -24,6 +24,17 @@ export class ProfessionalData {
     return this.professionalDataResource.value()?.data?.[0];
   }
 
+  get telefonoCompleto(): string | null {
+    const prefijo = this.professionalData?.prefijo_telefono;
+    const telefono = this.professionalData?.telefono;
+
+    if (!prefijo || !telefono) {
+      return null;
+    }
+
+    return `+${prefijo} ${telefono}`;
+  }
+
   professionalDataResource: ResourceRef<APIResponse<Developer[]> | undefined> = rxResource({
     stream: () =>{
       return this.professionalService.obtenerDatosProfesionales();

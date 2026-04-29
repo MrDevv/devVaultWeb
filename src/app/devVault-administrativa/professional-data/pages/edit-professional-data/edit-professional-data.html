@@ -3,105 +3,81 @@
         <span class="font-medium text-secondary block mb-4">Datos profesionales > <span class="text-primary"> Editar</span></span>
         <form [formGroup]="formProfessionalData" (ngSubmit)="editarDatos()">
             <div class="grid md:grid-cols-[1fr_auto] gap-3">
-                <div class="flex flex-col gap-3">
-                    <div class="p-5 bg-card rounded-xl flex flex-col gap-4">
-                        <div class="flex gap-2 items-center text-secondary">
-                            <i class="fa-regular fa-user"></i>
-                            <h2 class="font-bold text-lg capitalize">datos básicos</h2>
-                        </div>
+                <div class="flex flex-col gap-3">                    
+                    <section-card-component [titleHeader]="'Datos básicos'" [iconHeader]="'fa-regular fa-user'">
                         <div class="flex flex-col gap-5">
                             <div class="flex flex-col md:flex-row w-full gap-7">
-                                <div class="flex flex-col w-full gap-1">
-                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Nombres (*)</label>
-                                    <input 
-                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
-                                        type="text" 
+                                <div class="w-full">
+                                    <form-input-field 
+                                        label="Nombres" 
                                         placeholder="Ej. Sarhen"
-                                        formControlName="nombres"
-                                    >
-                                </div>
-                                <div class="flex flex-col w-full gap-1">
-                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Apellidos (*)</label>
-                                    <input 
-                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
                                         type="text" 
+                                        [required]="true"
+                                        [control]="formProfessionalData.get('nombres')!"
+                                    />
+                                </div>
+                                <div class="w-full">
+                                    <form-input-field 
+                                        label="Apellidos" 
                                         placeholder="Ej. Ramírez"
-                                        formControlName="apellidos"
-                                    >
+                                        type="text"
+                                        [required]="true"
+                                        [control]="formProfessionalData.get('apellidos')!"
+                                    />
                                 </div>
                             </div>
-                            <div class="flex flex-col w-full gap-1">
-                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Puesto</label>
-                                <input 
-                                    class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
-                                    type="text" 
-                                    placeholder="Ej. Desarrollador Fullstack "
-                                    formControlName="puesto"
-                                >
-                            </div>
-                            <div class="flex flex-col w-full gap-1">
-                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Biografía</label>
-                                <textarea 
-                                    class="bg-primary h-40 resize-none rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none mb-2" 
-                                    placeholder="Escribe una breve descripción que resuma tu perfil profesional"
-                                    formControlName="biografia"
-                                ></textarea>
-                                <span class="text-secondary font-light text-end text-sm">Máximo 4 000 caracteres.</span>
-                            </div>
+                            
+                            <form-input-field 
+                                    label="Puesto"
+                                    placeholder="Ej. Desarrollador Fullstack"
+                                    type="text"
+                                    [control]="formProfessionalData.get('puesto')!"
+                                />
+
+                            <form-text-area-field
+                                label="Biografía"
+                                placeholder="Escribe una breve descripción que resuma tu perfil profesional"
+                                [control]="formProfessionalData.get('biografia')!"
+                                maxLength="4000"
+                                descriptionMaxLength="Máximo 4 000 caracteres."
+                            />
                         </div>
-                    </div>
-                    <div class="p-5 bg-card rounded-xl flex flex-col gap-4">
-                        <div class="flex gap-2 items-center text-secondary">
-                            <i class="fa-solid fa-link"></i>
-                            <h2 class="font-bold text-lg">Redes y Curriculum Vitae</h2>
-                        </div>
+                    </section-card-component>
+
+                    <section-card-component titleHeader="Redes y Curriculum Vitae" iconHeader="fa-solid fa-link">
                         <div class="flex flex-col gap-5">
                             <div class="flex flex-col md:flex-row w-full gap-7">
-                                <div class="flex flex-col w-full gap-1">
-                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">url linkedin</label>
-                                    <div class="bg-primary rounded-lg py-2 px-3 text-primary flex items-center gap-2">
-                                        <i class="fa-brands fa-linkedin"></i>
-                                        <input
-                                            class="bg-primary w-full appearance-none focus-within:outline-none"
-                                            type="url"
-                                            placeholder="linkedin.com/in/username"
-                                            formControlName="linkedin_url"
-                                        >
-                                    </div>
-                                </div>
-                                <div class="flex flex-col w-full gap-1">
-                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">url github</label>
-                                    <div class="bg-primary rounded-lg py-2 px-3 text-primary flex items-center gap-2">
-                                        <i class="fa-brands fa-github"></i>
-                                        <input
-                                            class="bg-primary w-full appearance-none focus-within:outline-none"
-                                            type="url" 
-                                            placeholder="github.com/username"
-                                            formControlName="github_url" 
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col w-full gap-1">
-                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">curriculum vitae</label>
-                                <div class="bg-primary rounded-lg py-2 px-3 text-primary flex items-center gap-2">
-                                    <i class="fa-solid fa-file"></i>
-                                    <input
-                                        class="bg-primary w-full appearance-none focus-within:outline-none"
+                                <div class="w-full">
+                                    <form-icon-input-field
+                                        label="url linkedin"
+                                        placeholder="linkedin.com/in/username"
                                         type="url"
-                                        placeholder="https://mi-curriculum.org"
-                                        formControlName="cv_url"
-                                    >
+                                        icon="fa-brands fa-linkedin"
+                                        [control]="formProfessionalData.get('linkedin_url')!"
+                                    />
+                                </div>
+                                <div class="w-full">
+                                    <form-icon-input-field
+                                        label="url github"
+                                        placeholder="github.com/username"
+                                        type="url"
+                                        icon="fa-brands fa-github"
+                                        [control]="formProfessionalData.get('github_url')!"
+                                    />
                                 </div>
                             </div>
+    
+                            <form-icon-input-field
+                                label="curriculum vitae"
+                                placeholder="https://mi-curriculum.org"
+                                type="url"
+                                icon="fa-solid fa-file"
+                                [control]="formProfessionalData.get('cv_url')!"
+                            />
                         </div>
+                    </section-card-component>
 
-                    </div>
-                    <div class="p-5 bg-card rounded-xl flex flex-col gap-4">
-                        <div class="flex gap-2 items-center text-secondary">
-                            <i class="fa-regular fa-user"></i>
-                            <h2 class="font-bold text-lg capitalize">Contacto</h2>
-                        </div>
+                    <section-card-component titleHeader="Contacto" iconHeader="fa-regular fa-user">
                         <div class="flex flex-col gap-5">
                             <div class="flex flex-col md:flex-row w-full gap-7">
                                 <div class="flex flex-col w-fit gap-1">
@@ -114,59 +90,37 @@
                                     >
                                         <option [ngValue]="null">Seleccionar</option>
                                         <option ngValue="51">+51(PE)</option>
-                                        <option ngValue="54">+34(COL)</option>
+                                        <option ngValue="57">+57(COL)</option>
                                     </select>
                                 </div>
-                                <div class="flex flex-col w-full gap-1">
-                                    <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">teléfono</label>
-                                    <input 
-                                        class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
-                                        type="text" 
+                                <div class="w-full">
+                                    <form-input-field
+                                        label="teléfono"
                                         placeholder="999 999 999"
-                                        formControlName="telefono"
-                                    >
+                                        type="text"
+                                        [control]="formProfessionalData.get('telefono')!"
+                                    />
                                 </div>
                             </div>
-                            <div class="flex flex-col w-full gap-1">
-                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">correo de contacto</label>
-                                <input 
-                                    class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
-                                    type="email" 
-                                    placeholder="tom@dev.io"
-                                    formControlName="correo_contacto"
-                                >
-                            </div>
+
+                            <form-input-field
+                                label="correo de contacto"
+                                placeholder="tom@dev.io"
+                                type="email"
+                                [control]="formProfessionalData.get('correo_contacto')!"
+                            />
                         </div>
-                    </div>
+                    </section-card-component>
                 </div>
                 <div class="flex flex-col gap-5">
-                    <div class="p-5 bg-card rounded-xl flex flex-col gap-3">
-                        <div class="flex gap-2 items-center text-secondary">
-                            <i class="fa-solid fa-palette"></i>
-                            <h2 class="font-bold text-lg capitalize">Logo</h2>
-                        </div>
-                        <span class="text-secondary uppercase font-semibold text-[13px]">previsualización de logo</span>
-                        <div class="bg-secondary rounded-2xl w-full flex justify-center items-center h-80 overflow-hidden">
-                            @if (formProfessionalData.get('logo_url')?.value) {
-                                <img class="w-full object-cover" [src]="formProfessionalData.get('logo_url')?.value" alt="logo">
-                            }@else{
-                                <i class="text-secondary text-9xl fa-solid fa-user"></i>
-                            }
-                        </div>
-                        <div class="flex flex-col w-full gap-1">
-                                <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">URL del logo</label>
-                                <input 
-                                    type="text" 
-                                    class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none mb-2" 
-                                    placeholder="https://storage.io/mi-logo.png"
-                                    formControlName="logo_url"
-                                />
-                                <span class="text-secondary font-light text-end text-[13px] flex gap-1 items-center">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                    Sube tu imagén a un servicio web y copia su URL aquí.
-                                </span>
-                            </div>
-                    </div>
+                    <section-card-component titleHeader="logo" iconHeader="fa-solid fa-palette">
+                        <logo-preview-component
+                            [control]="formProfessionalData.get('logo_url')!"
+                            [subTitle]="'Previsualización de logo'"
+                            [placeHolder]="'https://storage.io/mi-logo.png'"
+                            [iconNotFound]="'fa-solid fa-palette'"/>
+                    </section-card-component>
+
                     <div class="flex flex-col gap-3">
                         <button type="submit" class="w-full cursor-pointer px-4 py-2 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">                        
                             Guardar Cambios
@@ -182,7 +136,5 @@
 </div>
 
 @if (isLoading()) {
-    <div class="absolute top-0 left-0 flex justify-center items-center w-full h-dvh bg-black/50">
-        <loader/>
-    </div>
+    <loading />
 }

@@ -1,0 +1,23 @@
+<div class="flex flex-col gap-5">
+    <span class="text-secondary uppercase font-semibold text-[13px]">{{ subTitle() }}</span>
+    <div class="bg-secondary rounded-2xl w-full flex justify-center items-center h-80 overflow-hidden">
+        @if (control().value) {
+            <img class="w-full object-cover" [src]="control().value" alt="logo">
+        }@else{
+            <i class="text-secondary text-9xl fa-solid fa-user" [ngClass]="iconNotFound()"></i>
+        }
+    </div>
+    <div class="flex flex-col w-full gap-1">
+            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">URL del logo</label>
+            <input 
+                type="text" 
+                class="bg-primary rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none mb-2" 
+                [placeholder]="placeHolder()"
+                [formControl]="$any(control())"
+            />
+            <span class="text-secondary font-light text-end text-[13px] flex gap-1 items-center">
+                <i class="fa-solid fa-circle-info"></i>
+                Sube tu imagén a un servicio web y copia su URL aquí.
+            </span>
+    </div>
+</div>

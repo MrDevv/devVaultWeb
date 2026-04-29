@@ -31,8 +31,6 @@ export class ProfessionalDataService {
   }
 
   public actualizarDatosProfesionales(developerUpdate: Developer): Observable<APIResponse<Developer>>{
-    console.log('actualizando datos');
-    
     return this._http.put<APIResponse<Developer>>(`${BASEURL}/desarrolladores`, developerUpdate).pipe(      
       tap((resp) => this.actualizarDatosProfesionalesCache(resp.data)
       ),
