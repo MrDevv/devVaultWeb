@@ -8,6 +8,7 @@ import { NewProject } from "./projects/pages/new-project/new-project";
 import { DevVaultAdministrativaLayout } from "./shared/layouts/dev-vault-administrativa-layout/dev-vault-administrativ-layout";
 import { ProfessionalData } from "./professional-data/pages/professional-data/professional-data";
 import { EditProfessionalData } from "./professional-data/pages/edit-professional-data/edit-professional-data";
+import { ListTechnologies } from "./technologies/pages/list-technologies/list-technologies";
 
 export const routes: Routes = [
     {
@@ -28,6 +29,15 @@ export const routes: Routes = [
                     {
                         path: ':uuid',
                         component: EditProfessionalData
+                    }
+                ]
+            },
+            {
+                path: 'technologies',
+                children: [
+                    {
+                        path: '',
+                        component: ListTechnologies
                     }
                 ]
             },
