@@ -4,13 +4,12 @@ import { PageHeader } from '@devVault-administrativa/shared/components/page-head
 import { TechnologyService } from '@devVault-administrativa/technologies/services/technology-service';
 import { rxResource } from '@angular/core/rxjs-interop';
 
-import { colorTechnologies } from '@devVault-administrativa/shared/utils/color-technologies';
-import { NgClass } from '@angular/common';
 import { LoadingOverlay } from "@shared/components/loading-overlay/loading-overlay";
+import { CardTechnology } from "@devVault-administrativa/technologies/components/card-technology/card-technology";
 
 @Component({
   selector: 'list-technologies',
-  imports: [PageHeader, RouterLink, NgClass, LoadingOverlay],
+  imports: [PageHeader, RouterLink, LoadingOverlay, CardTechnology],
   templateUrl: './list-technologies.html',
 })
 export class ListTechnologies {
@@ -22,9 +21,5 @@ export class ListTechnologies {
       return this._technologyService.obterTecnologiasDesarrollador();
     }
   })
-
-  obtenerColorTech(tipoTecnologia: string): string {
-    return colorTechnologies[tipoTecnologia];
-  }
 
 }

@@ -1,0 +1,37 @@
+<div class="bg-card flex flex-col gap-1 rounded-lg p-5">
+    <div class="flex justify-between text-secondary mb-5">
+        <div 
+            class="rounded-sm flex justify-center items-center w-10 h-10"
+            [class.bg-secondary]="technology().logo_url"
+        >
+            @if (technology().logo_url) {
+                <i class="fa-solid fa-terminal"></i>
+            }@else {
+                <img [src]="technology().logo_url" [alt]="technology().tecnologia">
+            }
+        </div>
+        <div class="flex items-start">
+            <button class="cursor-pointer">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div 
+        class="px-2 py-1 rounded-sm max-w-fit"
+        [ngClass]="obtenerColorTech(technology().tipo_tecnologia)"
+    >
+        <span class="uppercase text-[12px] font-bold"> {{ technology().tipo_tecnologia }} </span>
+    </div>
+    <h3 class="text-primary text-xl font-bold">{{ technology().tecnologia }}</h3>
+    @if (technology().nivel) {
+        <div class="flex gap-2 text-secondary items-center">
+            <span 
+                class="w-3 h-3 block rounded-full"
+                [class.bg-yellow-500]="technology().nivel === 'Intermedio'"
+                [class.bg-red-600]="technology().nivel === 'Básico'"
+                [class.bg-green-600]="technology().nivel === 'Avanzado'"
+            ></span>
+            <span> {{ technology().nivel }} </span>
+        </div>
+    }
+</div>
