@@ -49,4 +49,8 @@ export class ProfessionalDataService {
     })
   }
 
+  clearCache() {
+    this.professionalDataCache.set(null);
+  }
+
 }

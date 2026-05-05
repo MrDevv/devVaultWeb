@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, delay, map, Observable, of, tap, throwError } from 'rxjs';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
-import { Technology } from '@devVault-administrativa/technologies/interfaces/Technology';
+import { TechnologySimple } from '@technologies/interfaces/technology-simple';
+import { Technology } from '@technologies/interfaces/technology';
 import { environment } from '@environments/environment';
+import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 
 const BASE_URL = environment.API_URL;
 
@@ -13,18 +15,19 @@ const BASE_URL = environment.API_URL;
 })
 export class TechnologyService {
 
-  private _technologiesCache = signal<Technology[] | null>(null);
+  private _technologiesDeveloperCache = signal<TechnologySimple[] | null>(null);
+  private _technologiesCache = signal<APIResponseWithPageable<Technology> | null>(null);
 
   private _http = inject(HttpClient);
 
-  obterTecnologiasDesarrollador(nombre: string): Observable<Technology[]> {    
+  obterTecnologiasDesarrollador(nombre: string): Observable<TechnologySimple[]> {    
 
-    if (this._technologiesCache() && (!nombre || nombre.length < 3)) {
-      return of(this._technologiesCache()!);
+    if (this._technologiesDeveloperCache() && (!nombre || nombre.length < 2)) {
+      return of(this._technologiesDeveloperCache()!);
     }
 
-    if (nombre.length >= 3 && this._technologiesCache()) {
-      const resp = this._technologiesCache()!.filter(tech => {        
+    if (nombre.length >= 2 && this._technologiesDeveloperCache()) {
+      const resp = this._technologiesDeveloperCache()!.filter(tech => {        
         return tech.tecnologia.toLowerCase().includes(nombre.toLowerCase())
       });
       
@@ -33,20 +36,58 @@ export class TechnologyService {
       }
     }    
     
-    return this._http.get<APIResponse<Technology[]>>(`${BASE_URL}/tecnologias/me`, {
+    return this._http.get<APIResponse<TechnologySimple[]>>(`${BASE_URL}/tecnologias/me`, {
       params: {
         ...(nombre ? { nombre } : {})
       }
     }).pipe(      
-      tap((resp: APIResponse<Technology[]>) => {
+      tap((resp: APIResponse<TechnologySimple[]>) => {
         if (resp.data.length > 0) {
-          this._technologiesCache.set(resp.data)
+          this._technologiesDeveloperCache.set(resp.data)
         }
       }),
-      map((resp: APIResponse<Technology[]>) => resp.data),
+      map((resp: APIResponse<TechnologySimple[]>) => resp.data),
       catchError((error) => {
         return throwError(() => error.error)
       })
     )
+  }
+
+  obtenerTecnologias(nombre: string): Observable<APIResponseWithPageable<Technology>> {
+    
+    if (this._technologiesCache() && (!nombre || nombre.length < 2)) {
+      return of(this._technologiesCache()!);
+    }
+
+    if (nombre.length >= 2 && this._technologiesCache()) {
+      const resp = this._technologiesCache()!.content.filter(tech => {        
+        return tech.tecnologia.toLowerCase().includes(nombre.toLowerCase())
+      });
+      
+      if (resp.length > 0) {
+        return of({...this._technologiesCache()!, content: resp});
+      }
+    }
+
+    return this._http.get<APIResponse<APIResponseWithPageable<Technology>>>(`${BASE_URL}/tecnologias`, {
+      params: {
+        ...(nombre ? { nombre } : {}) 
+      }
+    }).pipe(      
+      tap((resp: APIResponse<APIResponseWithPageable<Technology>>) => {
+        if (resp.data.content.length > 0 && !nombre) {
+          this._technologiesCache.set(resp.data)
+        }
+      }),
+      map((resp: APIResponse<APIResponseWithPageable<Technology>>) => resp.data),
+      catchError((error) => {
+        return throwError(() => error.error)
+      })
+    )
+  }
+
+  clearCache() {
+    this._technologiesDeveloperCache.set(null);
+    this._technologiesCache.set(null);
   }
 }

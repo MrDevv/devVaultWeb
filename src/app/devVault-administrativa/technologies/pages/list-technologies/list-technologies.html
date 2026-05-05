@@ -1,6 +1,6 @@
 <div class="max-w-350 m-auto">
     <main class="py-5 md:px-10 px-5">
-        <page-header firstTitle="Inventario de" secondTitle="Tecnología" description="Gestiona tu ecosistema tecnológico: lenguajes, frontend, backend, DevOps y más." />
+        <page-header firstTitle="Inventario de" secondTitle="Tecnologías" description="Gestiona tu ecosistema tecnológico: lenguajes, frontend, backend, DevOps y más." />
 
         <div class="w-full flex flex-col gap-3">
             <div class="flex flex-col-reverse md:flex-row justify-between w-full gap-2 md:gap-10">
@@ -9,14 +9,14 @@
                     <input
                         class="bg-secondary w-full appearance-none focus-within:outline-none"
                         type="text"
-                        placeholder="Buscar por nombre (mínimo 3 caracteres)"
+                        placeholder="Buscar por nombre (mínimo 2 caracteres)"
                         (input)="nameTech.set($event.target.value)"
                     >
                     @if (isLoading() && nameTech()) {
                         <loader-input/>
                     }
                 </div>
-                <a routerLink="/experience/new-technology" class="min-w-fit px-4 py-3 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">
+                <a routerLink="new-technology" class="min-w-fit px-4 py-3 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">
                     <i class="fa-solid fa-plus"></i>
                     Nueva Tecnología
                 </a>

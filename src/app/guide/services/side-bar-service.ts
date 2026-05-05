@@ -1,6 +1,8 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth-service';
+import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
+import { TechnologyService } from '@devVault-administrativa/technologies/services/technology-service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,8 @@ export class SideBarService {
   
   private router = inject(Router);
   public authService = inject(AuthService);
+  public technologyService = inject(TechnologyService);
+  public professionalDataService = inject(ProfessionalDataService);
 
   private statusSidebar = signal<boolean>(false);
 
@@ -34,6 +38,8 @@ export class SideBarService {
 
   logout() {
     this.authService.clearData();
+    this.technologyService.clearCache();
+    this.professionalDataService.clearCache();
     this.close();
     this.router.navigateByUrl('/auth/login');
   }
