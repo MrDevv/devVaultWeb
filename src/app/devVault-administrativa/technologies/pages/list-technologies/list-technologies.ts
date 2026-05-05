@@ -7,7 +7,7 @@ import { TechnologyService } from '@devVault-administrativa/technologies/service
 import { PageHeader } from '@devVault-administrativa/shared/components/page-header/page-header';
 import { LoadingOverlay } from "@shared/components/loading-overlay/loading-overlay";
 import { CardTechnology } from "@devVault-administrativa/technologies/components/card-technology/card-technology";
-import { Technology } from '@devVault-administrativa/technologies/interfaces/Technology';
+import { TechnologySimple } from '@devVault-administrativa/technologies/interfaces/technology-simple';
 import { LoaderInput } from "@devVault-administrativa/shared/components/loader-input/loader-input";
 
 @Component({
@@ -19,7 +19,7 @@ export class ListTechnologies {
 
   public nameTech = signal<string | null>(null);  
   public isLoading = signal(false);
-  public technologies = signal<Technology[]>([]);
+  public technologies = signal<TechnologySimple[]>([]);
 
   private _technologyService = inject(TechnologyService);
 
@@ -36,7 +36,7 @@ export class ListTechnologies {
     skip(1),
     debounceTime(400),
     distinctUntilChanged(),
-    filter(name => name === null || name.length === 0 || name.length >= 3),
+    filter(name => name === null || name.length === 0 || name.length >= 2),
     tap(() => this.isLoading.set(true)),
     switchMap(name => {            
       return this._technologyService.obterTecnologiasDesarrollador(name ?? '').pipe(

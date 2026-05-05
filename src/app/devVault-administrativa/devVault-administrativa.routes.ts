@@ -9,6 +9,7 @@ import { DevVaultAdministrativaLayout } from "./shared/layouts/dev-vault-adminis
 import { ProfessionalData } from "./professional-data/pages/professional-data/professional-data";
 import { EditProfessionalData } from "./professional-data/pages/edit-professional-data/edit-professional-data";
 import { ListTechnologies } from "./technologies/pages/list-technologies/list-technologies";
+import { NewTechnology } from "./technologies/pages/new-technology/new-technology";
 
 export const routes: Routes = [
     {
@@ -38,6 +39,10 @@ export const routes: Routes = [
                     {
                         path: '',
                         component: ListTechnologies
+                    },
+                    {
+                        path: 'new-technology',
+                        component: NewTechnology
                     }
                 ]
             },
