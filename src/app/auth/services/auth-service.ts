@@ -7,7 +7,7 @@ import { User } from '@auth/interfaces/User';
 
 import { environment } from '@environments/environment';
 import { AuthStatus } from '@auth/types/auth-status';
-import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
+import { Professional } from '@devVault-administrativa/professional-data/interfaces/Professional';
 
 const BASEURL = environment.API_URL;
 
@@ -62,18 +62,18 @@ export class AuthService {
     ).subscribe();
   }
 
-  public updateNamesAndAvatar(developer: Developer){        
-    if (developer.nombres != this.user()?.nombres ||
-        developer.apellidos != this.user()?.apellidos ||
-        developer.puesto != this.user()?.puesto ||
-        developer.logo_url != this.user()?.logo_url) {          
+  public updateNamesAndAvatar(professional: Professional){        
+    if (professional.nombres != this.user()?.nombres ||
+        professional.apellidos != this.user()?.apellidos ||
+        professional.puesto != this.user()?.puesto ||
+        professional.logo_url != this.user()?.logo_url) {          
           this._user.update((user:any) => (
             {
               ...user,
-              nombres: developer.nombres,
-              apellidos: developer.apellidos,
-              logo_url: developer.logo_url,
-              puesto: developer.puesto
+              nombres: professional.nombres,
+              apellidos: professional.apellidos,
+              logo_url: professional.logo_url,
+              puesto: professional.puesto
             }
           ));
     }

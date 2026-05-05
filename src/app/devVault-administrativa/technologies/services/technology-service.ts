@@ -4,9 +4,10 @@ import { catchError, delay, map, Observable, of, tap, throwError } from 'rxjs';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { TechnologySimple } from '@technologies/interfaces/technology-simple';
-import { Technology } from '@technologies/interfaces/technology';
+
 import { environment } from '@environments/environment';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
+import { Technology } from '@technologies/interfaces/Technology';
 
 const BASE_URL = environment.API_URL;
 
@@ -36,7 +37,7 @@ export class TechnologyService {
       }
     }    
     
-    return this._http.get<APIResponse<TechnologySimple[]>>(`${BASE_URL}/tecnologias/me`, {
+    return this._http.get<APIResponse<TechnologySimple[]>>(`${BASE_URL}/me/tecnologias`, {
       params: {
         ...(nombre ? { nombre } : {})
       }
@@ -69,7 +70,7 @@ export class TechnologyService {
       }
     }
 
-    return this._http.get<APIResponse<APIResponseWithPageable<Technology>>>(`${BASE_URL}/tecnologias`, {
+    return this._http.get<APIResponse<APIResponseWithPageable<Technology>>>(`${BASE_URL}/admin/tecnologias`, {
       params: {
         ...(nombre ? { nombre } : {}) 
       }

@@ -3,7 +3,6 @@ import { RouterLink } from "@angular/router";
 import { rxResource } from '@angular/core/rxjs-interop';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
-import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
 import { SocialLinkItem } from "@devVault-administrativa/professional-data/pages/professional-data/components/social-link-item/social-link-item";
 import { DataField } from "@devVault-administrativa/professional-data/pages/professional-data/components/data-field/data-field";
@@ -11,6 +10,7 @@ import { ProfileAvatarBanner } from "@devVault-administrativa/professional-data/
 import { PageHeader } from '@devVault-administrativa/shared/components/page-header/page-header';
 import { BiographyCard } from "./components/biography-card/biography-card";
 import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overlay';
+import { Professional } from '@devVault-administrativa/professional-data/interfaces/Professional';
 
 @Component({
   selector: 'professional-data',
@@ -20,8 +20,8 @@ import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overl
 export class ProfessionalData {
   private professionalService = inject(ProfessionalDataService);
 
-  get professionalData(): Developer | undefined {
-    return this.professionalDataResource.value()?.data?.[0];
+  get professionalData(): Professional | undefined {
+    return this.professionalDataResource.value()?.data;
   }
 
   get telefonoCompleto(): string | null {
@@ -35,7 +35,7 @@ export class ProfessionalData {
     return `+${prefijo} ${telefono}`;
   }
 
-  professionalDataResource: ResourceRef<APIResponse<Developer[]> | undefined> = rxResource({
+  professionalDataResource: ResourceRef<APIResponse<Professional> | undefined> = rxResource({
     stream: () =>{
       return this.professionalService.obtenerDatosProfesionales();
     }

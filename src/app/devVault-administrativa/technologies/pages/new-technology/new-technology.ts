@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { PageHeader } from "@devVault-administrativa/shared/components/page-header/page-header";
 import { colorTechnologies } from '@devVault-administrativa/shared/utils/color-technologies';
 import { TechnologySimple } from '@technologies/interfaces/technology-simple';
-import { Technology } from '@technologies/interfaces/technology';
+import { Technology } from '@technologies/interfaces/Technology';
 import { TechnologyService } from '@devVault-administrativa/technologies/services/technology-service';
 import { catchError, debounceTime, distinctUntilChanged, filter, firstValueFrom, skip, switchMap, tap } from 'rxjs';
 import { APIResponseWithPageable } from '../../../../shared/interfaces/APIResponseWithPageable';

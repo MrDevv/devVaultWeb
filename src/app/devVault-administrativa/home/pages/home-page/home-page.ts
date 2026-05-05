@@ -10,7 +10,7 @@ import { ProfessionalDataService } from '@devVault-administrativa/professional-d
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { Experience } from '@devVault-administrativa/experience/interfaces/Experience';
-import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
+import { Professional } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { ClipboardService } from '@shared/services/clipboard-service';
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
 import { Project } from '@devVault-administrativa/projects/interfaces/project';
@@ -50,7 +50,7 @@ export class HomePage {
     }
   })
 
-  professionalDataResource: ResourceRef<APIResponse<Developer[]> | undefined> = rxResource({
+  professionalDataResource: ResourceRef<APIResponse<Professional> | undefined> = rxResource({
     stream: () =>{
       return this.professionalService.obtenerDatosProfesionales();
     }
@@ -63,7 +63,7 @@ export class HomePage {
   })
 
   obtenerPorcentajePerfil(): void {
-    const data = this.professionalDataResource.value()?.data?.[0]
+    const data = this.professionalDataResource.value()?.data;
     if (data!= null) {
       const values =  Object.values(data);
       const completed = values.filter((v) => v!==null && v != undefined && v != '');

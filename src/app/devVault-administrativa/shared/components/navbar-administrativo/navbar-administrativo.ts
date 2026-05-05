@@ -1,6 +1,6 @@
 import { Component, effect, inject, input } from '@angular/core';
 import { AuthService } from '@auth/services/auth-service';
-import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
+import { Professional } from '@devVault-administrativa/professional-data/interfaces/Developer';
 
 @Component({
   selector: 'navbar-administrativo',  

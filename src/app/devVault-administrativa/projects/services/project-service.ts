@@ -20,11 +20,11 @@ export class ProjectService {
 
   public obtenerProyectos(): Observable<APIResponse<APIResponseWithPageable<Project>>> {        
 
-    if (this.projectsCache != null) {
+    if (this.projectsCache() != null) {
       return of(this.projectsCache()!);
     }
 
-    return this._http.get<APIResponse<APIResponseWithPageable<Project>>>(`${BASEURL}/proyectos`).pipe(
+    return this._http.get<APIResponse<APIResponseWithPageable<Project>>>(`${BASEURL}/me/proyectos`).pipe(
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     )
   }

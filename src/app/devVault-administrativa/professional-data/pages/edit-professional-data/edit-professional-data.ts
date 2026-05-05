@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { rxResource } from '@angular/core/rxjs-interop';
 
-import { Developer } from '@devVault-administrativa/professional-data/interfaces/Developer';
+import { Professional } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
 import { FormInputField } from "@devVault-administrativa/shared/components/form-input-field/form-input-field";
@@ -44,17 +44,17 @@ export class EditProfessionalData {
 
   constructor(){
     effect(() => {
-      const developer: Developer | undefined = this.professionalData();
+      const developer: Professional | undefined = this.professionalData();
       this.formProfessionalData.patchValue(developer!)
     })    
   }
 
 
-  professionalData(): Developer | undefined {
-    return this.professionalDataResource.value()?.data?.[0];
+  professionalData(): Professional | undefined {
+    return this.professionalDataResource.value()?.data;
   }
 
-  professionalDataResource: ResourceRef<APIResponse<Developer[]> | undefined> = rxResource({
+  professionalDataResource: ResourceRef<APIResponse<Professional> | undefined> = rxResource({
     stream: () =>{
       return this.professionalDataService.obtenerDatosProfesionales();
     }
@@ -62,7 +62,7 @@ export class EditProfessionalData {
 
   async editarDatos() {
     this.isLoading.set(true);
-    const developerUpdate:Developer = {
+    const developerUpdate:Professional = {
       ...(this.formProfessionalData.value as any)
     };
 

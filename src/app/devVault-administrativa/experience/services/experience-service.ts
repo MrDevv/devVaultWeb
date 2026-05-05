@@ -22,11 +22,11 @@ export class ExperienceService {
 
   public obtenerExperiencias(size: number = 3, page: number = 0): Observable<APIResponse<APIResponseWithPageable<Experience>>> {    
 
-    if (this.experienceCache != null) {
+    if (this.experienceCache() != null) {
       return of(this.experienceCache()!);
     }
 
-    return this._http.get<APIResponse<APIResponseWithPageable<Experience>>>(`${BASEURL}/experiencias?size=${size}&page=${page}`).pipe(
+    return this._http.get<APIResponse<APIResponseWithPageable<Experience>>>(`${BASEURL}/me/experiencias?size=${size}&page=${page}`).pipe(
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     )
   }
