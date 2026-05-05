@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { environment } from '@environments/environment';
-import { APIResponse } from '@shared/interfaces/APIResponse';
-import { catchError, delay, map, Observable, of, tap, throwError } from 'rxjs';
-import { Technology } from '../interfaces/Technology';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
+import { APIResponse } from '@shared/interfaces/APIResponse';
+import { Technology } from '@devVault-administrativa/technologies/interfaces/Technology';
+import { environment } from '@environments/environment';
 
 const BASE_URL = environment.API_URL;
 
@@ -37,8 +37,7 @@ export class TechnologyService {
       params: {
         ...(nombre ? { nombre } : {})
       }
-    }).pipe(
-      delay(2099),
+    }).pipe(      
       tap((resp: APIResponse<Technology[]>) => {
         if (resp.data.length > 0) {
           this._technologiesCache.set(resp.data)

@@ -1,10 +1,10 @@
 import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PageHeader } from '@devVault-administrativa/shared/components/page-header/page-header';
-import { TechnologyService } from '@devVault-administrativa/technologies/services/technology-service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { debounceTime, filter, firstValueFrom, skip } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, filter, firstValueFrom, skip, switchMap, tap } from 'rxjs';
 
+import { TechnologyService } from '@devVault-administrativa/technologies/services/technology-service';
+import { PageHeader } from '@devVault-administrativa/shared/components/page-header/page-header';
 import { LoadingOverlay } from "@shared/components/loading-overlay/loading-overlay";
 import { CardTechnology } from "@devVault-administrativa/technologies/components/card-technology/card-technology";
 import { Technology } from '@devVault-administrativa/technologies/interfaces/Technology';
@@ -25,24 +25,39 @@ export class ListTechnologies {
 
   constructor() {
     afterNextRender(() => {
-      this.obtenerTecnologias('');
+      this.obtenerTecnologias();
     });
 
+    this.buscarTecnologiaPorNombre();
+  }
+
+  private buscarTecnologiaPorNombre() {
     toObservable(this.nameTech).pipe(
     skip(1),
     debounceTime(400),
+    distinctUntilChanged(),
     filter(name => name === null || name.length === 0 || name.length >= 3),
+    tap(() => this.isLoading.set(true)),
+    switchMap(name => {            
+      return this._technologyService.obterTecnologiasDesarrollador(name ?? '').pipe(
+        catchError((error) => {
+          console.error(error);
+          return [];
+        })
+      );
+    }),
     takeUntilDestroyed()
-    ).subscribe(name => {
-      this.obtenerTecnologias(name ?? '');
+    ).subscribe(data => {
+      this.technologies.set(data);
+      this.isLoading.set(false);
     });
   }
 
-  private async obtenerTecnologias(nombre: string) {
+  private async obtenerTecnologias(nombre: string = '') {
     this.isLoading.set(true);
     nombre = nombre.trim();
     try {
-      const data = await firstValueFrom(this._technologyService.obterTecnologiasDesarrollador(nombre));
+      const data = await firstValueFrom(this._technologyService.obterTecnologiasDesarrollador(nombre));      
       this.technologies.set(data);
     } catch (error) {
       console.error('Error al obtener tecnologías:', error);

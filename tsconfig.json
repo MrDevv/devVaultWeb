@@ -12,6 +12,7 @@
       "@landing/*": ["./src/app/landing/*"],
       "@experience/*": ["./src/app/devVault-administrativa/experience/*"],
       "@professional-data/*": ["./src/app/devVault-administrativa/professional-data/*"],
+      "@technologies/*": ["./src/app/devVault-administrativa/technologies/*"],
     },
     "strict": true,
     "noImplicitOverride": true,
