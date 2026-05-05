@@ -9,8 +9,12 @@
                     <input
                         class="bg-secondary w-full appearance-none focus-within:outline-none"
                         type="text"
-                        placeholder="Buscar por nombre"
+                        placeholder="Buscar por nombre (mínimo 3 caracteres)"
+                        (input)="nameTech.set($event.target.value)"
                     >
+                    @if (isLoading() && nameTech()) {
+                        <loader-input/>
+                    }
                 </div>
                 <a routerLink="/experience/new-technology" class="min-w-fit px-4 py-3 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">
                     <i class="fa-solid fa-plus"></i>
@@ -18,15 +22,21 @@
                 </a>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-3">
-                @for (tech of resourceTechnologies.value()?.data; track $index) {
-                    <card-technology [technology]="tech" />
-                }
-            </div>
+            @if (technologies().length > 0) {
+                <div class="grid md:grid-cols-4 gap-3">
+                    @for (tech of technologies(); track $index) {
+                        <card-technology [technology]="tech" />
+                    }
+                </div>
+            }@else{
+                <div class="w-full py-10 flex justify-center items-center">
+                    <p class="text-white">No se encontraron tecnologías.</p>
+                </div>
+            }
         </div>
     </main>
 </div>
 
-@if (resourceTechnologies.isLoading()) {
+@if (isLoading() && nameTech()===null) {
     <loading-overlay/>
 }

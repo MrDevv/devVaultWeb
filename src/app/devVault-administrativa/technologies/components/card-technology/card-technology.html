@@ -2,9 +2,9 @@
     <div class="flex justify-between text-secondary mb-5">
         <div 
             class="rounded-sm flex justify-center items-center w-10 h-10"
-            [class.bg-secondary]="technology().logo_url"
+            [class.bg-secondary]="!technology().logo_url"
         >
-            @if (technology().logo_url) {
+            @if (!technology().logo_url) {
                 <i class="fa-solid fa-terminal"></i>
             }@else {
                 <img [src]="technology().logo_url" [alt]="technology().tecnologia">
