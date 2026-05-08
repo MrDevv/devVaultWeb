@@ -4,12 +4,14 @@ import { Router, RouterLink } from "@angular/router";
 
 import { AuthService } from '@auth/services/auth-service';
 import { ErrorAPIResponse } from '@shared/interfaces/ErrorAPIResponse';
+import { Loading } from "@shared/components/loading/loading";
 
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'login-page',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, Loading],
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })
