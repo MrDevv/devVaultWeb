@@ -8,6 +8,7 @@ import { TechnologySimple } from '@technologies/interfaces/technology-simple';
 import { environment } from '@environments/environment';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 import { Technology } from '@technologies/interfaces/Technology';
+import { NewTechnologyProfesional } from '../interfaces/new-technology';
 
 const BASE_URL = environment.API_URL;
 
@@ -85,6 +86,15 @@ export class TechnologyService {
         return throwError(() => error.error)
       })
     )
+  }
+
+  registrarNuevaTecnologiaProfesional(newTechnology: NewTechnologyProfesional) {
+
+  }
+
+  
+  eliminarTecnologiaProfesional(uuidTechnology: string) {
+    
   }
 
   clearCache() {

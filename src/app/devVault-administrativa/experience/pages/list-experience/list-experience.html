@@ -1,1 +1,78 @@
-<p>list-experience works!</p>
+<div class="max-w-350 m-auto">
+    <main class="py-5 md:px-10 px-5">
+        <page-header firstTitle="Inventario de" secondTitle="Experiencias" description="Gestiona tu trayectoria profesiona y vincula tus logros a proyectos específicos." />
+
+        <div class="w-full flex flex-col gap-3">
+            <div class="flex flex-col-reverse md:flex-row justify-between w-full gap-2 md:gap-10">
+                <div class="w-full bg-secondary rounded-lg py-3 px-3 text-primary flex items-center gap-2">
+                    <i class="fas fa-search"></i>
+                    <input
+                        class="bg-secondary w-full appearance-none focus-within:outline-none"
+                        type="text"
+                        placeholder="Buscar por empresa (mínimo 2 caracteres)"
+                        (input)="nameTech.set($event.target.value)"
+                    >
+                    @if (isLoading() && nameTech()) {
+                        <loader-input/>
+                    }
+                </div>
+                <a routerLink="new-experience" class="min-w-fit px-4 py-3 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">
+                    <i class="fa-solid fa-plus"></i>
+                    Nueva Experiencia
+                </a>
+            </div>
+
+            @if (experiences().length === 0) {
+                <div class="grid grid-cols-1 w-full gap-3">
+                    <!-- @for (exp of experiences(); track $index) { -->
+                        <div class="bg-card flex flex-col gap-4 rounded-lg p-5">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h3 class="text-primary text-xl font-bold"> Desarrollador FullStack </h3>
+                                    <span class="text-[#C0C1FF]"> Municipalidad Distrital La Esperanza </span>
+                                </div>
+                                <span class="text-secondary rounded-2xl py-2 px-4 bg-primary">
+                                    Enero 2026 - Actualidad
+                                </span>
+                            </div>
+                            <p class="text-secondary">
+                                Desarrollo de aplicaciones web full-stack utilizando tecnologías modernas.
+                            </p>
+                            <div class="flex gap-4">
+                                <a routerLink="/projects/new-project" [queryParams]="{experience: 123-456-789}" class="bg-primary max-w-fit text-[#C0C1FF] font-semibold py-2 px-4 rounded-sm flex gap-2 items-center">
+                                    <i class="fa-solid fa-link"></i>
+                                    Vincular Proyecto
+                                </a>
+
+                                <span class="bg-[#353436]/60 max-w-fit rounded-2xl py-2 px-3 text-secondary flex text-sm items-center justify-center gap-2">
+                                    <i class="fa-regular fa-folder-open"></i>
+                                    3 Proyectos vinculados
+                                </span>
+
+                                <a routerLink="" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+
+                                <a routerLink="" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+
+                                <a routerLink="" class="bg-[#FFB4AB]/40 rounded-sm text-[#FFB4AB] py-2 px-3 text-secondary">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <!-- } -->
+                </div>
+            }@else{
+                <div class="w-full py-10 flex justify-center items-center">
+                    <p class="text-white">No se encontraron experiencias.</p>
+                </div>
+            }            
+        </div>
+    </main>
+</div>
+
+@if (isLoading() && nameTech()===null) {
+    <loading-overlay/>
+}
