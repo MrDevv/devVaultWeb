@@ -10,6 +10,7 @@ import { ProfessionalData } from "./professional-data/pages/professional-data/pr
 import { EditProfessionalData } from "./professional-data/pages/edit-professional-data/edit-professional-data";
 import { ListTechnologies } from "./technologies/pages/list-technologies/list-technologies";
 import { NewTechnology } from "./technologies/pages/new-technology/new-technology";
+import { EditExperience } from "./experience/pages/edit-experience/edit-experience";
 
 export const routes: Routes = [
     {
@@ -57,6 +58,10 @@ export const routes: Routes = [
                         path: 'new-experience',
                         component: NewExperience
                     },
+                    {
+                        path: ':uuid',
+                        component: EditExperience
+                    }
                 ]
             },
             {

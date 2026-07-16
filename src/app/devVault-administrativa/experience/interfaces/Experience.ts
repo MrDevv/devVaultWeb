@@ -1,5 +1,5 @@
 export interface Experience {
-    experience_id: number;
+    experiencia_uuid: number;
     titulo: string;
     descripcion: string;
     fecha_inicio: string;
@@ -7,4 +7,5 @@ export interface Experience {
     nombre_empresa: string;
     puesto: string;
     desarrollador: string;
+    cantidad_proyectos: number;
 }

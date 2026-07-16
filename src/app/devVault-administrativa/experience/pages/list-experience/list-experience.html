@@ -10,9 +10,9 @@
                         class="bg-secondary w-full appearance-none focus-within:outline-none"
                         type="text"
                         placeholder="Buscar por empresa (mínimo 2 caracteres)"
-                        (input)="nameTech.set($event.target.value)"
+                        (input)="nameCompany.set($event.target.value)"
                     >
-                    @if (isLoading() && nameTech()) {
+                    @if (isLoading() && nameCompany()) {
                         <loader-input/>
                     }
                 </div>
@@ -22,38 +22,40 @@
                 </a>
             </div>
 
-            @if (experiences().length === 0) {
+            @if (experiences().length > 0) {
                 <div class="grid grid-cols-1 w-full gap-3">
-                    <!-- @for (exp of experiences(); track $index) { -->
+                    @for (exp of experiences(); track $index) {
                         <div class="bg-card flex flex-col gap-4 rounded-lg p-5">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h3 class="text-primary text-xl font-bold"> Desarrollador FullStack </h3>
-                                    <span class="text-[#C0C1FF]"> Municipalidad Distrital La Esperanza </span>
+                                    <h3 class="text-primary text-xl font-bold"> {{ exp.puesto }} </h3>
+                                    <span class="text-[#C0C1FF]"> {{ exp.nombre_empresa }} • {{ exp.titulo }}</span>
                                 </div>
                                 <span class="text-secondary rounded-2xl py-2 px-4 bg-primary">
-                                    Enero 2026 - Actualidad
+                                    {{ exp.fecha_inicio | date: "MMMM yyyy" : '' : 'es' | titlecase }} 
+                                        - 
+                                    {{ exp.fecha_fin ? ( exp.fecha_fin | date: "MMMM yyyy" : '' : 'es' | titlecase) : 'Actual' }}
                                 </span>
                             </div>
                             <p class="text-secondary">
-                                Desarrollo de aplicaciones web full-stack utilizando tecnologías modernas.
+                                {{ exp.descripcion }}
                             </p>
                             <div class="flex gap-4">
-                                <a routerLink="/projects/new-project" [queryParams]="{experience: 123-456-789}" class="bg-primary max-w-fit text-[#C0C1FF] font-semibold py-2 px-4 rounded-sm flex gap-2 items-center">
+                                <a routerLink="/projects/new-project" [queryParams]="{experience: exp.experiencia_uuid}" class="bg-primary max-w-fit text-[#C0C1FF] font-semibold py-2 px-4 rounded-sm flex gap-2 items-center">
                                     <i class="fa-solid fa-link"></i>
                                     Vincular Proyecto
                                 </a>
 
                                 <span class="bg-[#353436]/60 max-w-fit rounded-2xl py-2 px-3 text-secondary flex text-sm items-center justify-center gap-2">
                                     <i class="fa-regular fa-folder-open"></i>
-                                    3 Proyectos vinculados
+                                  {{ exp.cantidad_proyectos }} Proyectos vinculados
                                 </span>
 
                                 <a routerLink="" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
 
-                                <a routerLink="" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
+                                <a [routerLink]="['/experience', exp.experiencia_uuid]" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
 
@@ -62,7 +64,7 @@
                                 </a>
                             </div>
                         </div>
-                    <!-- } -->
+                    }
                 </div>
             }@else{
                 <div class="w-full py-10 flex justify-center items-center">
@@ -73,6 +75,6 @@
     </main>
 </div>
 
-@if (isLoading() && nameTech()===null) {
+@if (isLoading() && nameCompany()===null) {
     <loading-overlay/>
 }
