@@ -9,6 +9,7 @@ import { catchError, debounceTime, distinctUntilChanged, filter, firstValueFrom,
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { toObservable } from '@angular/core/rxjs-interop';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'list-experience',
@@ -37,8 +38,17 @@ export class ListExperience {
         const data = await firstValueFrom(this.experienceService.obtenerExperiencias(10, 0, this.nameCompany() ?? ''));
         console.log(data.data);
         this.experiences.set(data.data.content);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error al obtener experiencias:', error);
+        if (error.code == 500) {
+          console.log('imprimir error');
+          
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ocurrió un error al momento de obtener las experiencias. Por favor, inténtalo de nuevo más tarde.",
+          });
+        }  
       } finally {
         this.isLoading.set(false);
       }
