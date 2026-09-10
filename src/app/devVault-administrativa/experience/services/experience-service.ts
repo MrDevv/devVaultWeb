@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
-import { catchError, of, throwError, Observable, tap, delay } from 'rxjs';
+import { catchError, of, throwError, Observable, tap } from 'rxjs';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 import { Experience } from '@experience/interfaces/Experience'
+import { CreateExperienceRequest, ExperienceResponse } from '../interfaces/experience.dto';
 
 
 
@@ -43,12 +44,17 @@ export class ExperienceService {
         nombre_empresa: nombre_empresa,
       } 
     }).pipe(
-      delay(3000),
       tap((response) => {
         if (response.data.content.length > 0 && !nombre_empresa) {
           this.experienceCache.set(response);
         }
       }),
+      catchError((error: HttpErrorResponse) => throwError(() => error.error))
+    )
+  }
+
+  public crearExperiencia(experience: CreateExperienceRequest): Observable<APIResponse<ExperienceResponse>> {
+    return this._http.post<APIResponse<ExperienceResponse>>(`${BASEURL}/me/experiencias`, experience).pipe(
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     )
   }
