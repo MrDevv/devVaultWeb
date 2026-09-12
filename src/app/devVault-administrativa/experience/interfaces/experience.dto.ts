@@ -7,6 +7,15 @@ export interface CreateExperienceRequest {
     descripcion: string;
 }
 
+export interface UpdateExperienceRequest {
+    titulo: string;
+    puesto: string;
+    nombre_empresa: string;
+    fecha_inicio: string;
+    fecha_fin: string | null;
+    descripcion: string;
+}
+
 export interface ExperienceResponse extends CreateExperienceRequest {
     experiencia_uuid: string
 }

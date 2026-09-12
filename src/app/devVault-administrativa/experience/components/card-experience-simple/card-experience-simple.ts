@@ -1,6 +1,6 @@
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { Experience } from '@devVault-administrativa/experience/interfaces/Experience';
+import { ExperienceDetailResponse } from '@devVault-administrativa/experience/interfaces/experience.dto';
 
 @Component({
   selector: 'card-experience-simple',
@@ -8,5 +8,5 @@ import { Experience } from '@devVault-administrativa/experience/interfaces/Exper
   templateUrl: './card-experience-simple.html'  
 })
 export class CardExperienceSimple {
-  experiencia = input<Experience | null>(null);
+  experiencia = input<ExperienceDetailResponse | null>(null);
 }

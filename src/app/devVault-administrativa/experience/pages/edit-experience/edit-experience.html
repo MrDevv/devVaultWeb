@@ -1,1 +1,107 @@
-<p>edit-experience works!</p>
+<div class="max-w-350 m-auto">
+    <main class="py-5 md:px-10 px-5">
+        <span class="font-medium text-secondary block mb-4">Experiencia > <span class="text-primary"> Editar</span></span>
+        <form [formGroup]="formExperienceData" (ngSubmit)="actualizarExperiencia()">
+            <div class="grid md:grid-cols-[1fr_auto] gap-3">
+                <div class="flex flex-col gap-3">  
+                    <section-card-component [titleHeader]="'Detalles de la posición'" [iconHeader]="'fa-regular fa-address-card text-[#C0C1FF]'">
+                        <div class="w-full">
+                            <form-input-field 
+                                label="TÍTULO DESCRIPTIVO DE LA EXPERIENCIA" 
+                                placeholder="Provale (programa de vaso de leche)"
+                                type="text" 
+                                [required]="true"
+                                [control]="formExperienceData.get('title')!"
+                            />
+                        </div>
+                        <div class="w-full">
+                            <form-input-field 
+                                label="PUESTO / ROL" 
+                                placeholder="Desarrollador Fullstack"
+                                type="text" 
+                                [required]="true"
+                                [control]="formExperienceData.get('puesto')!"
+                            />
+                        </div>
+                        <div class="w-full">
+                            <form-input-field 
+                                label="empresa u organización" 
+                                placeholder="DevVault Group"
+                                type="text" 
+                                [required]="true"
+                                [control]="formExperienceData.get('empresa')!"
+                            />
+                        </div>
+                    </section-card-component>
+
+                    <section-card-component [titleHeader]="'Periodo Laboral'" [iconHeader]="'fa-solid fa-calendar-days text-[#4EDEA3]'">            
+                        <div class="flex flex-col md:flex-row w-full gap-7">
+                            <div class="w-full">
+                                <form-input-field 
+                                    label="fecha de inicio"
+                                    placeholder="dd/mm/aaaa"
+                                    type="date" 
+                                    [required]="true"
+                                    [control]="formExperienceData.get('fechaInicio')!"
+                                />
+                            </div>
+                            <div class="w-full">
+                                <form-input-field 
+                                    label="fecha de finalización"
+                                    placeholder="dd/mm/aaaa"
+                                    type="date"
+                                    [required]="false"
+                                    [control]="formExperienceData.get('fechaFin')!"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="p-4 w-full rounded-xl bg-[#1B1B1C] flex items-start sm:items-center justify-between gap-4">
+                            <div class="flex items-center gap-3">
+                                <label class="relative flex items-center cursor-pointer">
+                                    <input type="checkbox" id="checkbox-current" class="sr-only peer" [checked]="currentExperience()" (change)="currentExperience.set(!currentExperience())">
+                                    <div class="w-11 h-6 bg-[#353436] peer-focus:outline-none rounded-full peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00A572]"></div>
+                                </label>
+                                <div>
+                                <p class="text-sm font-semibold text-primary">Actualmente desempeñando este cargo</p>
+                                <p class="text-xs text-secondary mt-0.5">Esta posición figurará con la etiqueta "Presente" y destacará como activa.</p>
+                                </div>
+                            </div>
+                            <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-[#4EDEA3] bg-[#4EDEA3]/10 px-2.5 py-1 rounded-full whitespace-nowrap">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#4EDEA3] animate-pulse"></span>
+                                En curso
+                            </span>
+                        </div>
+                    </section-card-component>
+
+                    <section-card-component [titleHeader]="'Descripción y Logros (*)'" [iconHeader]="'fa-solid fa-align-right text-[#BDC2FF]'">
+                        <form-text-area-field
+                                    label=""
+                                    placeholder="Escribe una breve descripción sobre tu experiencia laboral, incluyendo responsabilidades, logros y habilidades adquiridas."
+                                    [control]="formExperienceData.get('descripcion')!"
+                                    maxLength="4000"
+                                    descriptionMaxLength="Máximo 4 000 caracteres."
+                                />
+                    </section-card-component>
+                </div>
+                <div class="p-5 md:min-w-80 md:max-h-fit bg-card rounded-xl flex flex-col gap-4">
+                    <button type="submit" class="w-full cursor-pointer px-4 py-2 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">
+                        Actualizar Experiencia
+                    </button>
+                    <button type="button" (click)="toBack()" class="cursor-pointer w-full px-4 py-2 bg-transparent border-2 border-[#464554]/30 rounded-sm text-[#C0C1FF]">                        
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+
+@if (isLoading() || experienciaResource.isLoading()) {
+    <loading />
+}
+
+@if (experienciaResource.error()) {
+    mostrarAlertaError()
+}

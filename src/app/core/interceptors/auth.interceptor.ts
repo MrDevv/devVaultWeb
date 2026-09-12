@@ -1,12 +1,14 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Router } from "@angular/router";
 import { catchError, throwError } from "rxjs";
+
+import { SideBarService } from "@guide/services/side-bar-service";
+
 import Swal from "sweetalert2";
 
 export function authInterceptor(req: HttpRequest<unknown>,next: HttpHandlerFn){
 
-  const router = inject(Router) ;
+  const sideBarService = inject(SideBarService);
 
   const token = localStorage.getItem('token_devVault');
 
@@ -29,7 +31,7 @@ export function authInterceptor(req: HttpRequest<unknown>,next: HttpHandlerFn){
           title: "Error",
           text: error.error.message,
         });
-        router.navigateByUrl('/auth/login');
+        sideBarService.logout();
       }
       
       if (error.status == 0) {

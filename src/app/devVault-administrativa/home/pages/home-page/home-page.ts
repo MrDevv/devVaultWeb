@@ -9,7 +9,7 @@ import { CardExperienceSimple } from "@devVault-administrativa/experience/compon
 import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 import { APIResponse } from '@shared/interfaces/APIResponse';
-import { Experience } from '@devVault-administrativa/experience/interfaces/Experience';
+import { ExperienceDetailResponse } from '@devVault-administrativa/experience/interfaces/experience.dto';
 import { Professional } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { ClipboardService } from '@shared/services/clipboard-service';
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
@@ -43,7 +43,7 @@ export class HomePage {
     })
   }
 
-  experiencesResource: ResourceRef<APIResponse<APIResponseWithPageable<Experience>> | undefined> = rxResource({
+  experiencesResource: ResourceRef<APIResponse<APIResponseWithPageable<ExperienceDetailResponse>> | undefined> = rxResource({
     params: () => ({size: this.size(), page: this.page()}),
     stream: ({params}) =>{
       return this.experienceService.obtenerExperiencias(params.size, params.page);

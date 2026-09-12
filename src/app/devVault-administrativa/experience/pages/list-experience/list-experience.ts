@@ -4,12 +4,12 @@ import { RouterLink } from '@angular/router';
 import { PageHeader } from "@devVault-administrativa/shared/components/page-header/page-header";
 import { LoaderInput } from "@devVault-administrativa/shared/components/loader-input/loader-input";
 import { LoadingOverlay } from "@shared/components/loading-overlay/loading-overlay";
-import { Experience } from '@devVault-administrativa/experience/interfaces/Experience';
 import { catchError, debounceTime, distinctUntilChanged, filter, firstValueFrom, skip, switchMap, tap } from 'rxjs';
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { toObservable } from '@angular/core/rxjs-interop';
 import Swal from 'sweetalert2';
+import { ExperienceDetailResponse } from '@devVault-administrativa/experience/interfaces/experience.dto';
 
 @Component({
   selector: 'list-experience',
@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 export class ListExperience {
     public nameCompany = signal<string | null>(null);
     public isLoading = signal(false);
-    public experiences = signal<Experience[]>([]);
+    public experiences = signal<ExperienceDetailResponse[]>([]);
 
     private experienceService = inject(ExperienceService);
 
