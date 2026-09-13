@@ -1,27 +1,31 @@
 import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { catchError, debounceTime, distinctUntilChanged, filter, firstValueFrom, skip, switchMap, tap } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+
 import { PageHeader } from "@devVault-administrativa/shared/components/page-header/page-header";
 import { LoaderInput } from "@devVault-administrativa/shared/components/loader-input/loader-input";
 import { LoadingOverlay } from "@shared/components/loading-overlay/loading-overlay";
-import { catchError, debounceTime, distinctUntilChanged, filter, firstValueFrom, skip, switchMap, tap } from 'rxjs';
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
-import { DatePipe, TitleCasePipe } from '@angular/common';
-import { toObservable } from '@angular/core/rxjs-interop';
-import Swal from 'sweetalert2';
 import { ExperienceDetailResponse } from '@devVault-administrativa/experience/interfaces/experience.dto';
+import { CardExperienceDetail } from '@devVault-administrativa/experience/components/card-experience-detail/card-experience-detail';
+import { AlertService } from '@shared/services/alert-service';
+import { Loading } from '@shared/components/loading/loading';
 
 @Component({
   selector: 'list-experience',
-  imports: [PageHeader, LoaderInput, LoadingOverlay, RouterLink, DatePipe, TitleCasePipe],
+  imports: [PageHeader, LoaderInput, LoadingOverlay, RouterLink, CardExperienceDetail, Loading],
   templateUrl: './list-experience.html'  
 })
 export class ListExperience {
     public nameCompany = signal<string | null>(null);
     public isLoading = signal(false);
     public experiences = signal<ExperienceDetailResponse[]>([]);
+    isLoadingDelated = signal(false);
 
     private experienceService = inject(ExperienceService);
+    private alertService = inject(AlertService);
 
     constructor() { 
       afterNextRender(() => {
@@ -36,19 +40,11 @@ export class ListExperience {
 
       try {
         const data = await firstValueFrom(this.experienceService.obtenerExperiencias(10, 0, this.nameCompany() ?? ''));
-        console.log(data.data);
         this.experiences.set(data.data.content);
       } catch (error: any) {
-        console.error('Error al obtener experiencias:', error);
         if (error.code == 500) {
-          console.log('imprimir error');
-          
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Ocurrió un error al momento de obtener las experiencias. Por favor, inténtalo de nuevo más tarde.",
-          });
-        }  
+          this.alertService.error('Ocurrió un error al momento de obtener las experiencias. Por favor, inténtalo de nuevo más tarde.');          
+        }
       } finally {
         this.isLoading.set(false);
       }
@@ -73,5 +69,28 @@ export class ListExperience {
         this.experiences.set(data.data.content);
         this.isLoading.set(false);
       });
+    }
+
+    async eliminarExperiencia(uuid: string) {
+      const confirmed = await this.alertService.question(
+        '¿Está seguro de eliminar esta experiencia?',
+        'Al eliminar la experiencia también se borrarán los proyectos vinculados.'
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      this.isLoadingDelated.set(true);
+
+      try {
+        await firstValueFrom(this.experienceService.eliminarExperiencia(uuid));
+        this.experiences.update((items) => items.filter((exp) => exp.experiencia_uuid !== uuid));
+        this.alertService.info('Experiencia eliminada', 'La experiencia ha sido eliminada correctamente.');
+      } catch (error) {
+        this.alertService.error('Error', 'Ocurrió un error al intentar eliminar la experiencia.');
+      } finally {
+        this.isLoadingDelated.set(false);
+      }
     }
 }

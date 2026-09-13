@@ -68,7 +68,7 @@ export class AlertService {
     })
   }
 
-    errorAndRedirect(title: string = '', message: string = '', url: string){
+  errorAndRedirect(title: string = '', message: string = '', url: string){
     Swal.fire({
       title: title,
       text: message,
@@ -78,4 +78,16 @@ export class AlertService {
       this.router.navigateByUrl(url)
     });
   }
+
+  question(title: string = '', message: string = ''): Promise<boolean> {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => result.isConfirmed);
+  }
+
 }

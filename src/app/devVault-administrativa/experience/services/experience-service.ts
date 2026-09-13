@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
-import { catchError, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, delay, Observable, of, tap, throwError } from 'rxjs';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
@@ -78,6 +78,34 @@ export class ExperienceService {
     return this._http.get<APIResponse<ExperienceResponse>>(`${EXPERIENCES_ENDPOINT}/${uuid}`).pipe(
       catchError(this.handleHttpError)
     )
+  }
+
+  public eliminarExperiencia(experienciaUUID: string): Observable<APIResponse<void>> {
+    return this._http.delete<APIResponse<void>>(`${EXPERIENCES_ENDPOINT}/${experienciaUUID}`).pipe(
+      tap(() => this.eliminarExperienciaEnCache(experienciaUUID)),
+      catchError(this.handleHttpError)
+    )
+  }
+
+  public eliminarExperienciaEnCache(experienciaUUID: string): void {
+    const currentCache = this.experienceCache();
+    if (!currentCache) {
+      return;
+    }
+
+    const content = currentCache.data.content.filter((experiencia) => experiencia.experiencia_uuid !== experienciaUUID);
+
+    this.experienceCache.set({
+      ...currentCache,
+      data: {
+        ...currentCache.data,
+        content: this.orderExperiencias(content),
+        pageableData: {
+          ...currentCache.data.pageableData,
+          totalElements: currentCache.data.pageableData.totalElements - 1,
+        },
+      },
+    });
   }
 
   private filtrarPorEmpresa(experiencias: ExperienceDetailResponse[], nombreEmpresa: string): ExperienceDetailResponse[] {
