@@ -1,0 +1,85 @@
+<div class="w-dvw h-dvh overflow-y-auto md:w-4xl md:h-full bg-card px-6 pb-6">
+    <div class="flex justify-end bg-card sticky top-0 pt-5 pb-1">
+        <i (click)="cerrarModal()" class="fa-solid fa-xmark text-lg text-secondary cursor-pointer"></i>
+    </div>
+    
+    <section class="mb-5">
+        <span class="text-purple -tracking-tighter font-medium">{{ experienceWithProjects.titulo! }}</span>
+        <h2 class="text-primary text-2xl font-semibold">{{ experienceWithProjects.puesto }}</h2>
+        <h3 class="text-secondary text-[17px] mb-2">{{ experienceWithProjects.nombreEmpresa }}</h3>
+        <div class="flex gap-2 items-center text-secondary font-light text-[12px] mb-5">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>{{ experienceWithProjects.fechaInicio | date: "MMMM yyyy" : '' : 'es' | titlecase }} 
+            - 
+            {{ experienceWithProjects.fechaFin ? ( experienceWithProjects.fechaFin | date: "MMMM yyyy" : '' : 'es' | titlecase) : 'Actual' }}
+        </span>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <h4 class="text-secondary text-md uppercase font-medium">Descripción</h4>
+            <p class="text-primary font-light">{{ experienceWithProjects.descripcion }}</p>
+        </div>
+    </section>
+
+    <section class="mb-5 flex flex-col gap-3">
+        <div class="flex justify-between items-center gap-2">
+            <h4 class="text-secondary text-md uppercase font-medium">Proyectos vinculados</h4>
+            <span class="uppercase font-medium text-[12px] bg-[#C0C1FF]/10 text-purple py-1 px-3 rounded-lg">{{ experienceWithProjects.proyectos?.length | i18nPlural: mapeoProyectos }}</span>
+        </div>
+
+        <div class="flex flex-col gap-5">
+            @if (experienceWithProjects.proyectos.length <= 0) {
+                <div class="flex justify-center items-center border py-10 border-[#C0C1FF]/30 rounded-xl">
+                    <p class="text-purple text-sm">No hay proyectos vinculados a esta experiencia.</p>
+                </div>  
+            }@else {
+                @for (project of experienceWithProjects.proyectos; track $index) {
+                    <div class="flex flex-col md:flex-row rounded-lg bg-card-secondary overflow-hidden">
+                        @if (project.url_imagen_presentacion) {
+                            <div class="flex-1">
+                                <img class="object-fill w-full h-full" [src]="project.url_imagen_presentacion" alt="">
+                            </div>
+                        }@else {
+                            <div class="flex-1 flex py-10 justify-center text-6xl items-center text-[#C0C1FF]">
+                                <i class="fa-regular fa-folder-open"></i>
+                            </div>
+                        }
+                        <div class="flex-3 p-3">
+                            <div class="flex flex-col md:flex-row md:justify-between items-start mb-2 md:mb-0">
+                                <div>
+                                    <span class="text-purple text-[10px] -tracking-tighter font-medium uppercase">{{ project.tipo_proyecto.descripcion }}</span>
+                                    <h2 class="text-primary text-lg font-medium">{{ project.titulo }}</h2>
+                                </div>
+                                <div class="flex gap-2 text-primary w-full justify-end md:w-fit font-light">
+                                    @if (project.url_produccion != null) {
+                                        <a [href]="project.url_produccion" target="_blank" class="bg-[#353436] py-1 px-2.5 max-w-fit text-sm rounded-sm">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    }
+                                    @if (project.url_repositorio != null) {
+                                        <a [href]="project.url_repositorio" target="_blank" class="bg-[#353436] py-1 px-3 max-w-fit text-sm rounded-sm">
+                                            <i class="fa-brands fa-github"></i>
+                                        </a>
+                                    }
+                                    <a [routerLink]="['/projects/edit-project', project.proyecto_uuid]" target="_blank" class="bg-[#353436] py-1 px-3 max-w-fit text-sm rounded-sm">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="" target="_blank" class="bg-[#353436] text-[#F87C63] py-1 px-3 max-w-fit text-sm rounded-sm">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-secondary text-[12px] font-light mb-2 line-clamp-3"> {{ project.descripcion }} </p>
+                            <div class="flex flex-wrap gap-1 justify-center">
+                                @for (etiqueta of project.etiquetas; track $index) {
+                                    <div class="py-0.5 px-2 bg-[#353436] text-[11px] text-secondary rounded-sm">{{ etiqueta.descripcion }}</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+
+</div>

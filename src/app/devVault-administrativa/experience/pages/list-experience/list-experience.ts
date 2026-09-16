@@ -12,6 +12,9 @@ import { ExperienceDetailResponse } from '@devVault-administrativa/experience/in
 import { CardExperienceDetail } from '@devVault-administrativa/experience/components/card-experience-detail/card-experience-detail';
 import { AlertService } from '@shared/services/alert-service';
 import { Loading } from '@shared/components/loading/loading';
+import { ModalService } from '@shared/services/modal-service';
+import { ModalExperienceDetail } from '@devVault-administrativa/experience/components/modal-experience-detail/modal-experience-detail';
+import { ExperienceWithProjectsResponse } from '../../interfaces/experience.dto';
 
 @Component({
   selector: 'list-experience',
@@ -22,10 +25,11 @@ export class ListExperience {
     public nameCompany = signal<string | null>(null);
     public isLoading = signal(false);
     public experiences = signal<ExperienceDetailResponse[]>([]);
-    isLoadingDelated = signal(false);
+    isLoadingTransparent = signal(false);
 
     private experienceService = inject(ExperienceService);
     private alertService = inject(AlertService);
+    private modalService = inject(ModalService);
 
     constructor() { 
       afterNextRender(() => {
@@ -81,7 +85,7 @@ export class ListExperience {
         return;
       }
 
-      this.isLoadingDelated.set(true);
+      this.isLoadingTransparent.set(true);
 
       try {
         await firstValueFrom(this.experienceService.eliminarExperiencia(uuid));
@@ -90,7 +94,21 @@ export class ListExperience {
       } catch (error) {
         this.alertService.error('Error', 'Ocurrió un error al intentar eliminar la experiencia.');
       } finally {
-        this.isLoadingDelated.set(false);
+        this.isLoadingTransparent.set(false);
+      }
+    }
+
+    async verExperiencia(uuid: string) {
+      try {
+        this.isLoadingTransparent.set(true);
+        const experiencaProyectos: ExperienceWithProjectsResponse = (await firstValueFrom(this.experienceService.obtenerExperienciaConProyectos(uuid))).data;
+        this.modalService.openModal(ModalExperienceDetail, experiencaProyectos, false);
+      } catch (error) {
+        this.alertService.error('Error', 'Ocurrió un error al intentar ver la experiencia.');
+        console.log(error);
+        
+      } finally {
+        this.isLoadingTransparent.set(false);
       }
     }
 }

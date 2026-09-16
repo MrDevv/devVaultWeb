@@ -4,7 +4,7 @@
             <h3 class="text-primary text-xl font-bold"> {{ experience().puesto }} </h3>
             <span class="text-[#C0C1FF]"> {{ experience().nombre_empresa }} • {{ experience().titulo }}</span>
         </div>
-        <span class="text-secondary rounded-2xl py-2 px-4 bg-primary">
+        <span class="text-secondary rounded-2xl py-2 px-4 bg-primary md:text-sm text-xs">
             {{ experience().fecha_inicio | date: "MMMM yyyy" : '' : 'es' | titlecase }} 
                 - 
             {{ experience().fecha_fin ? ( experience().fecha_fin | date: "MMMM yyyy" : '' : 'es' | titlecase) : 'Actual' }}
@@ -13,27 +13,33 @@
     <p class="text-secondary">
         {{ experience().descripcion }}
     </p>
-    <div class="flex gap-4">
-        <a routerLink="/projects/new-project" [queryParams]="{experience: experience().experiencia_uuid}" class="bg-primary max-w-fit text-[#C0C1FF] font-semibold py-2 px-4 rounded-sm flex gap-2 items-center">
+    <div class="flex flex-col md:flex-row gap-2 md:gap-4">
+        <a 
+            routerLink="/projects/new-project" 
+            [queryParams]="{experience: experience().experiencia_uuid}" 
+            class="bg-primary md:max-w-fit w-full  text-[#C0C1FF] font-semibold py-2 px-4 rounded-sm flex gap-2 items-center justify-center"
+        >
             <i class="fa-solid fa-link"></i>
             Vincular Proyecto
         </a>
 
-        <span class="bg-[#353436]/60 max-w-fit rounded-2xl py-2 px-3 text-secondary flex text-sm items-center justify-center gap-2">
+        <span class="bg-[#353436]/60 md:max-w-fit w-full rounded-2xl py-2 px-3 text-secondary flex text-sm items-center justify-center gap-2 md:mb-0 mb-2">
             <i class="fa-regular fa-folder-open"></i>
-            {{ experience().cantidad_proyectos }} Proyectos vinculados
+            {{ experience().cantidad_proyectos | i18nPlural: mapeoProyectos }}
         </span>
 
-        <a routerLink="" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
-            <i class="fa-solid fa-eye"></i>
-        </a>
-
-        <a [routerLink]="['/experience', experience().experiencia_uuid]" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
-            <i class="fa-solid fa-pen-to-square"></i>
-        </a>
-
-        <a (click)="eliminar.emit(experience().experiencia_uuid)" class="bg-[#FFB4AB]/40 rounded-sm text-[#FFB4AB] py-2 px-3 text-secondary cursor-pointer">
-            <i class="fa-solid fa-trash"></i>
-        </a>
+        <div class="flex gap-4 justify-end">
+            <a (click)="emitirUUIDExperienciaVer()" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary cursor-pointer">
+                <i class="fa-solid fa-eye"></i>
+            </a>
+    
+            <a [routerLink]="['/experience', experience().experiencia_uuid]" class="bg-[#353436]/60 rounded-sm py-2 px-3 text-secondary">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+            
+            <a (click)="emitirUUIDExperienciaEliminar()" class="bg-[#FFB4AB]/40 rounded-sm text-[#FFB4AB] py-2 px-3 text-secondary cursor-pointer">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
     </div>
 </div>

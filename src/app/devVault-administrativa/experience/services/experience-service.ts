@@ -9,6 +9,7 @@ import {
   CreateExperienceRequest,
   ExperienceDetailResponse,
   ExperienceResponse,
+  ExperienceWithProjectsResponse,
   UpdateExperienceRequest,
 } from '@devVault-administrativa/experience/interfaces/experience.dto';
 
@@ -106,6 +107,12 @@ export class ExperienceService {
         },
       },
     });
+  }
+
+  public obtenerExperienciaConProyectos(uuid: string): Observable<APIResponse<ExperienceWithProjectsResponse>> {
+    return this._http.get<APIResponse<ExperienceWithProjectsResponse>>(`${EXPERIENCES_ENDPOINT}/${uuid}/proyectos`).pipe(
+      catchError(this.handleHttpError)
+    )
   }
 
   private filtrarPorEmpresa(experiencias: ExperienceDetailResponse[], nombreEmpresa: string): ExperienceDetailResponse[] {

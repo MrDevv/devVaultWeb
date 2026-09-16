@@ -25,7 +25,10 @@
             @if (experiences().length > 0) {
                 <div class="grid grid-cols-1 w-full gap-3">
                     @for (exp of experiences(); track $index) {
-                        <card-experience-detail (eliminar)="eliminarExperiencia($event)" [experience]="exp"/>
+                        <card-experience-detail 
+                            (UUIDExperienciaEliminar)="eliminarExperiencia($event)" 
+                            (UUIDExperienciaVer)="verExperiencia($event)"
+                            [experience]="exp"/>
                     }
                 </div>
             }@else{
@@ -41,6 +44,6 @@
     <loading-overlay/>
 }
 
-@if (isLoadingDelated()) {
+@if (isLoadingTransparent()) {
     <loading />
 }

@@ -28,6 +28,10 @@
         background-color: #201F20;        
     }
 
+    .bg-card-secondary {
+        background-color: #181819;
+    }
+
     .bg-gradient {
         background: linear-gradient(to bottom, #333333 0%, #181819 100%);
     }
@@ -46,6 +50,10 @@
 
     .text-primary-dark {
         color: #0e0e0f;
+    }
+
+    .text-purple {
+        color: #C0C1FF;
     }
 }
 
@@ -78,4 +86,14 @@
 
 .swal2-confirm:hover {
     background-color: #201F20;
+}
+
+
+/* Estilos dialogo */
+.dialogo-borde-redondeado .mdc-dialog__surface {
+  border-radius: 16px !important; 
+}
+
+.dialogo-sin-fondo .mat-mdc-dialog-surface {
+  background-color: transparent !important;
 }

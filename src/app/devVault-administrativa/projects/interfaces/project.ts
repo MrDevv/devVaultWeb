@@ -10,7 +10,7 @@ export interface Project {
     url_repositorio: string | null;
     url_imagen_presentacion: string | null;
     estado: string;
-    experiencia: ExperienceSimple,
+    experiencia?: ExperienceSimple;
     tipo_proyecto: ProjectType,
     etiquetas: Tag[]
 }

@@ -1,3 +1,5 @@
+import { Project } from "@devVault-administrativa/projects/interfaces/project";
+
 export interface CreateExperienceRequest {
     titulo: string;
     puesto: string;
@@ -25,4 +27,8 @@ export interface ExperienceSimple extends Pick<ExperienceResponse, 'experiencia_
 export interface ExperienceDetailResponse extends ExperienceResponse {
     desarrollador: string;
     cantidad_proyectos: number;
+}
+
+export interface ExperienceWithProjectsResponse extends ExperienceResponse {
+    proyectos: Project[];
 }
