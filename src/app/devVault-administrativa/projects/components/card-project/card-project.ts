@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Project } from '@devVault-administrativa/projects/interfaces/project';
 import { colorTags } from '@devVault-administrativa/projects/utils/color-tags';
 
@@ -10,8 +10,18 @@ import { colorTags } from '@devVault-administrativa/projects/utils/color-tags';
 })
 export class CardProject {
   public project = input<Project>();
+  public UUIDProyectoEliminar = output<string>();
+  public UUIDProyectoVer = output<string>();
 
   obtenerColor(tipoTag :string){
     return colorTags[tipoTag];
+  }
+
+  emitirUUIDProyectoEliminar(uuid: string) {
+    this.UUIDProyectoEliminar.emit(uuid);
+  }
+
+  emitirUUIDProyectoVer(uuid: string) {
+    this.UUIDProyectoVer.emit(uuid);
   }
 }

@@ -3,12 +3,12 @@
         @if (project()!.url_imagen_presentacion) {
             <img class="w-full h-40 object-cover" [src]="project()!.url_imagen_presentacion" [alt]="project()!.titulo">
         }@else{
-            <div class="w-full h-40 flex justify-center text-6xl items-center text-[#C0C1FF] text-3xl">
+            <div class="w-full h-40 flex justify-center text-6xl items-center text-[#C0C1FF]">
                 <i class="fa-regular fa-folder-open"></i>
             </div>
         }
         <div 
-            class="absolute bottom-2 left-2 rounded-md bg-secondary"
+            class="absolute bottom-2 left-2 rounded-md bg-secondary overflow-hidden"
         >
             <span 
                 class="text-[11px] uppercase block py-1 px-2 font-extrabold"
@@ -33,21 +33,21 @@
             }
         </div>
 
-        <div class="grid grid-cols-4 place-items-center mt-auto text-secondary font-light text-[12px]">
+        <div class="flex gap-2 justify-end mt-auto text-secondary font-light text-[12px]">
             @if (project()?.url_produccion != null) {
-                <a href="" target="_blank" class="py-1 col-start-1 col-end-2 px-2.5 max-w-fit text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
+                <a href="" target="_blank" class="py-1 px-2.5 max-w-fit text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
                     <i class="fa-solid fa-eye"></i>
                 </a>
             }
             @if (project()?.url_repositorio != null) {
-                <a [href]="project()?.url_repositorio" target="_blank" class="py-1 col-start-2 col-end-3 px-3 max-w-fit text-secondary text-lg bg-secondary rounded-sm">
+                <a [href]="project()?.url_repositorio" target="_blank" class="py-1 px-3 max-w-fit text-secondary text-lg bg-secondary rounded-sm">
                     <i class="fa-brands fa-github"></i>
                 </a>
             }
-            <a href="" target="_blank" class="py-1 col-start-3 col-end-4 px-3 max-w-fit text-secondary text-lg bg-secondary rounded-sm">
+            <a href="" target="_blank" class="py-1 px-3 max-w-fit text-secondary text-lg bg-secondary rounded-sm">
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
-            <a href="" target="_blank" class="text-[#F87C63] bg-[#F87C63]/10 py-1 col-start-4 col-end-5 px-3 max-w-fit text-lg rounded-sm">
+            <a href="" target="_blank" class="text-[#F87C63] bg-[#F87C63]/10 py-1 px-3 max-w-fit text-lg rounded-sm">
                 <i class="fa-solid fa-trash"></i>
             </a>   
         </div>

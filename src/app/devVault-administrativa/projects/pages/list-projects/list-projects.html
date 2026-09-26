@@ -1,1 +1,50 @@
-<p>list-projects works!</p>
+<div class="max-w-350 m-auto">
+    <main class="py-5 md:px-10 px-5">
+        <page-header firstTitle="Inventario de" secondTitle="Proyectos" description="Gestiona tus proyectos y vinculalos a tu experiencia." />
+
+        <div class="w-full flex flex-col gap-3">
+            <div class="flex flex-col-reverse md:flex-row justify-between w-full gap-2 md:gap-10">
+                <div class="w-full bg-secondary rounded-lg py-3 px-3 text-primary flex items-center gap-2">
+                    <i class="fas fa-search"></i>
+                    <input
+                        class="bg-secondary w-full appearance-none focus-within:outline-none"
+                        type="text"
+                        placeholder="Buscar por titulo (mínimo 2 caracteres)"
+                        (input)="titleProject.set($event.target.value)"
+                    >
+                    @if (isLoading() && titleProject()) {
+                        <loader-input/>
+                    }
+                </div>
+                <a routerLink="new-project" class="min-w-fit px-4 py-3 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">
+                    <i class="fa-solid fa-plus"></i>
+                    Nuevo Proyecto
+                </a>
+            </div>
+
+            @if (projects().length > 0) {
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full gap-3">
+                    @for (proj of projects(); track $index) {
+                        <card-project 
+                            (UUIDProyectoEliminar)="eliminarProyecto($event)" 
+                            (UUIDProyectoVer)="verProyecto($event)"
+                            [project]="proj"/>
+                    }
+                </div>
+            }@else{
+                <div class="w-full py-10 flex justify-center items-center">
+                    <p class="text-white">No se encontraron proyectos.</p>
+                </div>
+            }
+
+        </div>
+    </main>
+</div>
+
+@if (isLoading() && titleProject()===null) {
+    <loading-overlay/>
+}
+
+@if (isLoadingTransparent()) {
+    <loading />
+}
