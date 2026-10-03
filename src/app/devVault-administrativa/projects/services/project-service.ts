@@ -4,7 +4,7 @@ import { catchError, delay, Observable, of, tap, throwError } from 'rxjs';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
-import { Project } from '../interfaces/project';
+import { CreateProject, Project } from '../interfaces/project.dto';
 import { environment } from '@environments/environment';
 
 const PROJECTS_ENDPOINT = `${environment.API_URL}/me/proyectos`;
@@ -47,7 +47,6 @@ export class ProjectService {
         titulo,
       },
     }).pipe(
-      delay(3000),
       tap((response) => {
         if (response.data.content.length > 0 && !titulo) {
           this.projectsCache.set(response);
@@ -57,10 +56,37 @@ export class ProjectService {
     )
   }
 
-  private filtrarPorTitulo(proyectos: Project[], titulo: string): Project[] {
-      return proyectos.filter((proyecto) => {
-        return proyecto.titulo.toLowerCase().includes(titulo.toLowerCase())
-      });
+  public crearProyecto(proyecto: CreateProject): Observable<APIResponse<Project>> {
+    return this._http.post<APIResponse<Project>>(PROJECTS_ENDPOINT, proyecto).pipe(
+      tap((response) => {
+        this.agregarProyectoAlCache(response.data);
+      }),
+      catchError((error: HttpErrorResponse) => throwError(() => error.error))
+    );
+  }
+
+  private agregarProyectoAlCache(proyecto: Project): void {
+    const currentCache = this.projectsCache();
+    if (!currentCache) {
+      return;
     }
+
+    this.projectsCache.set({
+      ...currentCache,
+      data: {
+        content: [proyecto, ...(currentCache?.data.content ?? [])],
+        pageableData: {
+          ...currentCache?.data.pageableData,
+          totalElements: (currentCache?.data.pageableData?.totalElements ?? 0) + 1
+        }
+      },
+    });
+  }
+
+  private filtrarPorTitulo(proyectos: Project[], titulo: string): Project[] {
+    return proyectos.filter((proyecto) => {
+      return proyecto.titulo.toLowerCase().includes(titulo.toLowerCase())
+    });
+  }
 
 }

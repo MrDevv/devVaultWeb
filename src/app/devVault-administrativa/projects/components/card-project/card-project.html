@@ -35,7 +35,7 @@
 
         <div class="flex gap-2 justify-end mt-auto text-secondary font-light text-[12px]">
             @if (project()?.url_produccion != null) {
-                <a href="" target="_blank" class="py-1 px-2.5 max-w-fit text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
+                <a [href]="project()?.url_produccion" target="_blank" class="py-1 px-2.5 max-w-fit text-[#24255e] text-lg bg-[#C0C1FF] rounded-sm">
                     <i class="fa-solid fa-eye"></i>
                 </a>
             }

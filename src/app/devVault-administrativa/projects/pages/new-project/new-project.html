@@ -1,1 +1,168 @@
-<p>new-project works!</p>
+<div class="max-w-350 m-auto">
+    <main class="py-5 md:px-10 px-5">
+        <page-header firstTitle="Nuevo" secondTitle="Proyecto" description="Crea un nuevo proyecto y gestiona sus detalles." />
+        <form [formGroup]="formProyectoData" (ngSubmit)="guardarProyecto()">
+            <div class="grid md:grid-cols-[1fr_auto] gap-3">            
+                <div class="flex flex-col gap-3">  
+                    <section-card-component [titleHeader]="'Experiencia del Proyecto'" [iconHeader]="'fa-solid fa-briefcase text-[#C0C1FF]'">
+                        <div class="flex flex-col w-full gap-1">
+                            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Selecciona la experiencia</label>
+                            <select 
+                                class="bg-primary w-full rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                name="experienciaUUID" 
+                                id="experienciaUUID"
+                                formControlName="experienciaUUID"
+                            >
+                                <option [ngValue]="null">Seleccionar</option>
+                                @for (experiencia of resourceExperienciasSimple.value()?.data ?? []; track $index) {
+                                    <option [ngValue]="experiencia.experiencia_uuid">{{ experiencia.titulo }}</option>
+                                }
+                            </select>
+                        </div>
+                    </section-card-component>
+                    <section-card-component [titleHeader]="'Detalles del Proyecto'" [iconHeader]="'fa-regular fa-folder-open text-[#C0C1FF]'">
+                        <div class="w-full">
+                            <form-input-field 
+                                label="TÍTULO DEL PROYECTO" 
+                                placeholder="DocumentalApp API"
+                                type="text" 
+                                [required]="true"
+                                [control]="formProyectoData.get('titulo')!"
+                            />
+                        </div>
+                        <form-text-area-field
+                            label="DESCRIPCIÓN DEL PROYECTO" 
+                            placeholder="Describe brevemente el proyecto"
+                            [control]="formProyectoData.get('descripcion')!"
+                            maxLength="4000"
+                            descriptionMaxLength="Máximo 4 000 caracteres."
+                        />
+                        <div class="flex flex-col md:flex-row w-full gap-7">
+                            <div class="w-full">
+                                <form-icon-input-field
+                                    label="demo url"
+                                    placeholder="www.miproyecto.com"
+                                    type="url"
+                                    icon="fa-solid fa-link"
+                                    [control]="formProyectoData.get('urlProduccion')!"
+                                />
+                            </div>
+                            <div class="w-full">
+                                <form-icon-input-field
+                                    label="github repositorio"
+                                    placeholder="github.com/username/repositorio"
+                                    type="url"
+                                    icon="fa-brands fa-github"
+                                    [control]="formProyectoData.get('urlRepositorio')!"
+                                />
+                            </div>
+                        </div>
+                    </section-card-component>
+
+                    <section-card-component [titleHeader]="'Clasificación y etiquetas'" [iconHeader]="'fa-solid fa-tags text-[#C0C1FF]'">
+                        <div class="flex flex-col w-full gap-1">
+                            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Tipo de Proyecto</label>
+                            <select 
+                                class="bg-primary w-full rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
+                                name="tipoProyectoUUID" 
+                                id="tipoProyectoUUID"
+                                formControlName="tipoProyectoUUID"
+                            >
+                                <option [ngValue]="null">Seleccionar</option>
+                                @for (tipoProyecto of resourceTiposProyectos.value()?.data; track $index) {
+                                    <option [ngValue]="tipoProyecto.tipo_proyecto_uuid">{{ tipoProyecto.descripcion | titlecase }}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="w-full gap-1 flex flex-col relative">
+                            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">
+                                buscar y añadir etiquetas <span class="font-normal">(opcional)</span>
+                            </label>
+                            <div class="relative w-full bg-secondary rounded-lg py-3 px-3 text-primary flex items-center gap-2">
+                                <i class="fas fa-search"></i>
+                                <input
+                                    #tagSearchInput
+                                    class="bg-secondary w-full appearance-none focus-within:outline-none"
+                                    type="text"
+                                    placeholder="Buscar etiqueta (mínimo 2 caracteres)"
+                                    [value]="etiquetaTitle()"
+                                    (keydown)="onSearchKeyDown($event)"
+                                    (keyup)="onSearchKeyUp($event)"
+                                    (input)="onSearchInput($any($event.target).value)"
+                                    (focus)="isDropdownOpen.set(true); teclaBorradoPresionada.set(false)"
+                                    (blur)="isDropdownOpen.set(false)"
+                                >
+                                @if (isLoading() && etiquetaTitle()) {
+                                    <loader-input/>
+                                }
+                            </div>
+
+                            @if (isDropdownOpen() && etiquetaTitle().trim().length >= 2) {
+                                <div
+                                    class="absolute top-full left-0 right-0 z-20 mt-1 max-h-56 overflow-y-auto bg-card rounded-lg border border-[#464554]/30 p-1 shadow-lg"
+                                    (mousedown)="$event.preventDefault()"
+                                >
+                                    @for (tag of etiquetasDisponibles(); track tag.etiqueta_uuid) {
+                                        <div
+                                            class="cursor-pointer px-3 py-2 rounded-md transition-colors text-primary hover:bg-[#353436]"
+                                            (click)="seleccionarEtiqueta(tag)"
+                                        >
+                                            <span class="text-[14px]">{{ tag.descripcion }}</span>
+                                        </div>
+                                    } @empty {
+                                        <p class="px-3 py-4 text-secondary text-[14px] text-center">
+                                            No se encontraron etiquetas.
+                                        </p>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="w-full gap-1 flex flex-col">
+                            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">
+                                Etiquetas seleccionadas
+                            </label>
+                            <div class="w-full flex flex-wrap items-center gap-2">
+                                @for (tag of etiquetasSeleccionadas(); track tag.etiqueta_uuid) {
+                                    <div class="flex gap-3 items-center text-primary bg-[#2A2A2B] rounded-xl px-5 py-1.5">
+                                        <span class="text-[14px]">{{ tag.descripcion }}</span>
+                                        <button
+                                            type="button"
+                                            class="cursor-pointer text-secondary transition-colors hover:text-primary"
+                                            (click)="eliminarEtiqueta(tag.etiqueta_uuid)"
+                                        >
+                                            <i class="fas fa-close"></i>
+                                        </button>
+                                    </div>
+                                } @empty {
+                                    <p class="text-secondary text-[14px]">Aún no has añadido etiquetas.</p>
+                                }
+                            </div>
+                        </div>
+                    </section-card-component>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <section-card-component titleHeader="Imagen presentación" iconHeader="fa-solid fa-image">
+                        <logo-preview-component
+                            [control]="formProyectoData.get('urlImagenPresentacion')!"
+                            [subTitle]="'Previsualización de la imagen'"
+                            [placeHolder]="'https://storage.io/mi-logo.png'"
+                            [iconNotFound]="'fa-solid fa-palette'"/>
+                    </section-card-component>
+
+                    <div class="flex flex-col gap-3">
+                        <button type="submit" class="w-full cursor-pointer px-4 py-2 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]">                        
+                            Guardar Cambios
+                        </button>
+                        <button (click)="toBack()" class="cursor-pointer w-full px-4 py-2 bg-transparent border-2 border-[#464554]/30 rounded-sm text-[#C0C1FF]">                        
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+@if (isLoading()) {
+    <loading />
+}

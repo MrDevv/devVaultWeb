@@ -14,3 +14,14 @@ export interface Project {
     tipo_proyecto: ProjectType,
     etiquetas: Tag[]
 }
+
+export interface CreateProject {
+    titulo: string;
+    descripcion: string;
+    urlProduccion: string | null;
+    urlRepositorio: string | null;
+    urlImagenPresentacion: string | null;
+    experienciaUUID: string;
+    tipoProyectoUUID: string;
+    etiquetas: string[];
+}

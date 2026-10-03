@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overlay';
 import { Loading } from '@shared/components/loading/loading';
 import { CardProject } from '@devVault-administrativa/projects/components/card-project/card-project';
-import { Project } from '@devVault-administrativa/projects/interfaces/project';
+import { Project } from '@devVault-administrativa/projects/interfaces/project.dto';
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
 import { firstValueFrom, switchMap, skip, debounceTime, distinctUntilChanged, filter, tap, catchError } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -39,7 +39,7 @@ export class ListProjects {
     this.isLoading.set(true); 
 
     try {
-      const data = await firstValueFrom(this.projectService.obtenerProyectos(10, 0, this.titleProject() ?? ''));
+      const data = await firstValueFrom(this.projectService.obtenerProyectos(12, 0, this.titleProject() ?? ''));
       this.projects.set(data.data.content);
     } catch (error: any) {
       if (error.code == 500) {

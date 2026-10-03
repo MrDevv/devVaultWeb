@@ -1,4 +1,4 @@
-import { Project } from "@devVault-administrativa/projects/interfaces/project";
+import { Project } from "@devVault-administrativa/projects/interfaces/project.dto";
 
 export interface CreateExperienceRequest {
     titulo: string;

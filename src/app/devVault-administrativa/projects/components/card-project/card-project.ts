@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { Project } from '@devVault-administrativa/projects/interfaces/project';
+import { Project } from '@devVault-administrativa/projects/interfaces/project.dto';
 import { colorTags } from '@devVault-administrativa/projects/utils/color-tags';
 
 @Component({

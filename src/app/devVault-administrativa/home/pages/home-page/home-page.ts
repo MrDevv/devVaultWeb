@@ -13,7 +13,7 @@ import { ExperienceDetailResponse } from '@devVault-administrativa/experience/in
 import { Professional } from '@devVault-administrativa/professional-data/interfaces/Developer';
 import { ClipboardService } from '@shared/services/clipboard-service';
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
-import { Project } from '@devVault-administrativa/projects/interfaces/project';
+import { Project } from '@devVault-administrativa/projects/interfaces/project.dto';
 import { CardProject } from "@devVault-administrativa/projects/components/card-project/card-project";
 import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overlay';
 

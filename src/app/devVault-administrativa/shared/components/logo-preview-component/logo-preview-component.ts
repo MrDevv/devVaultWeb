@@ -13,5 +13,6 @@ export class LogoPreviewComponent {
   iconNotFound = input.required<string>();
   subTitle = input.required<string>();
   placeHolder = input.required<string>();
+  required = input<boolean>(false);
 
 }

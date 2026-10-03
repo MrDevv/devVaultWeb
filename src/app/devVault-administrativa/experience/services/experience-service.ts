@@ -12,6 +12,7 @@ import {
   ExperienceWithProjectsResponse,
   UpdateExperienceRequest,
 } from '@devVault-administrativa/experience/interfaces/experience.dto';
+import { ExperienceSimple } from '../interfaces/experience-simple';
 
 const EXPERIENCES_ENDPOINT = `${environment.API_URL}/me/experiencias`;
 
@@ -84,6 +85,12 @@ export class ExperienceService {
   public eliminarExperiencia(experienciaUUID: string): Observable<APIResponse<void>> {
     return this._http.delete<APIResponse<void>>(`${EXPERIENCES_ENDPOINT}/${experienciaUUID}`).pipe(
       tap(() => this.eliminarExperienciaEnCache(experienciaUUID)),
+      catchError(this.handleHttpError)
+    )
+  }
+
+  public obtenerExperienciasSimple(): Observable<APIResponse<ExperienceSimple[]>> {
+    return this._http.get<APIResponse<ExperienceSimple[]>>(`${EXPERIENCES_ENDPOINT}/simple`).pipe(
       catchError(this.handleHttpError)
     )
   }
