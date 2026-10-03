@@ -20,15 +20,25 @@ import { toObservable } from '@angular/core/rxjs-interop';
   templateUrl: './list-projects.html'  
 })
 export class ListProjects implements OnInit{
+  // Titulo utilizado para filtrar los proyectos por su título 
   public titleProject = signal<string | null>(null);
+
+  // Estado de carga inicial o de busqueda
   public isLoading = signal<boolean>(false);
+
+  // Estado de carga transparente para eliminar o ver el detalle de la experiencia relacionada con el proyecto
   public isLoadingTransparent = signal<boolean>(false);
+
+  // Indica si se están cargando más proyectos al hacer scroll
   public isLoadingMore = signal<boolean>(false);
 
+  // Permite posponer la busqueda mientras se presiona la tecla de borrado
   public teclaBorradoPresionada = signal<boolean>(false);
   
+  // Lista de proyectos obtenidos del servidor
   public projects = signal<Project[]>([]);
 
+  // Indica si hay más proyectos para cargar al hacer scroll
   public readonly hayMasProyectos = computed(
     () => this.projects().length > 0 && !this.lastPage() && !this.isLoading()
   );
@@ -48,6 +58,7 @@ export class ListProjects implements OnInit{
     this.obtenerProyectos();
   }
 
+  // Obtiene los proyectos en la primera renderización
   public async obtenerProyectos() {    
     this.isLoading.set(true); 
        
@@ -65,6 +76,7 @@ export class ListProjects implements OnInit{
     }
   }
 
+  // Solicita al servidor más proyectos al hacer scroll
   public async cargarMasProyectos() {
     if (this.isLoadingMore() || this.isLoading() || this.lastPage()) return;
 
@@ -94,17 +106,20 @@ export class ListProjects implements OnInit{
     }
   }
 
+  // Actualiza el filtro de búsqueda por título de proyecto, excepto cuando se está presionando la tecla de borrado
   public onSearchInput(titulo: string) {
     if (this.teclaBorradoPresionada()) return;
     this.aplicarBusqueda(titulo);
   }
 
+  // Marca el inicio del borrado de texto en el campo de búsqueda
   public onSearchKeyDown(event: KeyboardEvent) {
     if (event.key === 'Backspace' || event.key === 'Delete') {
       this.teclaBorradoPresionada.set(true);
     }
   }
 
+  // Marca el fin del borrado de texto en el campo de búsqueda y aplica la búsqueda
   public onSearchKeyUp(event: KeyboardEvent) {
     if (event.key === 'Backspace' || event.key === 'Delete') {
       this.teclaBorradoPresionada.set(false);
@@ -112,10 +127,14 @@ export class ListProjects implements OnInit{
     }
   }
 
+  // Aplica la búsqueda actualizando el título del proyecto
   private aplicarBusqueda(titulo: string) {
     this.titleProject.set(titulo);
   }
 
+  // Observa los cambios en filtro por titulo y realiza la búsqueda correspondiente
+  // Se omite la primera emisión porque ngOnInit realiza la carga inicial
+  // Espera 400 ms sin cambios en el título de búsqueda antes de realizarla
   public buscarProyectoPorTitulo() {
     toObservable(this.titleProject).pipe(
       skip(1),
