@@ -10,7 +10,9 @@
                         class="bg-secondary w-full appearance-none focus-within:outline-none"
                         type="text"
                         placeholder="Buscar por titulo (mínimo 2 caracteres)"
-                        (input)="titleProject.set($event.target.value)"
+                        (input)="onSearchInput($event.target.value)"
+                        (keydown)="onSearchKeyDown($event)"
+                        (keyup)="onSearchKeyUp($event)"
                     >
                     @if (isLoading() && titleProject()) {
                         <loader-input/>

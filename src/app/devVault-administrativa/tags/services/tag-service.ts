@@ -26,9 +26,7 @@ export class TagService {
       return of(cached);
     }
 
-    if (cached) {
-      console.log('hay data en caché');
-      
+    if (cached) {    
       const content = this.filtrarPorNombre(cached.data.content, nombre);
       if (content.length > 0) {
         return of({
@@ -40,9 +38,6 @@ export class TagService {
         });
       }
     }
-
-    console.log('llamando al endpoint');
-    
 
     return this.http.get<APIResponse<APIResponseWithPageable<Tag>>>(TAG_API_URL, {
       params: {

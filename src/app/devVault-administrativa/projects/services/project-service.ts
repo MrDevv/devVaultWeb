@@ -9,38 +9,39 @@ import { environment } from '@environments/environment';
 
 const PROJECTS_ENDPOINT = `${environment.API_URL}/me/proyectos`;
 
+type projectsResponse = APIResponse<APIResponseWithPageable<Project>>;
+
+interface ProjectsCacheEntry {
+  response: projectsResponse;
+  expiresAt: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
 
-  private _http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
-  private projectsCache = signal<APIResponse<APIResponseWithPageable<Project>> | null>(null);
+  private readonly projectsCache = new Map<string, ProjectsCacheEntry>();
+  private readonly cacheDurationMs = 3 * 60 * 1000; // 5 minutes
 
-  public obtenerProyectos(size: number = 3, page: number = 0, titulo: string = ''): Observable<APIResponse<APIResponseWithPageable<Project>>> {
+  private cacheVersion = 0;
 
-    const cached = this.projectsCache();
+  public obtenerProyectos(size: number = 3, page: number = 0, titulo: string = ''): Observable<projectsResponse> {    
+    const key = `${size}-${page}-${titulo}`;
 
-    if (cached && titulo.length < 2) {
-      return of(cached);
+    const cached = this.projectsCache.get(key);
+
+    if (cached && cached.expiresAt > Date.now()) {
+      return of(cached.response);
     }
 
-    if (cached) {
-      const content = this.filtrarPorTitulo(cached.data.content, titulo);
-      if (content.length > 0) {
-        return of({
-          ...cached,
-          data: {
-            ...cached.data,
-            content,
-          },
-        });
-      }
-    }
+    this.projectsCache.delete(key);
 
+    const version = this.cacheVersion;
 
-    return this._http.get<APIResponse<APIResponseWithPageable<Project>>>(PROJECTS_ENDPOINT, {
+    return this.http.get<projectsResponse>(PROJECTS_ENDPOINT, {
       params: {
         size,
         page,
@@ -48,8 +49,13 @@ export class ProjectService {
       },
     }).pipe(
       tap((response) => {
-        if (response.data.content.length > 0 && !titulo) {
-          this.projectsCache.set(response);
+        if (version === this.cacheVersion) {
+          this.projectsCache.set(key, {
+            response,
+            expiresAt: Date.now() + this.cacheDurationMs,
+          });
+
+          console.log(this.projectsCache);
         }
       }),
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
@@ -57,36 +63,15 @@ export class ProjectService {
   }
 
   public crearProyecto(proyecto: CreateProject): Observable<APIResponse<Project>> {
-    return this._http.post<APIResponse<Project>>(PROJECTS_ENDPOINT, proyecto).pipe(
-      tap((response) => {
-        this.agregarProyectoAlCache(response.data);
-      }),
+    return this.http.post<APIResponse<Project>>(PROJECTS_ENDPOINT, proyecto).pipe(
+      tap(() => this.invalidarCache()),
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     );
   }
 
-  private agregarProyectoAlCache(proyecto: Project): void {
-    const currentCache = this.projectsCache();
-    if (!currentCache) {
-      return;
-    }
-
-    this.projectsCache.set({
-      ...currentCache,
-      data: {
-        content: [proyecto, ...(currentCache?.data.content ?? [])],
-        pageableData: {
-          ...currentCache?.data.pageableData,
-          totalElements: (currentCache?.data.pageableData?.totalElements ?? 0) + 1
-        }
-      },
-    });
-  }
-
-  private filtrarPorTitulo(proyectos: Project[], titulo: string): Project[] {
-    return proyectos.filter((proyecto) => {
-      return proyecto.titulo.toLowerCase().includes(titulo.toLowerCase())
-    });
+  private invalidarCache(): void {
+    this.cacheVersion++;
+    this.projectsCache.clear();
   }
 
 }
