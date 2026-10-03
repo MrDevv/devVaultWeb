@@ -26,13 +26,25 @@
 
             @if (projects().length > 0) {
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full gap-3">
-                    @for (proj of projects(); track $index) {
+                    @for (proj of projects(); track proj.proyecto_uuid) {
                         <card-project 
                             (UUIDProyectoEliminar)="eliminarProyecto($event)" 
                             (UUIDProyectoVer)="verProyecto($event)"
                             [project]="proj"/>
                     }
                 </div>
+
+                @if (hayMasProyectos()) {
+                    <div
+                        class="w-full min-h-16 py-6 flex justify-center items-center"
+                        appInfiniteScroll
+                        (appInfiniteScroll)="cargarMasProyectos()"
+                    >
+                        @if (isLoadingMore()) {
+                            <loader/>
+                        }
+                    </div>
+                }
             }@else{
                 <div class="w-full py-10 flex justify-center items-center">
                     <p class="text-white">No se encontraron proyectos.</p>

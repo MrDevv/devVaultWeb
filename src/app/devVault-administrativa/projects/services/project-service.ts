@@ -48,6 +48,7 @@ export class ProjectService {
         titulo,
       },
     }).pipe(
+      delay(3000),
       tap((response) => {
         if (version === this.cacheVersion) {
           this.projectsCache.set(key, {
