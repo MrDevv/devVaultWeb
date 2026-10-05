@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { Location, TitleCasePipe } from '@angular/common';
 import { catchError, debounceTime, distinctUntilChanged, firstValueFrom, map, of, startWith, switchMap, tap } from 'rxjs';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -18,6 +18,7 @@ import { FormIconInputField } from '@devVault-administrativa/shared/components/f
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
 import { LoaderInput } from '@devVault-administrativa/shared/components/loader-input/loader-input';
 import { Loading } from '@shared/components/loading/loading';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ import { Loading } from '@shared/components/loading/loading';
   templateUrl: './new-project.html'  
 })
 export class NewProject {
-
+  
   etiquetaTitle = signal<string>('');
   isLoading = signal(false);
   isDropdownOpen = signal(false);
@@ -42,6 +43,11 @@ export class NewProject {
   private location = inject(Location);
   private alertService = inject(AlertService);
   private projectService = inject(ProjectService);
+  private activeRoute = inject(ActivatedRoute);
+  private router = inject(Router);
+  
+  private experienciaUUIDParam = this.activeRoute.snapshot.queryParamMap.get('experience');
+
 
   formProyectoData = this.fb.group({
     titulo: ['', Validators.required],
@@ -49,7 +55,7 @@ export class NewProject {
     urlProduccion: [''],
     urlRepositorio: [''],
     urlImagenPresentacion: [''],
-    experienciaUUID: [null, Validators.required],
+    experienciaUUID: [null as string | null, Validators.required],
     tipoProyectoUUID: [null, Validators.required],
     etiquetas: [[] as Tag[]]
   })
@@ -79,6 +85,22 @@ export class NewProject {
 
   constructor() {
     this.buscarEtiquetaPorNombre();
+    
+    effect(() => {
+      const experiencias = this.resourceExperienciasSimple.value();
+      const experienciaControl = this.formProyectoData.get('experienciaUUID');
+
+      if (experiencias && this.experienciaUUIDParam) {
+        const experiencia = experiencias.data.find(experience => experience.experiencia_uuid === this.experienciaUUIDParam);
+
+        if (experiencia) {
+          experienciaControl?.setValue(experiencia.experiencia_uuid);
+          experienciaControl?.disable();
+        } else {
+          this.router.navigateByUrl('experience');
+        }
+      }
+    });
   }
 
   public onSearchInput(value: string): void {
@@ -145,7 +167,7 @@ export class NewProject {
   async guardarProyecto() {
     if (!this.validarDatosProyecto()) return;
 
-    const { titulo, descripcion, experienciaUUID, tipoProyectoUUID, urlProduccion, urlRepositorio, urlImagenPresentacion, etiquetas } = this.formProyectoData.value;
+    const { titulo, descripcion, experienciaUUID, tipoProyectoUUID, urlProduccion, urlRepositorio, urlImagenPresentacion, etiquetas } = this.formProyectoData.getRawValue();
 
     const etiquetasUUID = etiquetas?.map((etiqueta: Tag) => etiqueta.etiqueta_uuid);
 
@@ -186,7 +208,7 @@ export class NewProject {
   }
 
   validarDatosProyecto() {
-    const { titulo, descripcion, experienciaUUID, tipoProyectoUUID } = this.formProyectoData.value;
+    const { titulo, descripcion, experienciaUUID, tipoProyectoUUID } = this.formProyectoData.getRawValue();
     
     if (!experienciaUUID) {
       this.alertService.warning('Advertencia', 'Debes seleccionar una experiencia.');

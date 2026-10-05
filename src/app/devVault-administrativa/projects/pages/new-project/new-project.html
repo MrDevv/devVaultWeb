@@ -6,12 +6,20 @@
                 <div class="flex flex-col gap-3">  
                     <section-card-component [titleHeader]="'Experiencia del Proyecto'" [iconHeader]="'fa-solid fa-briefcase text-[#C0C1FF]'">
                         <div class="flex flex-col w-full gap-1">
-                            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">Selecciona la experiencia</label>
+                            <label class="uppercase text-secondary font-semibold text-[12px] font-secondary">
+                                @if (formProyectoData.controls.experienciaUUID.disabled) {
+                                    Experiencia seleccionada
+                                }@else {
+                                    Selecciona la experiencia
+                                }
+                            </label>
                             <select 
                                 class="bg-primary w-full rounded-lg py-2 px-3 appearance-none text-primary focus-within:outline-none" 
                                 name="experienciaUUID" 
                                 id="experienciaUUID"
                                 formControlName="experienciaUUID"
+                                [class.bg-secondary]="formProyectoData.controls.experienciaUUID.disabled"
+                                [class.text-secondary]="formProyectoData.controls.experienciaUUID.disabled"
                             >
                                 <option [ngValue]="null">Seleccionar</option>
                                 @for (experiencia of resourceExperienciasSimple.value()?.data ?? []; track $index) {
