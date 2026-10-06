@@ -193,4 +193,9 @@ export class ExperienceService {
     return throwError(() => error.error)
   }
 
+  public invalidarCache(): void {
+    // this.cacheVersion++;
+    this.experienceCache.set(null);
+  }
+
 }

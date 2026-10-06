@@ -82,7 +82,7 @@ export class ProjectService {
   }
 
   // Invalida la cache de proyectos aumentando la versión y limpiando la cache actual
-  private invalidarCache(): void {
+  public invalidarCache(): void {
     this.cacheVersion++;
     this.projectsCache.clear();
   }
