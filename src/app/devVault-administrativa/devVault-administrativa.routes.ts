@@ -11,6 +11,7 @@ import { EditProfessionalData } from "./professional-data/pages/edit-professiona
 import { ListTechnologies } from "./technologies/pages/list-technologies/list-technologies";
 import { NewTechnology } from "./technologies/pages/new-technology/new-technology";
 import { EditExperience } from "./experience/pages/edit-experience/edit-experience";
+import { EditProject } from "./projects/pages/edit-project/edit-project";
 
 export const routes: Routes = [
     {
@@ -75,6 +76,10 @@ export const routes: Routes = [
                         path: 'new-project',
                         component: NewProject
                     },
+                    {
+                        path: ':uuid',
+                        component: EditProject
+                    }
                 ]
             },
             {

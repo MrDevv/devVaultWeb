@@ -25,3 +25,14 @@ export interface CreateProject {
     tipoProyectoUUID: string;
     etiquetas: string[];
 }
+
+export interface UpdateProject {
+    titulo: string;
+    descripcion: string;
+    urlProduccion: string | null;
+    urlRepositorio: string | null;
+    urlImagenPresentacion: string | null;
+    experienciaUUID: string;
+    tipoProyectoUUID: string;
+    etiquetas: string[];
+}

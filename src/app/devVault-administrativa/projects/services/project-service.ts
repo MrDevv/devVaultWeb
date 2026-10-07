@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, delay, Observable, of, tap, throwError } from 'rxjs';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
-import { CreateProject, Project } from '../interfaces/project.dto';
+import { CreateProject, Project, UpdateProject } from '../interfaces/project.dto';
 import { environment } from '@environments/environment';
 
 const PROJECTS_ENDPOINT = `${environment.API_URL}/me/proyectos`;
@@ -73,9 +73,23 @@ export class ProjectService {
     )
   }
 
+  public obtenerProyectoPorUUID(uuid: string): Observable<APIResponse<Project>> {
+    return this.http.get<APIResponse<Project>>(`${PROJECTS_ENDPOINT}/${uuid}`).pipe(
+      catchError((error: HttpErrorResponse) => throwError(() => error.error))
+    );
+  }
+
   public crearProyecto(proyecto: CreateProject): Observable<APIResponse<Project>> {
     return this.http.post<APIResponse<Project>>(PROJECTS_ENDPOINT, proyecto).pipe(
       // invalida la cache después de crear un nuevo proyecto
+      tap(() => this.invalidarCache()),
+      catchError((error: HttpErrorResponse) => throwError(() => error.error))
+    );
+  }
+
+  public actualizarProyecto(uuid: string, proyecto: UpdateProject): Observable<APIResponse<Project>> {
+    return this.http.put<APIResponse<Project>>(`${PROJECTS_ENDPOINT}/${uuid}`, proyecto).pipe(
+      // invalida la cache después de actualizar un proyecto
       tap(() => this.invalidarCache()),
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     );

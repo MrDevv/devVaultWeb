@@ -2,10 +2,11 @@ import { NgClass } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { Project } from '@devVault-administrativa/projects/interfaces/project.dto';
 import { colorTags } from '@devVault-administrativa/projects/utils/color-tags';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'card-project',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './card-project.html'
 })
 export class CardProject {
