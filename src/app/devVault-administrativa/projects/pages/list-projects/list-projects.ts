@@ -161,7 +161,25 @@ export class ListProjects implements OnInit{
     ).subscribe();
   }
 
-  public eliminarProyecto(uuid: string) {}
+  async eliminarProyecto(uuid: string) {
+
+    const confirmed = await this.alertService.question(
+      '¿Está seguro de eliminar este proyecto?'
+    )
+
+    if (!confirmed) return;
+    
+    try {
+      console.log('eliminando proyecto');      
+      this.isLoadingTransparent.set(true);
+      await firstValueFrom(this.projectService.eliminarProyecto(uuid));
+      this.obtenerProyectos();
+    } catch (error: any) {
+      this.alertService.error('Error', 'Ocurrió un error al eliminar el proyecto.');
+    } finally {
+      this.isLoadingTransparent.set(false);
+    }
+  }
 
   public verProyecto(uuid: string) {}
 

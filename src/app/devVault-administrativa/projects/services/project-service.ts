@@ -95,6 +95,14 @@ export class ProjectService {
     );
   }
 
+  public eliminarProyecto(uuid: string): Observable<APIResponse<void>> {
+    return this.http.delete<APIResponse<void>>(`${PROJECTS_ENDPOINT}/${uuid}`).pipe(
+      // invalida la cache después de eliminar un proyecto
+      tap(() => this.invalidarCache()),
+      catchError((error: HttpErrorResponse) => throwError(() => error.error))
+    );
+  }
+
   // Invalida la cache de proyectos aumentando la versión y limpiando la cache actual
   public invalidarCache(): void {
     this.cacheVersion++;

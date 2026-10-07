@@ -18,11 +18,11 @@ export class CardProject {
     return colorTags[tipoTag];
   }
 
-  emitirUUIDProyectoEliminar(uuid: string) {
-    this.UUIDProyectoEliminar.emit(uuid);
+  emitirUUIDProyectoEliminar() {
+    this.UUIDProyectoEliminar.emit(this.project()!.proyecto_uuid);
   }
 
-  emitirUUIDProyectoVer(uuid: string) {
-    this.UUIDProyectoVer.emit(uuid);
+  emitirUUIDProyectoVer() {
+    this.UUIDProyectoVer.emit(this.project()!.proyecto_uuid);
   }
 }
