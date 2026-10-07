@@ -13,6 +13,7 @@ export class CardProject {
   public project = input<Project>();
   public UUIDProyectoEliminar = output<string>();
   public UUIDProyectoVer = output<string>();
+  public UUIDExperienciaVer = output<string>();
 
   obtenerColor(tipoTag :string){
     return colorTags[tipoTag];
@@ -20,6 +21,10 @@ export class CardProject {
 
   emitirUUIDProyectoEliminar() {
     this.UUIDProyectoEliminar.emit(this.project()!.proyecto_uuid);
+  }
+
+  emitirVerExperiencia() {
+    this.UUIDExperienciaVer.emit(this.project()!.experiencia!.experiencia_uuid);
   }
 
   emitirUUIDProyectoVer() {

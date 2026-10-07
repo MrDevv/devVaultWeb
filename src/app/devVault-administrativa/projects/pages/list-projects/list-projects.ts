@@ -12,6 +12,10 @@ import { Project } from '@devVault-administrativa/projects/interfaces/project.dt
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
 import { firstValueFrom, switchMap, skip, debounceTime, distinctUntilChanged, filter, tap, catchError, finalize, EMPTY } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { ModalExperienceDetail } from '@devVault-administrativa/experience/components/modal-experience-detail/modal-experience-detail';
+import { ExperienceWithProjectsResponse } from '@devVault-administrativa/experience/interfaces/experience.dto';
+import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
+import { ModalService } from '@shared/services/modal-service';
 
 
 @Component({
@@ -48,6 +52,8 @@ export class ListProjects implements OnInit{
   private readonly lastPage = signal<boolean>(false);
 
   private readonly projectService = inject(ProjectService);
+  private readonly experienceService = inject(ExperienceService);
+  private readonly modalService = inject(ModalService);
   private readonly alertService = inject(AlertService);
 
   constructor() {
@@ -170,7 +176,6 @@ export class ListProjects implements OnInit{
     if (!confirmed) return;
     
     try {
-      console.log('eliminando proyecto');      
       this.isLoadingTransparent.set(true);
       await firstValueFrom(this.projectService.eliminarProyecto(uuid));
       this.obtenerProyectos();
@@ -182,5 +187,19 @@ export class ListProjects implements OnInit{
   }
 
   public verProyecto(uuid: string) {}
+
+  async verExperiencia(uuid: string) {
+    try {
+      this.isLoadingTransparent.set(true);
+      const experiencaProyectos: ExperienceWithProjectsResponse = (await firstValueFrom(this.experienceService.obtenerExperienciaConProyectos(uuid))).data;
+      this.modalService.openModal(ModalExperienceDetail, experiencaProyectos, false);
+    } catch (error) {
+      this.alertService.error('Error', 'Ocurrió un error al intentar ver la experiencia.');
+      console.log(error);
+      
+    } finally {
+      this.isLoadingTransparent.set(false);
+    }
+  }
 
 }
