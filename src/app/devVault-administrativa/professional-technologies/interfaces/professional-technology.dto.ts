@@ -10,3 +10,7 @@ export interface CreateProfessionalTechnology {
   tecnologiaUUID: string;
   nivel?: string | null;
 }
+
+export interface UpdateProfessionalTechnology {
+  nivel?: string | null;
+}

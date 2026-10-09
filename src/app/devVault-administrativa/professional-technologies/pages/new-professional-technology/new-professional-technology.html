@@ -63,30 +63,30 @@
                     <div class="flex flex-col md:flex-row gap-4">
                         <div 
                             class="cursor-pointer bg-[#1B1B1C] rounded-lg p-6 text-primary text-center"
-                            (click)="seleccionarNivel('Básico')"
-                            [class.bg-[#353436]]="nivelSelected()?.match('Básico')"
-                            [class.outline-1]="nivelSelected()?.match('Básico')"
-                            [class.outline-[#C0C1FF]]="nivelSelected()?.match('Básico')"
+                            (click)="seleccionarNivel('básico')"
+                            [class.bg-[#353436]]="nivelSelected()?.match('básico')"
+                            [class.outline-1]="nivelSelected()?.match('básico')"
+                            [class.outline-[#C0C1FF]]="nivelSelected()?.match('básico')"
                         >
                             <h3 class="font-bold text-[16px] mb-2">Básico</h3>
                             <p class="text-secondary text-sm">Conceptos básicos y aprendizaje</p>
                         </div>
                         <div 
                             class="cursor-pointer bg-[#1B1B1C] rounded-lg p-6 text-primary text-center" 
-                            (click)="seleccionarNivel('Intermedio')"
-                            [class.bg-[#353436]]="nivelSelected()?.match('Intermedio')"
-                            [class.outline-1]="nivelSelected()?.match('Intermedio')"
-                            [class.outline-[#C0C1FF]]="nivelSelected()?.match('Intermedio')"
+                            (click)="seleccionarNivel('intermedio')"
+                            [class.bg-[#353436]]="nivelSelected()?.match('intermedio')"
+                            [class.outline-1]="nivelSelected()?.match('intermedio')"
+                            [class.outline-[#C0C1FF]]="nivelSelected()?.match('intermedio')"
                         >
                             <h3 class="font-bold text-[16px] mb-2">Intermedio</h3>
                             <p class="text-secondary text-sm">Aplicación práctica y resolución de problemas</p>
                         </div>
                         <div 
                             class="cursor-pointer bg-[#1B1B1C] rounded-lg p-6 text-primary text-center" 
-                            (click)="seleccionarNivel('Avanzado')"
-                            [class.bg-[#353436]]="nivelSelected()?.match('Avanzado')"
-                            [class.outline-1]="nivelSelected()?.match('Avanzado')"
-                            [class.outline-[#C0C1FF]]="nivelSelected()?.match('Avanzado')"
+                            (click)="seleccionarNivel('avanzado')"
+                            [class.bg-[#353436]]="nivelSelected()?.match('avanzado')"
+                            [class.outline-1]="nivelSelected()?.match('avanzado')"
+                            [class.outline-[#C0C1FF]]="nivelSelected()?.match('avanzado')"
                         >
                             <h3 class="font-bold text-[16px] mb-2">Avanzado</h3>
                             <p class="text-secondary text-sm">Liderazgo técnico y arquitectura</p>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="grid grid-cols-2 border-b border-[#464554]/20 pb-3">
                         <p>Nivel</p> 
-                        <span class="font-bold">{{ nivelSelected() || 'No especificado' }}</span>
+                        <span class="font-bold">{{ nivelSelected() || 'No especificado' | titlecase }}</span>
                     </div>
                 </div>
                 <button 

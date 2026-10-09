@@ -1,5 +1,5 @@
 
-import { NgClass } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -17,11 +17,11 @@ import { AlertService } from '@shared/services/alert-service';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 import { Loading } from '@shared/components/loading/loading';
 
-type Nivel = 'Básico' | 'Intermedio' | 'Avanzado';
+type Nivel = 'básico' | 'intermedio' | 'avanzado';
 
 @Component({
   selector: 'new-professional-technology',
-  imports: [PageHeader, RouterLink, NgClass, LoaderInput, ReactiveFormsModule, Loading],
+  imports: [PageHeader, RouterLink, NgClass, LoaderInput, ReactiveFormsModule, Loading, TitleCasePipe],
   templateUrl: './new-professional-technology.html',
 })
 export class NewProfessionalTechnology implements OnInit {
@@ -148,7 +148,7 @@ export class NewProfessionalTechnology implements OnInit {
 
     const createTechnology: CreateProfessionalTechnology = {
       tecnologiaUUID: this.technologySelected()?.tecnologiaUUID ?? '',
-      nivel: this.nivelSelected() && this.nivelSelected()
+      nivel: this.nivelSelected()?.toLowerCase()
     };
 
     try {

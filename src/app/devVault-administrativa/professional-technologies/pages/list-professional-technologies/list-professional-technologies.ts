@@ -74,7 +74,7 @@ export class ListProfessionalTechnologies implements OnInit {
     filter(name => name === null || name.length === 0 || name.length >= 2),
     tap(() => this.isLoading.set(true)),
     switchMap(name => {            
-      return this._technologyService.obterTecnologiasDesarrollador(name ?? '').pipe(
+      return this._technologyService.obtenerTecnologiasDesarrollador(name ?? '').pipe(
         catchError((error) => {
           console.error(error);
           return [];
@@ -93,7 +93,7 @@ export class ListProfessionalTechnologies implements OnInit {
     this.isLoading.set(true);
 
     try {
-      const data = await firstValueFrom(this._technologyService.obterTecnologiasDesarrollador(this.nameTech() ?? ''));      
+      const data = await firstValueFrom(this._technologyService.obtenerTecnologiasDesarrollador(this.nameTech() ?? ''));      
       this.professionalTechnologies.set(data.data);
     } catch (error) {
       console.error('Error al obtener tecnologías:', error);

@@ -1,12 +1,13 @@
-import { NgClass } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 
 import { colorTechnologies } from '@devVault-administrativa/shared/utils/color-technologies';
 import { ResponseProfessionalTechnology } from '@devVault-administrativa/professional-technologies/interfaces/professional-technology.dto';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'card-professional-technology',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink, TitleCasePipe],
   templateUrl: './card-professional-technology.html',
 })
 export class CardProfessionalTechnology {

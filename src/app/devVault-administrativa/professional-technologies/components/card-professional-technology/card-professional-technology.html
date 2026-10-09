@@ -10,10 +10,10 @@
                 <img [src]="logoOptimizado()" [alt]="professionalTechnology().tecnologia">
             }
         </div>
-        <div class="flex gap-4">            
-            <button class="cursor-pointer">
+        <div class="flex gap-4 items-center">            
+            <a [routerLink]="['/technologies', professionalTechnology().profesionalTecnologiaUUID]" class="cursor-pointer">
                 <i class="fa-solid fa-pen"></i>
-            </button>
+            </a>
             <button (click)="emitirUUIDProfessionalTechnology()" class="cursor-pointer">
                 <i class="fa-solid fa-trash text-[#FFB4AB]"></i>
             </button>    
@@ -34,7 +34,7 @@
                 [class.bg-red-600]="professionalTechnology().nivel === 'Básico'"
                 [class.bg-green-600]="professionalTechnology().nivel === 'Avanzado'"
             ></span>
-            <span> {{ professionalTechnology().nivel }} </span>
+            <span> {{ professionalTechnology().nivel | titlecase }} </span>
         </div>
     }
 </div>
