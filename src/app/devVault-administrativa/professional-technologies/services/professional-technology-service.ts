@@ -72,17 +72,16 @@ export class ProfessionalTechnologyService {
 
   registrarNuevaTecnologiaProfesional(newTechnology: CreateProfessionalTechnology) {
     return this.http.post<APIResponse<ResponseProfessionalTechnology>>(`${BASE_URL}`, newTechnology).pipe(
-      delay(3000),
       tap(() => this.invalidarCache()),
-      catchError((error) => {
-        return throwError(() => error.error)
-      })
+      catchError((error) => throwError(() => error.error))
     );
   }
 
-  
   eliminarTecnologiaProfesional(uuidTechnology: string) {
-    
+    return this.http.delete<APIResponse<ResponseProfessionalTechnology>>(`${BASE_URL}/${uuidTechnology}`).pipe(
+      tap(() => this.invalidarCache()),
+      catchError((error) => throwError(() => error.error))
+    );
   }
 
   invalidarCache() {

@@ -27,7 +27,7 @@
             @if (professionalTechnologies().length > 0) {
                 <div class="grid md:grid-cols-4 gap-3">
                     @for (tech of professionalTechnologies(); track $index) {
-                        <card-professional-technology [professionalTechnology]="tech" />
+                        <card-professional-technology (professionaTechnologyUUID)="eliminarTecnologia($event)" [professionalTechnology]="tech" />
                     }
                 </div>
             }@else{
@@ -41,4 +41,8 @@
 
 @if (isLoading() && nameTech()===null) {
     <loading-overlay/>
+}
+
+@if (isLoadingTransparent()) {
+    <loading />
 }

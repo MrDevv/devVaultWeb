@@ -170,6 +170,7 @@ export class ListProjects implements OnInit{
   async eliminarProyecto(uuid: string) {
 
     const confirmed = await this.alertService.question(
+      'Confirmar',
       '¿Está seguro de eliminar este proyecto?'
     )
 

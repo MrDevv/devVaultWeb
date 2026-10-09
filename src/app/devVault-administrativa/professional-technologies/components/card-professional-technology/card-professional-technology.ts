@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
 import { colorTechnologies } from '@devVault-administrativa/shared/utils/color-technologies';
 import { ResponseProfessionalTechnology } from '@devVault-administrativa/professional-technologies/interfaces/professional-technology.dto';
@@ -11,6 +11,7 @@ import { ResponseProfessionalTechnology } from '@devVault-administrativa/profess
 })
 export class CardProfessionalTechnology {
   public professionalTechnology = input.required<ResponseProfessionalTechnology>();
+  public professionaTechnologyUUID = output<string>();
 
   public logoOptimizado = computed(() => {
   const url = this.professionalTechnology().logoURL;
@@ -25,5 +26,9 @@ export class CardProfessionalTechnology {
 
   obtenerColorTech(tipoTecnologia: string): string {
     return colorTechnologies[tipoTecnologia];
+  }
+
+  emitirUUIDProfessionalTechnology() {
+    this.professionaTechnologyUUID.emit(this.professionalTechnology().profesionalTecnologiaUUID);
   }
 }

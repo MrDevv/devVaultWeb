@@ -10,10 +10,11 @@ import { CardProfessionalTechnology } from "@devVault-administrativa/professiona
 import { LoaderInput } from "@devVault-administrativa/shared/components/loader-input/loader-input";
 import { ResponseProfessionalTechnology } from '@devVault-administrativa/professional-technologies/interfaces/professional-technology.dto';
 import { ProfessionalTechnologyService } from '@devVault-administrativa/professional-technologies/services/professional-technology-service';
+import { Loading } from '@shared/components/loading/loading';
 
 @Component({
   selector: 'list-professional-technologies',
-  imports: [PageHeader, RouterLink, LoadingOverlay, CardProfessionalTechnology, LoaderInput, CardProfessionalTechnology],
+  imports: [PageHeader, RouterLink, LoadingOverlay, CardProfessionalTechnology, LoaderInput, CardProfessionalTechnology, Loading],
   templateUrl: './list-professional-technologies.html',
 })
 export class ListProfessionalTechnologies implements OnInit {
@@ -23,6 +24,8 @@ export class ListProfessionalTechnologies implements OnInit {
 
   // Estado de carga inicial o de busqueda
   public isLoading = signal(false);
+
+  public isLoadingTransparent = signal(false);
 
   // Permite posponer la busqueda mientras se presiona la tecla de borrado
   public teclaBorradoPresionada = signal<boolean>(false);
@@ -97,6 +100,24 @@ export class ListProfessionalTechnologies implements OnInit {
       this.alertService.error('Error', 'Error al obtener tecnologías');
     } finally {
       this.isLoading.set(false);
+    }
+  }
+
+  async eliminarTecnologia(profesionalTecnologiaUUID: string) {
+    const confirmed = await this.alertService.question('Confirmar', '¿Estás seguro de que deseas eliminar esta tecnología?');
+    if (!confirmed) return;
+    
+    this.isLoadingTransparent.set(true);
+
+    try {
+      await firstValueFrom(this._technologyService.eliminarTecnologiaProfesional(profesionalTecnologiaUUID));
+      this.alertService.success('Éxito', 'Tecnología eliminada correctamente');
+      this.obtenerTecnologias();
+    } catch (error) {
+      console.error('Error al eliminar tecnología:', error);
+      this.alertService.error('Error', 'Error al eliminar tecnología');
+    } finally {
+      this.isLoadingTransparent.set(false);
     }
   }
 }
