@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth-service';
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
 import { ProfessionalDataService } from '@devVault-administrativa/professional-data/services/professional-data-service';
+import { ProfessionalTechnologyService } from '@devVault-administrativa/professional-technologies/services/professional-technology-service';
 import { ProjectService } from '@devVault-administrativa/projects/services/project-service';
-import { TechnologyService } from '@devVault-administrativa/technologies/services/technology-service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class SideBarService {
   
   private router = inject(Router);
   public authService = inject(AuthService);
-  public technologyService = inject(TechnologyService);
+  public professionalTechnologyService = inject(ProfessionalTechnologyService);
   public professionalDataService = inject(ProfessionalDataService);
   public experienceService = inject(ExperienceService);
   public projectService = inject(ProjectService);
@@ -42,7 +43,6 @@ export class SideBarService {
 
   logout() {
     this.authService.clearData();
-    this.technologyService.clearCache();
     this.professionalDataService.clearCache();
     this.experienceService.invalidarCache();
     this.projectService.invalidarCache();

@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { NewProfessionalTechnology } from "./professional-technologies/pages/new-professional-technology/new-professional-technology";
 
 import { HomePage } from "./home/pages/home-page/home-page";
 import { ListExperience } from "./experience/pages/list-experience/list-experience";
@@ -8,10 +9,10 @@ import { NewProject } from "./projects/pages/new-project/new-project";
 import { DevVaultAdministrativaLayout } from "./shared/layouts/dev-vault-administrativa-layout/dev-vault-administrativ-layout";
 import { ProfessionalData } from "./professional-data/pages/professional-data/professional-data";
 import { EditProfessionalData } from "./professional-data/pages/edit-professional-data/edit-professional-data";
-import { ListTechnologies } from "./technologies/pages/list-technologies/list-technologies";
-import { NewTechnology } from "./technologies/pages/new-technology/new-technology";
+
 import { EditExperience } from "./experience/pages/edit-experience/edit-experience";
 import { EditProject } from "./projects/pages/edit-project/edit-project";
+import { ListProfessionalTechnologies } from "./professional-technologies/pages/list-professional-technologies/list-professional-technologies";
 
 export const routes: Routes = [
     {
@@ -40,11 +41,11 @@ export const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        component: ListTechnologies
+                        component: ListProfessionalTechnologies
                     },
                     {
                         path: 'new-technology',
-                        component: NewTechnology
+                        component: NewProfessionalTechnology
                     }
                 ]
             },

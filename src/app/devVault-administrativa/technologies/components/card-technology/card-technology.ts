@@ -1,18 +1,8 @@
-import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
-
-import { colorTechnologies } from '@devVault-administrativa/shared/utils/color-technologies';
-import { TechnologySimple } from '@devVault-administrativa/technologies/interfaces/technology-simple';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'card-technology',
-  imports: [NgClass],
+  selector: 'app-card-technology',
+  imports: [],
   templateUrl: './card-technology.html',
 })
-export class CardTechnology {
-  public technology = input.required<TechnologySimple>();
-
-  obtenerColorTech(tipoTecnologia: string): string {
-    return colorTechnologies[tipoTecnologia];
-  }
-}
+export class CardTechnology {}

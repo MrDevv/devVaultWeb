@@ -10,7 +10,9 @@
                         class="bg-secondary w-full appearance-none focus-within:outline-none"
                         type="text"
                         placeholder="Buscar por nombre (mínimo 2 caracteres)"
-                        (input)="nameTech.set($event.target.value)"
+                        (keydown)="onSearchKeyDown($event)"
+                        (input)="onSearchInput($event.target.value)"
+                        (keyup)="onSearchKeyUp($event)"
                     >
                     @if (isLoading() && nameTech()) {
                         <loader-input/>
@@ -22,10 +24,10 @@
                 </a>
             </div>
 
-            @if (technologies().length > 0) {
+            @if (professionalTechnologies().length > 0) {
                 <div class="grid md:grid-cols-4 gap-3">
-                    @for (tech of technologies(); track $index) {
-                        <card-technology [technology]="tech" />
+                    @for (tech of professionalTechnologies(); track $index) {
+                        <card-professional-technology [professionalTechnology]="tech" />
                     }
                 </div>
             }@else{
