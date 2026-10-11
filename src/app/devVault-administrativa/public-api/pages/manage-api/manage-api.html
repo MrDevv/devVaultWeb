@@ -96,11 +96,18 @@
                         <p class="text-secondary">Configura el sitio web autorizado para realizar solicitudes a tu información.</p>
                     </div>
                     @if (authService.user()?.origen_permitido && !isEditDominio()) {
-                        <div class="bg-secondary flex flex-col gap-3 p-3 rounded-sm">
+                        <div class="bg-secondary flex flex-col gap-1 sm:gap-3 p-3 rounded-sm">
                             <div class="flex justify-between pb-3 border-b border-[#464554]/20">
                                 <div class="flex gap-3 items-center">
-                                    <div class="p-3 max-h-fit bg-card flex justify-center items-center rounded-sm">
-                                        <i class="fa-solid fa-earth-americas text-secondary text-xl"></i>
+                                    <div 
+                                        class="p-3 max-h-fit flex justify-center items-center rounded-sm"
+                                        [class.bg-card]="authService.user()?.estado_origen == 'inactivo'"
+                                        [class.bg-green-300/10]="authService.user()?.estado_origen == 'activo'"
+                                    >
+                                        <i 
+                                            class="fa-solid fa-earth-americas text-secondary text-xl"
+                                            [class.text-green-300]="authService.user()?.estado_origen == 'activo'"                                            
+                                        ></i>
                                     </div>
                                     <div class="flex flex-col gap-1 text-secondary">
                                         <h3 class="text-white">{{ authService.user()?.origen_permitido }}</h3>
@@ -139,7 +146,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center">
+                            <div class="flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center">
                                 <span class="text-secondary text-[12px]">                                    
                                     <i class="fa-solid fa-circle-check text-secondary text-[12px]"></i>
                                     Dominio autorizado exclusivo
@@ -151,7 +158,7 @@
                                     </button>
                                     <button (click)="eliminarOrigen()" class="text-red-500 bg-red-500/20 py-2 px-4 rounded-md cursor-pointer flex items-center gap-2">
                                         <i class="fa-solid fa-trash"></i>
-                                        Borrar
+                                        Eliminar dominio
                                     </button>
                                 </div>
                             </div>
@@ -180,7 +187,7 @@
                                        </div>
                                     </div>
                                 }@else{
-                                    <span class="text-secondary font-bold">Nuevo Origen Permitido</span>
+                                    <span class="text-secondary font-bold">Nuevo dominio</span>
                                     <div class="flex flex-col sm:flex-row gap-3">
                                         <input 
                                             class="outline-1 outline-[#464554] p-3 rounded-lg text-secondary whitespace-nowrap w-full"
@@ -204,7 +211,7 @@
                     <span class="bg-secondary p-3 rounded-sm text-secondary text-[12px]">
                         <i class="fa-solid fa-shield-halved text-[#4EDEA3] text-secondary text-[12px] pr-1"></i>
                         <span class="text-white">Nota técnica:</span>
-                         Los orígenes CORS restringen el acceso a tu API exclusivamente a tus dominios autorizados en producción. Durante el desarrollo local (localhost), desactiva temporalmente la validación de tu dominio para permitir las solicitudes de prueba.
+                         El dominio restringe el acceso a tu API exclusivamente a tu dominio autorizado en producción. Durante el desarrollo local (localhost), desactiva temporalmente la validación de tu dominio para permitir las solicitudes de prueba.
                     </span>
                     
                 </section>
