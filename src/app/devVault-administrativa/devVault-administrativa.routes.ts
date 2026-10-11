@@ -14,6 +14,7 @@ import { EditExperience } from "./experience/pages/edit-experience/edit-experien
 import { EditProject } from "./projects/pages/edit-project/edit-project";
 import { ListProfessionalTechnologies } from "./professional-technologies/pages/list-professional-technologies/list-professional-technologies";
 import { EditProfessionalTechnology } from "./professional-technologies/pages/edit-professional-technology/edit-professional-technology";
+import { ManageAPI } from "./public-api/pages/manage-api/manage-api";
 
 export const routes: Routes = [
     {
@@ -87,6 +88,10 @@ export const routes: Routes = [
                         component: EditProject
                     }
                 ]
+            },
+            {
+                path: 'manage-api',
+                component: ManageAPI
             },
             {
                 path: '**',

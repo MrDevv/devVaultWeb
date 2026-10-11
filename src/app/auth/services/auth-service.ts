@@ -79,6 +79,15 @@ export class AuthService {
     }
   }
 
+  public updateApiKey(apiKey: string | null): void {
+    this._user.update((user: any) => (
+      {
+        ...user,
+        api_key: apiKey
+      }
+    ));
+  }
+
   successLogin(user: User): void {
     this._token.set(user.token)
     this._user.set(user)

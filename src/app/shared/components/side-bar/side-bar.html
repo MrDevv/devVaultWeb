@@ -131,7 +131,12 @@
                 <a>Proyectos</a>
             </div>
 
-            <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+            <div 
+                class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+                routerLink="/manage-api"
+                routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                (click)="sideBarService.close()"
+                >
                 <i class="fa-solid fa-globe"></i>
                 <a>Administrar API</a>
             </div>
