@@ -24,6 +24,9 @@ export class ManageAPI {
 
   public showAPIKEY = signal(false);
 
+  public nuevoDominio = signal<string | null>(this.authService.user()?.origen_permitido ?? null);
+  public isEditDominio = signal(false);
+
   async generarAPIKey() {
     this.isLoading.set(true);
     try {
@@ -49,6 +52,88 @@ export class ManageAPI {
       this.alertService.error('Error al eliminar la API Key');
     } finally {
       this.isLoading.set(false);
+    }
+  }
+
+  async registrarEstadoOrigen() {
+    if (!this.nuevoDominio()) {
+      this.alertService.warning('Advertencia', 'Debes ingresar un dominio válido');
+      return;
+    }
+
+    this.isLoading.set(true);
+    try {
+      if (this.nuevoDominio()) {
+        await firstValueFrom(this.publicAPIService.actualizarDominio({ origenPermitido: this.nuevoDominio()!, estado: true }));
+      }
+    } catch (error) {
+      console.error('Error al registrar el dominio:', error);
+      this.alertService.error('Error al registrar el dominio');
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  async cambiarEstadoOrigen(nuevoEstado: boolean) {
+    this.isLoading.set(true);
+    try {    
+      await firstValueFrom(this.publicAPIService.actualizarDominio(
+        { 
+          origenPermitido: this.authService.user()!.origen_permitido, 
+          estado: nuevoEstado 
+        }
+      ));
+    } catch (error) {
+      console.error('Error al cambiar el estado del dominio:', error);
+      this.alertService.error('Error al cambiar el estado del dominio');
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  editarOrigen() {    
+    this.isEditDominio.set(true);
+  }
+
+  async actualizarOrigen() {
+    if (!this.nuevoDominio()) {
+      this.alertService.warning('Advertencia', 'Debes ingresar un dominio válido');
+      return;
+    }
+
+    this.isLoading.set(true);
+    try {
+      if (this.nuevoDominio()) {
+        await firstValueFrom(this.publicAPIService.actualizarDominio(
+          { 
+            origenPermitido: this.nuevoDominio()!, 
+            estado: this.authService.user()!.estado_origen == 'activo' ? true : false 
+          }
+        ));
+      }
+    } catch (error) {
+      console.error('Error al registrar el dominio:', error);
+      this.alertService.error('Error al registrar el dominio');
+    } finally {
+      this.isLoading.set(false);
+      this.isEditDominio.set(false);
+    }    
+  }
+
+  async eliminarOrigen() {
+    const confirmed = await this.alertService.question('Confirmar', '¿Estás seguro de que deseas eliminar el origen permitido?');
+
+    if (!confirmed) return;
+
+    this.isLoading.set(true);
+    try {
+      await firstValueFrom(this.publicAPIService.actualizarDominio({ origenPermitido: null, estado: false }));
+    } catch (error) {
+      console.error('Error al eliminar el dominio:', error);
+      this.alertService.error('Error al eliminar el dominio');
+    } finally {
+      this.isLoading.set(false);
+      this.nuevoDominio.set(null)
     }
   }
 }

@@ -8,6 +8,7 @@ import { User } from '@auth/interfaces/User';
 import { environment } from '@environments/environment';
 import { AuthStatus } from '@auth/types/auth-status';
 import { Professional } from '@devVault-administrativa/professional-data/interfaces/Professional';
+import { UpdateOrigen } from '@devVault-administrativa/public-api/interfaces/public-api.dto';
 
 const BASEURL = environment.API_URL;
 
@@ -84,6 +85,16 @@ export class AuthService {
       {
         ...user,
         api_key: apiKey
+      }
+    ));
+  }
+
+  public updateOrigen(origen: UpdateOrigen): void {
+    this._user.update((user: any) => (
+      {
+        ...user,
+        origen_permitido: origen.origenPermitido,
+        estado_origen: origen.estado ? 'activo' : 'inactivo'
       }
     ));
   }

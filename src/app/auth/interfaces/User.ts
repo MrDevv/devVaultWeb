@@ -12,5 +12,5 @@ export interface User {
     token: string;
     api_key: string | null;
     origen_permitido: string | null;
-    estado_origen: string | null;
+    estado_origen: string;
 }

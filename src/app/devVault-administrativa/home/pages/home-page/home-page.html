@@ -125,21 +125,30 @@
                             <p class="text-secondary text-[12px]">Estado de CORS</p>
                             <p 
                                 class="font-bold text-[18px]"
-                                [class.text-[#F87C63]]="authService.user()?.estado_origen == 'inactivo'"
+                                [class.text-[#F87C63]]="!authService.user()?.origen_permitido"
                                 [class.text-[#4EDEA3]]="authService.user()?.estado_origen == 'activo'"
+                                [class.text-secondary]="authService.user()?.estado_origen == 'inactivo'"
                             >
-                             {{ authService.user()?.estado_origen == 'activo' ? 'Habilitado' : 'Deshabilidado' }}
+                            @if (!authService.user()?.origen_permitido) {
+                                Sin configurar
+                            }@else if (authService.user()?.estado_origen == 'activo') {
+                                Habilitado
+                            }@else {
+                                Deshabilitado
+                            }
                             </p>
                         </div>
                         <div 
                             class="bg-[#4EDEA3]/10 w-10 h-10 flex justify-center items-center rounded-xl"
-                            [class.bg-[#F87C63]/10]="authService.user()?.estado_origen == 'inactivo'"
+                            [class.bg-[#F87C63]/10]="!authService.user()?.origen_permitido"
                             [class.bg-[#4EDEA3]/10]="authService.user()?.estado_origen == 'activo'"
+                            [class.bg-[#908FA0]/10] ="authService.user()?.estado_origen == 'inactivo'"
                         >
                             <i 
                                 class="text-xl fa-regular"
-                                [ngClass]="authService.user()?.estado_origen == 'activo' ? 'fa-circle-check' : 'fa-circle-xmark'"
-                                [class.text-[#F87C63]]="authService.user()?.estado_origen == 'inactivo'"
+                                [ngClass]="authService.user()?.estado_origen ? 'fa-circle-check' : 'fa-circle-xmark'"
+                                [class.text-[#F87C63]]="!authService.user()?.origen_permitido"
+                                [class.text-secondary]="authService.user()?.estado_origen == 'inactivo'"
                                 [class.text-[#4EDEA3]]="authService.user()?.estado_origen == 'activo'"
                             ></i>
                         </div>
