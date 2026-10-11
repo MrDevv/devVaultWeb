@@ -15,6 +15,7 @@ import { EditProject } from "./projects/pages/edit-project/edit-project";
 import { ListProfessionalTechnologies } from "./professional-technologies/pages/list-professional-technologies/list-professional-technologies";
 import { EditProfessionalTechnology } from "./professional-technologies/pages/edit-professional-technology/edit-professional-technology";
 import { ManageAPI } from "./public-api/pages/manage-api/manage-api";
+import { UnderConstruction } from "../shared/pages/under-construction/under-construction";
 
 export const routes: Routes = [
     {
@@ -92,6 +93,10 @@ export const routes: Routes = [
             {
                 path: 'manage-api',
                 component: ManageAPI
+            },
+            {
+                path: 'config',
+                component: UnderConstruction
             },
             {
                 path: '**',
