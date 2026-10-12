@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { ProjectType } from '../interfaces/project-type';
+import { of } from 'rxjs';
 
 
 const PROJECT_TYPES_API_URL = `${environment.API_URL}/admin/tipos-proyectos`;
@@ -18,6 +19,11 @@ export class ProjectTypeService {
   private http = inject(HttpClient);
 
   public obtenerTiposProyectos() {
+
+    if (this.projectTypesCache()) {
+      return of(this.projectTypesCache());
+    }
+
     return this.http.get<APIResponse<ProjectType[]>>(PROJECT_TYPES_API_URL).pipe(
       tap(response => this.projectTypesCache.set(response))
     );
