@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, delay, Observable, of, tap, throwError } from 'rxjs';
+import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
 
 import { APIResponse } from '@shared/interfaces/APIResponse';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
@@ -33,6 +34,8 @@ export class ProjectService {
 
   // Versión de la cache para impedir cachear respuestas antiguas después de invalidar la cache
   private cacheVersion = 0;
+
+  private experienceService = inject(ExperienceService);
 
 
   public obtenerProyectos(size: number = 3, page: number = 0, titulo: string = ''): Observable<projectsResponse> {    
@@ -82,7 +85,10 @@ export class ProjectService {
   public crearProyecto(proyecto: CreateProject): Observable<APIResponse<Project>> {
     return this.http.post<APIResponse<Project>>(PROJECTS_ENDPOINT, proyecto).pipe(
       // invalida la cache después de crear un nuevo proyecto
-      tap(() => this.invalidarCache()),
+      tap(() => {
+        this.invalidarCache();
+        this.experienceService.invalidarCache();        
+      }),
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     );
   }
@@ -98,7 +104,10 @@ export class ProjectService {
   public eliminarProyecto(uuid: string): Observable<APIResponse<void>> {
     return this.http.delete<APIResponse<void>>(`${PROJECTS_ENDPOINT}/${uuid}`).pipe(
       // invalida la cache después de eliminar un proyecto
-      tap(() => this.invalidarCache()),
+      tap(() => {
+        this.invalidarCache()
+        this.experienceService.invalidarCache();
+      }),
       catchError((error: HttpErrorResponse) => throwError(() => error.error))
     );
   }

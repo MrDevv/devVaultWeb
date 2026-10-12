@@ -3,30 +3,30 @@ import { Project } from "@devVault-administrativa/projects/interfaces/project.dt
 export interface CreateExperienceRequest {
     titulo: string;
     puesto: string;
-    nombre_empresa: string;
-    fecha_inicio: string;
-    fecha_fin: string | null;
+    nombreEmpresa: string;
+    fechaInicio: string;
+    fechaFin: string | null;
     descripcion: string;
 }
 
 export interface UpdateExperienceRequest {
     titulo: string;
     puesto: string;
-    nombre_empresa: string;
-    fecha_inicio: string;
-    fecha_fin: string | null;
+    nombreEmpresa: string;
+    fechaInicio: string;
+    fechaFin: string | null;
     descripcion: string;
 }
 
 export interface ExperienceResponse extends CreateExperienceRequest {
-    experiencia_uuid: string
+    experienciaUUID: string
 }
 
-export interface ExperienceSimple extends Pick<ExperienceResponse, 'experiencia_uuid' | 'titulo'> {}
+export interface ExperienceSimple extends Pick<ExperienceResponse, 'experienciaUUID' | 'titulo'> {}
 
 export interface ExperienceDetailResponse extends ExperienceResponse {
     desarrollador: string;
-    cantidad_proyectos: number;
+    cantidadProyectos: number;
 }
 
 export interface ExperienceWithProjectsResponse extends ExperienceResponse {

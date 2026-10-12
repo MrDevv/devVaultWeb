@@ -88,6 +88,10 @@
     background-color: #201F20;
 }
 
+/* .swal2-container {
+  z-index: 10000 !important;
+} */
+
 
 /* Estilos dialogo */
 .dialogo-borde-redondeado .mdc-dialog__surface {

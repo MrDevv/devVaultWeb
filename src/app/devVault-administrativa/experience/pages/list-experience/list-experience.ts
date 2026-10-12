@@ -96,8 +96,8 @@ export class ListExperience implements OnInit {
         if(nameCompany !== (this.nameCompany() ?? '')) return;
 
         this.experiences.update((items) => {
-          const yaCargados = new Set(items.map(item => item.experiencia_uuid));
-          return [...items, ...data.data.content.filter(item => !yaCargados.has(item.experiencia_uuid))];
+          const yaCargados = new Set(items.map(item => item.experienciaUUID));
+          return [...items, ...data.data.content.filter(item => !yaCargados.has(item.experienciaUUID))];
         });
 
         this.page.set(siguientePagina);

@@ -67,12 +67,12 @@ export class EditExperience {
           title: experiencia.titulo,
           puesto: experiencia.puesto,
           descripcion: experiencia.descripcion,
-          empresa: experiencia.nombre_empresa,
-          fechaInicio: experiencia.fecha_inicio,
-          fechaFin: experiencia.fecha_fin ?? ''
+          empresa: experiencia.nombreEmpresa,
+          fechaInicio: experiencia.fechaInicio,
+          fechaFin: experiencia.fechaFin ?? ''
         });
 
-        this.currentExperience.set(!experiencia.fecha_fin);
+        this.currentExperience.set(!experiencia.fechaFin);
       }
     });
   }
@@ -91,15 +91,15 @@ export class EditExperience {
     const updateExperience: UpdateExperienceRequest = {
       titulo: title!,
       puesto: puesto!,
-      nombre_empresa: empresa!,
-      fecha_inicio: fechaInicio!,
-      fecha_fin: fechaFin ? fechaFin : null,
+      nombreEmpresa: empresa!,
+      fechaInicio: fechaInicio!,
+      fechaFin: fechaFin ? fechaFin : null,
       descripcion: descripcion!
     }
 
     try{
       this.isLoading.set(true);
-      await firstValueFrom(this.experienceService.actualizarExperiencia(updateExperience, this.experienciaResource.value()!.data.experiencia_uuid))
+      await firstValueFrom(this.experienceService.actualizarExperiencia(updateExperience, this.experienciaResource.value()!.data.experienciaUUID))
       this.alertService.successAndRedirect("Éxito", "Se actualizó la experiencia correctamente.", '/experience');
     }catch(err: any) {
       console.error(err);

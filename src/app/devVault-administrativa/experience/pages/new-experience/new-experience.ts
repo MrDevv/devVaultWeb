@@ -63,9 +63,9 @@ export class NewExperience {
     const createExperience: CreateExperienceRequest = {
       titulo: title!,
       puesto: puesto!,
-      nombre_empresa: empresa!,
-      fecha_inicio: fechaInicio!,
-      fecha_fin: fechaFin ? fechaFin : null,
+      nombreEmpresa: empresa!,
+      fechaInicio: fechaInicio!,
+      fechaFin: fechaFin ? fechaFin : null,
       descripcion: descripcion!
     }
 

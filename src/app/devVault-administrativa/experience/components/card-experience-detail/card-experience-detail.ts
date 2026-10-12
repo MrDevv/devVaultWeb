@@ -21,10 +21,10 @@ export class CardExperienceDetail {
   };
 
   emitirUUIDExperienciaEliminar() {
-    this.UUIDExperienciaEliminar.emit(this.experience().experiencia_uuid);
+    this.UUIDExperienciaEliminar.emit(this.experience().experienciaUUID);
   }
   emitirUUIDExperienciaVer() {
-    this.UUIDExperienciaVer.emit(this.experience().experiencia_uuid);
+    this.UUIDExperienciaVer.emit(this.experience().experienciaUUID);
   }
 
 }

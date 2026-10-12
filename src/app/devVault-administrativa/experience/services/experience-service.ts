@@ -109,27 +109,10 @@ export class ExperienceService {
     )
   }
 
-
-  private toDetailResponse(data: ExperienceResponse): ExperienceDetailResponse {
-    return {
-      ...data,
-      desarrollador: '',
-      cantidad_proyectos: 0,
-    };
-  }
-
-
-  private orderExperiencias(experiencias: ExperienceDetailResponse[]): ExperienceDetailResponse[] {
-    return [...experiencias].sort((a, b) => {
-      if (a.fecha_fin === null) return -1;
-      if (b.fecha_fin === null) return 1;
-      return new Date(b.fecha_fin).getTime() - new Date(a.fecha_fin).getTime();
-    });
-  }
-
   private readonly handleHttpError = (error: HttpErrorResponse): Observable<never> => {
     return throwError(() => error.error)
   }
+
 
   public invalidarCache(): void {
     this.cacheVersion++;
