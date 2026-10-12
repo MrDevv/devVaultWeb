@@ -34,11 +34,18 @@
                         </div>
                     </header>
                     <!-- body -->
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        @for (experiencia of experiencesResource.value()?.data?.content; track $index) {
-                            <card-experience-simple [experiencia]="experiencia" />
-                        }
-                     </div>
+                     @if (experiencesResource.hasValue() && experiencesResource.value().data.content.length <= 0) {
+                        <div class="flex justify-center items-center border py-10 border-[#C0C1FF]/30 rounded-xl">
+                            <p class="text-purple text-sm">
+                                Aún no existen experiencias registradas.</p>
+                        </div>  
+                     }@else{
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            @for (experiencia of experiencesResource.value()?.data?.content; track $index) {
+                                <card-experience-simple [experiencia]="experiencia" />
+                            }
+                         </div>
+                     }
                 </section>
                 <!-- ultimos proyectos -->
                 <section>
@@ -59,11 +66,18 @@
                         </div>
                     </header>
                     <!-- body -->
-                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        @for (project of projectResource.value()?.data?.content; track $index) {
-                            <card-project [project]="project" />
-                        }
-                     </div>
+                    @if (projectResource.hasValue() && projectResource.value().data.content.length <= 0) {
+                        <div class="flex justify-center items-center border py-10 border-[#C0C1FF]/30 rounded-xl">
+                            <p class="text-purple text-sm">
+                                Aún no existen proyectos registrados.</p>
+                        </div>  
+                    }@else {
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            @for (project of projectResource.value()?.data?.content; track $index) {
+                                <card-project [project]="project" />
+                            }
+                        </div>
+                    }
                 </section>
             </div>
             <div class="flex flex-col gap-6">
