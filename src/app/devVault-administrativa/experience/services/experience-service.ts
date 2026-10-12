@@ -18,33 +18,38 @@ const EXPERIENCES_ENDPOINT = `${environment.API_URL}/me/experiencias`;
 
 type ExperiencePageableResponse = APIResponse<APIResponseWithPageable<ExperienceDetailResponse>>;
 
+interface ExperienceCache {
+  response: ExperiencePageableResponse;
+  expiresAt: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ExperienceService {
 
   private readonly _http = inject(HttpClient);
-  private readonly experienceCache = signal<ExperiencePageableResponse | null>(null);
+
+  private readonly experienceCache = new Map<string, ExperienceCache>();
+
+  private readonly cacheDurationMs = 10 * 60 * 1000; // 10 minutes
+
+  private cacheVersion = 0;
+
+  // private readonly experienceCache = signal<ExperiencePageableResponse | null>(null);
 
   public obtenerExperiencias(size: number = 3, page: number = 0, nombreEmpresa: string = ''): Observable<ExperiencePageableResponse> {
-    const cached = this.experienceCache();
+    const key = `${size}-${page}-${nombreEmpresa}`;
 
-    if (cached && nombreEmpresa.length < 2) {
-      return of(cached);
+    const cached = this.experienceCache.get(key);
+
+    if (cached && cached.expiresAt > Date.now()) {
+      return of(cached.response);
     }
 
-    if (cached) {
-      const content = this.filtrarPorEmpresa(cached.data.content, nombreEmpresa);
-      if (content.length > 0) {
-        return of({
-          ...cached,
-          data: {
-            ...cached.data,
-            content,
-          },
-        });
-      }
-    }
+    this.experienceCache.delete(key);
+
+    const version = this.cacheVersion;
 
     return this._http.get<ExperiencePageableResponse>(EXPERIENCES_ENDPOINT, {
       params: {
@@ -54,8 +59,11 @@ export class ExperienceService {
       },
     }).pipe(
       tap((response) => {
-        if (response.data.content.length > 0 && !nombreEmpresa) {
-          this.experienceCache.set(response);
+        if (version === this.cacheVersion) {
+          this.experienceCache.set(key, {
+            response,
+            expiresAt: Date.now() + this.cacheDurationMs,
+          });
         }
       }),
       catchError(this.handleHttpError)
@@ -64,14 +72,14 @@ export class ExperienceService {
 
   public crearExperiencia(experience: CreateExperienceRequest): Observable<APIResponse<ExperienceResponse>> {
     return this._http.post<APIResponse<ExperienceResponse>>(EXPERIENCES_ENDPOINT, experience).pipe(
-      tap((response) => this.addExperienciaEnCache(this.toDetailResponse(response.data))),
+      tap(() => this.invalidarCache()),
       catchError(this.handleHttpError)
     )
   }
 
   public actualizarExperiencia(experience: UpdateExperienceRequest, experienciaUuid: string): Observable<APIResponse<ExperienceResponse>> {
     return this._http.put<APIResponse<ExperienceResponse>>(`${EXPERIENCES_ENDPOINT}/${experienciaUuid}`, experience).pipe(
-      tap((response) => this.updateExperienciaEnCache(experienciaUuid, response.data)),
+      tap(() => this.invalidarCache()),
       catchError(this.handleHttpError)
     )
   }
@@ -84,7 +92,7 @@ export class ExperienceService {
 
   public eliminarExperiencia(experienciaUUID: string): Observable<APIResponse<void>> {
     return this._http.delete<APIResponse<void>>(`${EXPERIENCES_ENDPOINT}/${experienciaUUID}`).pipe(
-      tap(() => this.eliminarExperienciaEnCache(experienciaUUID)),
+      tap(() => this.invalidarCache()),
       catchError(this.handleHttpError)
     )
   }
@@ -95,38 +103,12 @@ export class ExperienceService {
     )
   }
 
-  public eliminarExperienciaEnCache(experienciaUUID: string): void {
-    const currentCache = this.experienceCache();
-    if (!currentCache) {
-      return;
-    }
-
-    const content = currentCache.data.content.filter((experiencia) => experiencia.experiencia_uuid !== experienciaUUID);
-
-    this.experienceCache.set({
-      ...currentCache,
-      data: {
-        ...currentCache.data,
-        content: this.orderExperiencias(content),
-        pageableData: {
-          ...currentCache.data.pageableData,
-          totalElements: currentCache.data.pageableData.totalElements - 1,
-        },
-      },
-    });
-  }
-
   public obtenerExperienciaConProyectos(uuid: string): Observable<APIResponse<ExperienceWithProjectsResponse>> {
     return this._http.get<APIResponse<ExperienceWithProjectsResponse>>(`${EXPERIENCES_ENDPOINT}/${uuid}/proyectos`).pipe(
       catchError(this.handleHttpError)
     )
   }
 
-  private filtrarPorEmpresa(experiencias: ExperienceDetailResponse[], nombreEmpresa: string): ExperienceDetailResponse[] {
-    return experiencias.filter((experiencia) => {
-      return experiencia.nombre_empresa.toLowerCase().includes(nombreEmpresa.toLowerCase())
-    });
-  }
 
   private toDetailResponse(data: ExperienceResponse): ExperienceDetailResponse {
     return {
@@ -136,50 +118,6 @@ export class ExperienceService {
     };
   }
 
-  private addExperienciaEnCache(nuevaExperiencia: ExperienceDetailResponse): void {
-    const currentCache = this.experienceCache();
-    if (!currentCache) {
-      return;
-    }
-
-    this.experienceCache.set({
-      ...currentCache,
-      data: {
-        ...currentCache.data,
-        content: this.orderExperiencias([nuevaExperiencia, ...currentCache.data.content]),
-        pageableData: {
-          ...currentCache.data.pageableData,
-          totalElements: currentCache.data.pageableData.totalElements + 1,
-        },
-      },
-    });
-  }
-
-  private updateExperienciaEnCache(experienciaUuid: string, data: ExperienceResponse): void {
-    const currentCache = this.experienceCache();
-    if (!currentCache) {
-      return;
-    }
-
-    const content = currentCache.data.content.map((experiencia) => {
-      if (experiencia.experiencia_uuid === experienciaUuid) {
-        return {
-          ...this.toDetailResponse(data),
-          desarrollador: experiencia.desarrollador,
-          cantidad_proyectos: experiencia.cantidad_proyectos,
-        };
-      }
-      return experiencia;
-    });
-
-    this.experienceCache.set({
-      ...currentCache,
-      data: {
-        ...currentCache.data,
-        content: this.orderExperiencias(content),
-      },
-    });
-  }
 
   private orderExperiencias(experiencias: ExperienceDetailResponse[]): ExperienceDetailResponse[] {
     return [...experiencias].sort((a, b) => {
@@ -194,8 +132,8 @@ export class ExperienceService {
   }
 
   public invalidarCache(): void {
-    // this.cacheVersion++;
-    this.experienceCache.set(null);
+    this.cacheVersion++;
+    this.experienceCache.clear();
   }
 
 }

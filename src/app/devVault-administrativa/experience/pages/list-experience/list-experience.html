@@ -10,7 +10,9 @@
                         class="bg-secondary w-full appearance-none focus-within:outline-none"
                         type="text"
                         placeholder="Buscar por empresa (mínimo 2 caracteres)"
-                        (input)="nameCompany.set($event.target.value)"
+                        (input)="onSearchInput($event.target.value)"
+                        (keydown)="onSearchKeyDown($event)"
+                        (keyup)="onSearchKeyUp($event)"
                     >
                     @if (isLoading() && nameCompany()) {
                         <loader-input/>
@@ -31,6 +33,18 @@
                             [experience]="exp"/>
                     }
                 </div>
+
+                @if (hayMasExperiencias()) {
+                    <div
+                        class="w-full min-h-16 py-6 flex justify-center items-center"
+                        appInfiniteScroll
+                        (appInfiniteScroll)="cargarMasExperiencias()"
+                    >
+                        @if (isLoadingMore()) {
+                            <loader/>
+                        }
+                    </div>
+                }
             }@else{
                 <div class="w-full py-10 flex justify-center items-center">
                     <p class="text-white">No se encontraron experiencias.</p>

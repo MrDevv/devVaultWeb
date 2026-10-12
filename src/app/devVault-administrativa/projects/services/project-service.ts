@@ -29,7 +29,7 @@ export class ProjectService {
   private readonly projectsCache = new Map<string, ProjectsCacheEntry>();
 
   // Tiempo de vigencia de cada respuesta
-  private readonly cacheDurationMs = 5 * 60 * 1000; // 5 minutes
+  private readonly cacheDurationMs = 10 * 60 * 1000; // 10 minutes
 
   // Versión de la cache para impedir cachear respuestas antiguas después de invalidar la cache
   private cacheVersion = 0;
