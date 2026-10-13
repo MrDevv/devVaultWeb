@@ -1,0 +1,53 @@
+<div class="min-h-svh w-full bg-card-secondary flex flex-col px-8">
+    <header class="flex items-center gap-2 py-6">
+        <img class="w-6 h-6" src="logo_white.png" alt="logo devVault">
+        <h1 class="text-primary text-lg">DevVault</h1>
+    </header>
+    <main class="flex-1 flex items-center justify-center py-10">
+        <div class="bg-card border border-outline-variant/30 rounded-2xl w-full max-w-xl flex flex-col items-center text-center gap-4 p-10">
+            @if (statusCode() === 200) {
+                <div class="w-20 h-20 flex justify-center items-center">
+                    <i class="fa-solid fa-circle-check text-6xl text-[#4ADE80]"></i>
+                </div>
+                <h2 class="text-primary text-4xl font-bold mt-2">Cuenta activada</h2>
+                <p class="text-secondary text-md max-w-md">
+                    Tu cuenta ha sido activada correctamente. Ya puedes iniciar sesión y empezar a usar DevVault.
+                </p>
+                <button routerLink="/login" class="bg-[#C0C1FF]/20 text-primary font-medium text-[16px] py-3.5 px-8 rounded-sm cursor-pointer mt-2">
+                    Iniciar sesión
+                </button>
+            } @else if (statusCode() === 400) {
+                <div class="w-20 h-20 flex justify-center items-center">
+                    <i class="fa-solid fa-hourglass-end text-6xl text-[#FBBF24]"></i>
+                </div>
+                <h2 class="text-primary text-4xl font-bold mt-2">Enlace expirado</h2>
+                <p class="text-secondary text-md max-w-md">
+                    El enlace de activación ha expirado y tu cuenta no ha sido activada. Vuelve a registrarte dentro de 24 horas.
+                </p>
+            } @else if (statusCode() === 404) {
+                <div class="w-20 h-20 flex justify-center items-center">
+                    <i class="fa-solid fa-link-slash text-6xl text-[#F87171]"></i>
+                </div>
+                <h2 class="text-primary text-4xl font-bold mt-2">Enlace no encontrado</h2>
+                <p class="text-secondary text-md max-w-md">
+                    El enlace de activación no existe. Verifica que hayas copiado la dirección correctamente.
+                </p>
+            } @else if (statusCode() === 500) {
+                <div class="w-20 h-20 flex justify-center items-center">
+                    <i class="fa-solid fa-triangle-exclamation text-6xl text-[#F87171]"></i>
+                </div>
+                <h2 class="text-primary text-4xl font-bold mt-2">Error del servidor</h2>
+                <p class="text-secondary text-md max-w-md">
+                    No pudimos procesar tu solicitud. Inténtalo de nuevo más tarde.
+                </p>
+            }
+        </div>
+    </main>
+    <footer class="text-center py-6">
+        <span class="text-[#908FA0] tracking-wider text-[13px]">© {{ currentYear }} DevVault. Creado por <a href="https://www.linkedin.com/in/miguelangelvegaperez" target="_blank" class="text-purple">MrDevv</a></span>
+    </footer>
+</div>
+
+@if (authService.authStatus() == 'checking') {
+    <loading-overlay />
+}

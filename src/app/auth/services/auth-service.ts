@@ -57,6 +57,19 @@ export class AuthService {
     );
   }
 
+  public activarCuenta(token: string) {
+    this._authStatus.set('checking');
+
+    return this._http.patch<APIResponse<null>>(`${BASEURL}/auth/activar-cuenta`, { token }).pipe(
+      delay(3000),
+      tap(() => this.clearData()),
+      catchError((error: HttpErrorResponse) => {
+        this.clearData();
+        return throwError(() =>  error.error)
+      })
+    );
+  }
+
   public validateToken() {
     const token = localStorage.getItem('token_devVault');
 

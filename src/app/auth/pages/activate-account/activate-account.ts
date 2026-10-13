@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-activate-account',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './activate-account.html',
   styleUrl: './activate-account.css',
 })
