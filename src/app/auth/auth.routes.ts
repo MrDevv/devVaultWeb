@@ -12,25 +12,30 @@ import { SuspendedAccount } from "./pages/suspended-account/suspended-account";
 export const routes: Routes = [
     {
         path: 'login',
-        component: LoginPage
+        component: LoginPage,
+        title: 'Iniciar sesión | DevVault'
     },
     {
         path: 'register',
-        component: RegisterPage
+        component: RegisterPage,
+        title: 'Registrarse | DevVault'
     },
     {
         path: 'activate-account',
         component: ActivateAccount,
-        canActivate: [registerFlowGuard]
+        canActivate: [registerFlowGuard],
+        title: 'Activar cuenta | DevVault'
     },
     {
         path: 'confirm-email/:token',
-        component: ConfirmEmail
+        component: ConfirmEmail,
+        title: 'Confirmar correo | DevVault'
     },
     {
         path: 'suspended-account',
         component: SuspendedAccount,
-        canActivate: [loginFlowGuard]
+        canActivate: [loginFlowGuard],
+        title: 'Cuenta suspendida | DevVault'
     }
 ]
 

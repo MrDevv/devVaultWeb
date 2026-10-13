@@ -1,0 +1,49 @@
+/auth
+  X-Robots-Tag: noindex
+  Referrer-Policy: no-referrer
+
+/auth/*
+  X-Robots-Tag: noindex
+  Referrer-Policy: no-referrer
+
+/home
+  X-Robots-Tag: noindex
+
+/home/*
+  X-Robots-Tag: noindex
+
+/professional-data
+  X-Robots-Tag: noindex
+
+/professional-data/*
+  X-Robots-Tag: noindex
+
+/technologies
+  X-Robots-Tag: noindex
+
+/technologies/*
+  X-Robots-Tag: noindex
+
+/experience
+  X-Robots-Tag: noindex
+
+/experience/*
+  X-Robots-Tag: noindex
+
+/projects
+  X-Robots-Tag: noindex
+
+/projects/*
+  X-Robots-Tag: noindex
+
+/manage-api
+  X-Robots-Tag: noindex
+
+/manage-api/*
+  X-Robots-Tag: noindex
+
+/config
+  X-Robots-Tag: noindex
+
+/config/*
+  X-Robots-Tag: noindex
