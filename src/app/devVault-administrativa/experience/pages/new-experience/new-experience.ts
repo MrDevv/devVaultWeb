@@ -1,16 +1,17 @@
 import { Component, effect, inject, signal } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+
 import { FormInputField } from "@devVault-administrativa/shared/components/form-input-field/form-input-field";
 import { SectionCardComponent } from "@devVault-administrativa/shared/components/section-card-component/section-card-component";
 import { PageHeader } from "@devVault-administrativa/shared/components/page-header/page-header";
 import { FormTextAreaField } from "@devVault-administrativa/shared/components/form-text-area-field/form-text-area-field";
-import { Location } from '@angular/common';
 import { ExperienceService } from '@devVault-administrativa/experience/services/experience-service';
-import Swal from 'sweetalert2';
 import { CreateExperienceRequest } from '@devVault-administrativa/experience/interfaces/experience.dto';
-import { firstValueFrom } from 'rxjs';
-import { Router } from '@angular/router';
 import { Loading } from "@shared/components/loading/loading";
+import { AlertService } from '@shared/services/alert-service';
 
 @Component({
   selector: 'app-new-experience',
@@ -26,6 +27,7 @@ export class NewExperience {
   private fb = inject(FormBuilder);
   private location = inject(Location);
   private router = inject(Router);
+  private alertService = inject(AlertService);
 
   formExperienceData = this.fb.group({
     title: ['', Validators.required],
@@ -52,8 +54,7 @@ export class NewExperience {
     this.location.back();    
   }
 
-  async guardarExperiencia() {
-    console.log(this.formExperienceData.value);
+  async guardarExperiencia() {    
     if(!this.validarDatos()) {
       return;
     }
@@ -76,64 +77,37 @@ export class NewExperience {
     }catch(err: any) {
       console.error(err);
       if (err.code == 400) {
-        Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Verifique los datos ingresados e intente nuevamente."
-        });
-
+        this.alertService.warning("Advertencia", "Verifique los datos ingresados e intente nuevamente.");        
         return;
       }
 
       if (err.code == 409) {
-        Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "La experiencia con este título ya está registrada."
-        });
-
+        this.alertService.warning("Advertencia", "La experiencia con este título ya está registrada.");
         return;
       }
+    } finally {
+      this.isLoading.set(false);
     }
 
-    this.isLoading.set(false);
   }
 
   validarDatos(): boolean {
     const { fechaInicio, fechaFin } = this.formExperienceData.value
 
-
     if (fechaInicio && !fechaFin && !this.currentExperience()) {
-      Swal.fire({
-              icon: "warning",
-              title: "Advertencia",
-              text: "Si actualmente trabaja en esta empresa marcar la opción correspondiente."
-            });
-      ;
-
+      this.alertService.warning("Advertencia", "Si actualmente trabaja en esta empresa marcar la opción correspondiente.");
       return false;
     }
 
     if (fechaInicio && fechaFin) {
       if (fechaFin < fechaInicio) {
-        Swal.fire({
-              icon: "warning",
-              title: "Advertencia",
-              text: "Las fechas no son válidas."
-            });
-  
+        this.alertService.warning("Advertencia", "Las fechas no son válidas.");  
         return false;
       }
     }    
 
     if (this.formExperienceData.invalid) {
-      Swal.fire({
-              icon: "warning",
-              title: "Advertencia",
-              text: "Ingrese todos los datos obligatorios."
-            });
-      ;
-
+      this.alertService.warning("Advertencia", "Ingrese todos los datos obligatorios.");
       return false;
     }
 

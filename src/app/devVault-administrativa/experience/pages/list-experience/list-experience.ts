@@ -182,7 +182,7 @@ export class ListExperience implements OnInit {
       try {
         await firstValueFrom(this.experienceService.eliminarExperiencia(uuid));
         this.obtenerExperiencias();
-        this.alertService.info('Experiencia eliminada', 'La experiencia ha sido eliminada correctamente.');
+        this.alertService.success('Experiencia eliminada', 'La experiencia ha sido eliminada correctamente.');
       } catch (error) {
         this.alertService.error('Error', 'Ocurrió un error al intentar eliminar la experiencia.');
       } finally {
