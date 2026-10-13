@@ -9,6 +9,7 @@ import { environment } from '@environments/environment';
 import { AuthStatus } from '@auth/types/auth-status';
 import { Professional } from '@devVault-administrativa/professional-data/interfaces/Professional';
 import { UpdateOrigen } from '@devVault-administrativa/public-api/interfaces/public-api.dto';
+import { CreateUser } from '@auth/interfaces/CreateUser.dto';
 
 const BASEURL = environment.API_URL;
 
@@ -38,6 +39,19 @@ export class AuthService {
       }),
       catchError((error: HttpErrorResponse) => {
         this._authStatus.set('not-authenticated');
+        return throwError(() =>  error.error)
+      })
+    );
+  }
+
+  public register(user: CreateUser) {
+    this._authStatus.set('checking');
+
+    return this._http.post<APIResponse<null>>(`${BASEURL}/auth/register`, user).pipe(
+      delay(3000),
+      tap(() => this.clearData()),
+      catchError((error: HttpErrorResponse) => {
+        this.clearData();
         return throwError(() =>  error.error)
       })
     );

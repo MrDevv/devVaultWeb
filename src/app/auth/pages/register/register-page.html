@@ -1,1 +1,71 @@
-<p>register-component works!</p>
+<div class="flex min-h-svh">
+    <div class="lg:flex-2 overflow-hidden lg:block hidden bg-card">
+        <!-- Register form goes here -->
+         <div class="relative w-full h-full flex items-center justify-center p-12">
+             <div class="absolute w-[80%] aspect-auto rounded-xl overflow-hidden border border-outline-variant/30 transform -rotate-3 -translate-x-12 -translate-y-25 z-10 scale-95 opacity-80">
+                <img class="object-contain w-full h-full" src="portada_2.png" alt="imagen portada devVault">
+            </div>
+            <div class="absolute w-[80%] aspect-auto rounded-xl overflow-hidden border border-outline-variant/30 shadow-2xl transform rotate-3 translate-x-12 translate-y-20 z-20">
+                <img class="object-contain w-full h-full" src="portada_1.png" alt="imagen portada devVault">
+            </div>
+         </div>
+    </div>
+    <div class="flex-1 flex justify-center bg-card-secondary py-14.5 px-8 lg:px-16">
+        <form [formGroup]="registerForm" (ngSubmit)="registrarUsuario()">
+            <div class="max-w-lg flex flex-col gap-7">
+                <div class="flex items-center gap-2">
+                    <img class="w-6 h-6" src="logo_white.png" alt="logo devVault">
+                    <h1 class="text-primary text-lg">DevVault</h1>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <h2 class="text-primary text-4xl font-bold">Crea tu cuenta</h2>
+                    <p class="text-secondary text-md">Completa el formulario para crear tu cuenta.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Nombres</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="firstName" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="text" placeholder="Tom">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Apellidos</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="lastName" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="text" placeholder="Perez">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Correo electrónico</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="email" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="email" placeholder="correo@ejemplo.com">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Contraseña</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="password" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="password" placeholder="********">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Confirmar contraseña</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="confirmPassword" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="password" placeholder="********">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-1">
+                    <input formControlName="acceptTerms" class="mt-0.5" type="checkbox">
+                    <label class="text-[#908FA0] tracking-wider text-[13px]">Acepto los <a href="/terms-of-service" class="underline text-purple">Términos del Servicio</a> y la <a href="/privacy-policy" class="underline text-purple">Política de Privacidad</a> de DevVault.</label>
+                </div>
+                <button type="submit" class="bg-[#C0C1FF]/20 text-primary font-medium text-[16px] py-3.5 rounded-sm cursor-pointer">Registrarse</button>
+                <span class="text-[#908FA0] tracking-wider text-[13px] text-center uppercase">¿ya tienes una cuenta? <a routerLink="/login" class=" text-purple uppercase">iniciar sesión</a></span>
+                <span class="text-[#908FA0] tracking-wider text-[13px] mt-10">© {{ currentYear }} DevVault. Creado por <a href="https://www.linkedin.com/in/miguelangelvegaperez" target="_blank" class="text-purple">MrDevv</a></span>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+@if (authService.authStatus() == 'checking') {
+    <loading/>
+}
