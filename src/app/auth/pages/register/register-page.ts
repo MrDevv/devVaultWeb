@@ -16,7 +16,7 @@ import { Loading } from '@shared/components/loading/loading';
 export class RegisterPage {
   public currentYear = new Date().getFullYear();
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
   private router = inject(Router); 
   private alertService = inject(AlertService);
 

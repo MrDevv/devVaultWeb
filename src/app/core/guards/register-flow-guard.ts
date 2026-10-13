@@ -4,9 +4,11 @@ import { CanActivateFn, Router } from '@angular/router';
 export const registerFlowGuard: CanActivateFn = () => {
   const router = inject(Router);
 
-  const fromRegister = router.currentNavigation()?.extras.state?.['fromRegister'];
+  const state = router.currentNavigation()?.extras.state;
+  const fromRegister = state?.['fromRegister'];
+  const fromLogin = state?.['fromLogin'];
 
-  if (fromRegister === true) {
+  if (fromRegister === true || fromLogin === true) {
     return true;
   }
 
