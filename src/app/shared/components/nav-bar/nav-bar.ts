@@ -1,6 +1,8 @@
 
 import { Component, inject, input} from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '@auth/services/auth-service';
+
 
 import { SideBarService } from '@guide/services/side-bar-service';
 import { NavBarService } from '@shared/services/nav-bar-service';
@@ -14,6 +16,7 @@ export class NavBar {
 
   navBarService = inject(NavBarService);
   sideBarService = inject(SideBarService);
+  authService = inject(AuthService);
 
   pageName = input<string>('landing-page');
 
