@@ -17,6 +17,8 @@ import { AlertService } from '@shared/services/alert-service';
 })
 export class LoginPage {
 
+  public currentYear = new Date().getFullYear();
+  
   router = inject(Router);
   fb = inject(FormBuilder);
   authService = inject(AuthService);

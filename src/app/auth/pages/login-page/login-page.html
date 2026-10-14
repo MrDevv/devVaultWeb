@@ -1,4 +1,4 @@
-<div class="min-h-svh w-full bg-card flex justify-center items-center flex-col gap-6">    
+<!-- <div class="min-h-svh w-full bg-card flex justify-center items-center flex-col gap-6">    
         <div class="bg-secondary rounded-4xl">
             <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="bg-white text-primary-dark rounded-4xl flex flex-col items-center">
@@ -20,7 +20,53 @@
                 <button type="submit" class="cursor-pointer text-white font-bold py-4 text-center w-full">INICIAR SESIÓN</button>
             </form>
         </div>
-        <p class="text-primary text-sm">¿no tienes una cuenta? <a routerLink="/auth/register" class="font-bold cursor-pointer">registrate ahora</a></p>    
+        <p class="text-primary text-sm">¿ya tienes una cuenta? <a routerLink="/auth/login" class="font-bold cursor-pointer">inicia sesión</a></p>    
+</div> -->
+
+<div class="flex min-h-svh">
+    <div class="lg:flex-2 overflow-hidden lg:block hidden bg-card">
+        <!-- Register form goes here -->
+         <div class="relative w-full h-full flex items-center justify-center p-12">
+             <div class="absolute w-[80%] aspect-auto rounded-xl overflow-hidden border border-outline-variant/30 transform -rotate-3 -translate-x-12 -translate-y-25 z-10 scale-95 opacity-80">
+                <img class="object-contain w-full h-full" src="portada_2.webp" alt="imagen portada devVault">
+            </div>
+            <div class="absolute w-[80%] aspect-auto rounded-xl overflow-hidden border border-outline-variant/30 shadow-2xl transform rotate-3 translate-x-12 translate-y-20 z-20">
+                <img class="object-contain w-full h-full" src="portada_1.webp" alt="imagen portada devVault">
+            </div>
+         </div>
+    </div>
+    <div class="flex-1 flex justify-center items-center bg-card-secondary py-14.5 px-8 lg:px-16">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="max-w-lg flex flex-col gap-10">
+                <div class="flex items-center gap-2">
+                    <img class="w-6 h-6" src="logo_white.webp" alt="logo devVault">
+                    <h1 class="text-primary text-lg">DevVault</h1>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <h2 class="text-primary text-4xl font-bold">Iniciar sesión</h2>
+                    <p class="text-secondary text-md">Completa el formulario para iniciar sesión en tu cuenta.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Correo electrónico</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="email" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="email" placeholder="correo@ejemplo.com">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[#908FA0] tracking-wider font-medium">Contraseña</label>
+                        <div class=" border-b bg-secondary border-[#464554] px-3 rounded-sm flex items-center gap-2">
+                            <input formControlName="password" class="text-sm outline-0 text-secondary bg-secondary w-full py-2" type="password" placeholder="********">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="bg-[#C0C1FF]/20 text-primary font-medium text-[16px] py-3.5 rounded-sm cursor-pointer">Iniciar sesión</button>
+                <span class="text-[#908FA0] tracking-wider text-[13px] text-center uppercase">¿no tienes una cuenta? <a routerLink="/auth/register" class=" text-purple uppercase">registrate ahora</a></span>
+                <span class="text-[#908FA0] tracking-wider text-[13px] mt-10">© {{ currentYear }} DevVault. Creado por <a href="https://www.linkedin.com/in/miguelangelvegaperez" target="_blank" class="text-purple">MrDevv</a></span>
+            </div>
+        </form>
+    </div>
+    
 </div>
 
 @if (authService.authStatus() == 'checking') {
