@@ -6,4 +6,10 @@
   <url>
     <loc>https://devvault.netlify.app/guide</loc>
   </url>
+  <url>
+    <loc>https://devvault.netlify.app/terms-of-service</loc>
+  </url>
+  <url>
+      <loc>https://devvault.netlify.app/privacy-policy</loc>
+  </url>
 </urlset>
