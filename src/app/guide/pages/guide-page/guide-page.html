@@ -44,6 +44,43 @@
                     <code-block text="Authorization: Bearer 691c3e42-9f1d-162e-9126-30c4d524abca-2032023165314"/>
                 </section>
 
+                <section id="dominio_autorizado" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-earth-americas"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Autorización de dominio</h2>
+                    </div>
+
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">
+                        Por seguridad, cada API Key está asociada a un dominio autorizado. La API solo acepta
+                        peticiones provenientes de ese origen, por lo que un dominio no configurado o inactivo
+                        inhabilita esta seguridad.
+                    </p>
+
+                    <div class="bg-secondary rounded-sm p-4 flex gap-3 items-start border-l-4 border-[#DB982C]">
+                        <i class="fa-solid fa-triangle-exclamation text-[#DB982C] mt-1"></i>
+                        <div class="flex flex-col gap-1">
+                            <span class="text-white font-medium text-sm md:text-base">Entornos de desarrollo (localhost)</span>
+                            <p class="text-sm md:text-base text-secondary leading-relaxed font-light">
+                                Si vas a implementar o probar un endpoint en desarrollo
+                                (<code class="text-purple">http://localhost:3000</code>), la validación del dominio debe estar
+                                <span class="text-white font-medium">deshabilitada</span> o
+                                <span class="text-white font-medium">pendiente de configuración</span>.
+                                De lo contrario la API rechazará la solicitud por CORS
+                                <span class="text-white font-medium">aunque envíes correctamente tu API Key</span>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Cómo configurarlo:</p>
+                    <ul class="list-disc pl-5 text-sm md:text-lg text-secondary leading-relaxed font-light">
+                        <li>Ve a <span class="text-purple font-medium">Administrar API</span> → sección <span class="text-purple font-medium">Dominio autorizado</span>.</li>
+                        <li>Para desarrollo: deja el dominio en <span class="text-white">Sin configurar</span> o desactiva el switch (estado <span class="text-white">Inactivo</span>).</li>
+                        <li>Al desplegar a producción, registra tu dominio (con protocolo, ej. <code>https://miportafolio.com</code>) o actívalo.</li>
+                    </ul>
+                </section>
+
                 <section id="endpoints" class="flex flex-col gap-2 mb-7 md:mb-10">
                     <div class="flex gap-2 items-center mb-2">
                         <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
@@ -67,14 +104,14 @@
                         <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Obtener datos profesionales</h2>
                     </div>
 
-                    <code-block text="/desarrolladores/me/datos"/>
+                    <code-block text="/dev/me/datos"/>
                     
                     <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Lista de datos profesionales:</p>
                     <ul class="list-disc pl-5 text-sm md:text-lg text-secondary leading-relaxed font-light">
-                        <li>desarrollador ID</li>
+                        <li>UUID</li>
                         <li>nombres</li>
                         <li>apellidos</li>
-                        <li>correo</li>
+                        <li>correo contacto</li>
                         <li>github url</li>
                         <li>linkedin url</li>
                         <li>cv url</li>
@@ -89,6 +126,89 @@
                     <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo en Javascript (Fetch):</p>
                     <code-block [text]="codigo" type="javascript"/>
                 </section>
+                
+                <section id="tecnologias" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Obtener tecnologías</h2>
+                    </div>
+
+                    <code-block text="/dev/me/tecnologias"/>
+                    
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Lista de tecnologías:</p>
+                    <ul class="list-disc pl-5 text-sm md:text-lg text-secondary leading-relaxed font-light">
+                        <li>UUID</li>
+                        <li>tecnología</li>
+                        <li>logo URL</li>
+                        <li>tipo de tecnología</li>
+                        <li>nivel</li>
+                    </ul>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo respuesta JSON:</p>
+                    <code-block [text]="data_tecnologias | json" type="json"/>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo en Javascript (Fetch):</p>
+                    <code-block [text]="codigo_tecnologias" type="javascript"/>
+                </section>
+
+                <section id="experiencias" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Obtener experiencias</h2>
+                    </div>
+
+                    <code-block text="/dev/me/experiencias"/>
+                    
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Lista de experiencias:</p>
+                    <ul class="list-disc pl-5 text-sm md:text-lg text-secondary leading-relaxed font-light">
+                        <li>UUID</li>
+                        <li>título</li>
+                        <li>descripción</li>
+                        <li>fecha de inicio</li>
+                        <li>fecha de fin</li>
+                        <li>nombre de la empresa</li>
+                        <li>puesto</li>
+                        <li>profesional</li>
+                        <li>cantidad de proyectos</li>
+                    </ul>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo respuesta JSON:</p>
+                    <code-block [text]="data_experiencias | json" type="json"/>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo en Javascript (Fetch):</p>
+                    <code-block [text]="codigo_experiencias" type="javascript"/>
+                </section>
+
+                <section id="proyectos" class="flex flex-col gap-2 mb-7 md:mb-10">
+                    <div class="flex gap-2 items-center mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-[#c0c1ff1a] text-secondary flex justify-center items-center">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl text-primary font-bold tracking-tight">Obtener proyectos</h2>
+                    </div>
+
+                    <code-block text="/dev/me/proyectos"/>
+                    
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Lista de proyectos:</p>
+                    <ul class="list-disc pl-5 text-sm md:text-lg text-secondary leading-relaxed font-light">
+                        <li>UUID</li>
+                        <li>título</li>
+                        <li>descripción</li>
+                        <li>URL de producción</li>
+                        <li>URL del repositorio</li>
+                        <li>URL de la imagen de presentación</li>
+                        <li>estado</li>
+                        <li>experiencia</li>
+                        <li>tipo proyecto</li>
+                        <li>etiquetas</li>
+                    </ul>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo respuesta JSON:</p>
+                    <code-block [text]="data_proyectos | json" type="json"/>
+                    <p class="text-sm md:text-lg text-secondary leading-relaxed font-light mb-2">Ejemplo en Javascript (Fetch):</p>
+                    <code-block [text]="codigo_proyectos" type="javascript"/>
+                </section>
+
+
             </main>
         </div>
 

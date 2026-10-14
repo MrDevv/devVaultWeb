@@ -54,6 +54,11 @@
                 <i class="text-lg fa-solid fa-key"></i>
                 <a>Autenticación</a>
             </div>
+
+            <div (click)="sideBarService.goTo('dominio_autorizado')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-earth-americas"></i>
+                <a>Autorización de dominio</a>
+            </div>
     
             <div (click)="sideBarService.goTo('endpoints')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
                 <i class="fa-solid fa-network-wired"></i>
@@ -66,18 +71,18 @@
             </div>
     
             <div (click)="sideBarService.goTo('tecnologias')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
-                <i class="text-lg fa-solid fa-key"></i>
-                <a>- Obtener tecnologías</a>            
+                <i class="fa-solid fa-code"></i>
+                <a>Obtener tecnologías</a>            
             </div>
     
-            <div (click)="sideBarService.goTo('experiencia')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
-                <i class="text-lg fa-solid fa-key"></i>            
-                <a>- Obtener experiencia</a>
+            <div (click)="sideBarService.goTo('experiencias')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
+                <i class="fa-solid fa-briefcase"></i>            
+                <a>Obtener experiencia</a>
             </div>
     
             <div (click)="sideBarService.goTo('proyectos')" class="flex items-center gap-3 px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
-                <i class="text-lg fa-solid fa-key"></i>
-                <a>- Obtener proyectos</a>
+                <i class="fa-solid fa-diagram-project"></i>
+                <a>Obtener proyectos</a>
             </div>
         }@else {
 
@@ -185,12 +190,13 @@
         }
     </div>
 
-    <div 
-    class="flex items-center self-end gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
-    (click)="sideBarService.logout()"    
-    >
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <a>Cerrar sesión</a>
-    </div>
+    @if (page() != 'guide') {
+        <div 
+        class="flex items-center self-end gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+        (click)="sideBarService.logout()"    
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <a>Cerrar sesión</a>
+        </div>
+    }
 </aside>
-     
