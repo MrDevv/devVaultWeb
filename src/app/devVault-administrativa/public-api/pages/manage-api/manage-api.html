@@ -130,7 +130,7 @@
                                                 {{ authService.user()?.estado_origen == 'activo' ? 'Habilitado' : 'Deshabilitado' }}
                                             </span>
                                         </div>
-                                        <span>Origen registrado • {{ authService.user()?.estado_origen == 'activo' ? 'Activo para validación CORS' : 'Inactivo (peticiones bloqueadas por CORS)' }}</span>
+                                        <span>Origen registrado • {{ authService.user()?.estado_origen == 'activo' ? 'Activo para el dominio' : 'Inactivo (peticiones permitidas por cualquier dominio)' }}</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-3">

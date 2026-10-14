@@ -44,6 +44,7 @@ export class SideBarService {
   logout() {
     this.authService.clearData();
     this.professionalDataService.clearCache();
+    this.professionalTechnologyService.invalidarCache();
     this.experienceService.invalidarCache();
     this.projectService.invalidarCache();
     this.close();
