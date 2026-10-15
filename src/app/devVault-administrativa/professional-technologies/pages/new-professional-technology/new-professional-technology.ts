@@ -16,12 +16,12 @@ import { CreateProfessionalTechnology } from '@devVault-administrativa/professio
 import { AlertService } from '@shared/services/alert-service';
 import { APIResponseWithPageable } from '@shared/interfaces/APIResponseWithPageable';
 import { Loading } from '@shared/components/loading/loading';
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 type Nivel = 'básico' | 'intermedio' | 'avanzado';
 
 @Component({
-  selector: 'new-professional-technology',
-  imports: [PageHeader, RouterLink, NgClass, LoaderInput, ReactiveFormsModule, Loading, TitleCasePipe],
+  imports: [PageHeader, RouterLink, NgClass, LoaderInput, ReactiveFormsModule, Loading, TitleCasePipe, AdsterraBanner],
   templateUrl: './new-professional-technology.html',
 })
 export class NewProfessionalTechnology implements OnInit {

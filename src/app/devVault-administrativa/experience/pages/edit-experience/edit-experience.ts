@@ -13,10 +13,11 @@ import { SectionCardComponent } from '@devVault-administrativa/shared/components
 import { FormTextAreaField } from '@devVault-administrativa/shared/components/form-text-area-field/form-text-area-field';
 import { Loading } from '@shared/components/loading/loading';
 import { FormInputField } from '@devVault-administrativa/shared/components/form-input-field/form-input-field';
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 @Component({
   selector: 'edit-experience',
-  imports: [ReactiveFormsModule, SectionCardComponent, FormTextAreaField, Loading, FormInputField],
+  imports: [ReactiveFormsModule, SectionCardComponent, FormTextAreaField, Loading, FormInputField, AdsterraBanner],
   templateUrl: './edit-experience.html',
 })
 export class EditExperience {

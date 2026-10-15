@@ -15,10 +15,11 @@ import { Loading } from "@shared/components/loading/loading";
 
 import Swal from 'sweetalert2';
 import { LogoPreviewComponent } from "@devVault-administrativa/shared/components/logo-preview-component/logo-preview-component";
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 @Component({
   selector: 'edit-professional-data',
-  imports: [ReactiveFormsModule, RouterLink, FormInputField, FormTextAreaField, FormIconInputField, SectionCardComponent, Loading, LogoPreviewComponent],
+  imports: [ReactiveFormsModule, RouterLink, FormInputField, FormTextAreaField, FormIconInputField, SectionCardComponent, Loading, LogoPreviewComponent, AdsterraBanner],
   templateUrl: './edit-professional-data.html'  
 })
 export class EditProfessionalData {

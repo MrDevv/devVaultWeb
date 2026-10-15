@@ -19,11 +19,12 @@ import { ProjectService } from '@devVault-administrativa/projects/services/proje
 import { LoaderInput } from '@devVault-administrativa/shared/components/loader-input/loader-input';
 import { Loading } from '@shared/components/loading/loading';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 
 @Component({
   selector: 'new-project',
-  imports: [PageHeader, FormInputField, ReactiveFormsModule, SectionCardComponent, FormTextAreaField, FormIconInputField, LogoPreviewComponent, TitleCasePipe, LoaderInput, Loading],
+  imports: [PageHeader, FormInputField, ReactiveFormsModule, SectionCardComponent, FormTextAreaField, FormIconInputField, LogoPreviewComponent, TitleCasePipe, LoaderInput, Loading, AdsterraBanner],
   templateUrl: './new-project.html'  
 })
 export class NewProject {

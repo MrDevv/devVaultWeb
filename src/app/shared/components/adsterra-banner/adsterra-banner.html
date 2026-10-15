@@ -1,0 +1,23 @@
+<div #measurementContainer class="w-full min-w-0">
+  <section
+    aria-label="Publicidad"
+    class="mx-auto rounded-xl bg-card py-3"
+    [class.hidden]="!hasEnoughSpace()"
+    [style.width.px]="bannerWidth"
+  >
+    <div class="mb-3 flex items-center justify-center gap-3 px-3">
+      <span class="h-px flex-1 bg-white/10"></span>
+      <span class="text-[10px] uppercase tracking-[0.18em] text-[#C0C1FF]"> Publicidad </span>
+      <span class="h-px flex-1 bg-white/10"></span>
+    </div>
+
+    <div
+      #adContainer
+      class="mx-auto"
+      [style.height.px]="bannerHeight"
+      [style.min-height.px]="bannerHeight"
+      [style.width.px]="bannerWidth"
+      [style.min-width.px]="bannerWidth"
+    ></div>
+  </section>
+</div>

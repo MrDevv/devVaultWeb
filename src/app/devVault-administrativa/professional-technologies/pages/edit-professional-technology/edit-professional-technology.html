@@ -39,31 +39,34 @@
                     </div>
                 </div>
             </div>
-            <div class="p-5 md:min-w-80 md:max-h-fit bg-card rounded-xl flex flex-col gap-4">
-                <h2 class="text-primary text-nowrap text-lg font-bold">Resumen de Selección</h2>    
-                <div class="text-secondary flex flex-col gap-3 mb-5">
-                    <div class="grid grid-cols-2 border-b border-[#464554]/20 pb-3">
-                        <p>Tecnología</p> 
-                        <span class="font-bold"> {{ professionalTechnologyResource.value()?.data?.tecnologia }} </span>
+            <div class="flex flex-col gap-2">
+                <div class="p-5 md:min-w-80 md:max-h-fit bg-card rounded-xl flex flex-col gap-4">
+                    <h2 class="text-primary text-nowrap text-lg font-bold">Resumen de Selección</h2>    
+                    <div class="text-secondary flex flex-col gap-3 mb-5">
+                        <div class="grid grid-cols-2 border-b border-[#464554]/20 pb-3">
+                            <p>Tecnología</p> 
+                            <span class="font-bold"> {{ professionalTechnologyResource.value()?.data?.tecnologia }} </span>
+                        </div>
+                        <div class="grid grid-cols-2 border-b border-[#464554]/20 pb-3">
+                            <p>Nivel</p> 
+                            <span class="font-bold">{{ nivelSelected() || 'No especificado' | titlecase }}</span>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-2 border-b border-[#464554]/20 pb-3">
-                        <p>Nivel</p> 
-                        <span class="font-bold">{{ nivelSelected() || 'No especificado' | titlecase }}</span>
-                    </div>
+                    <button 
+                        type="button"
+                        class="w-full disabled:cursor-not-allowed cursor-pointer px-4 py-2 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]"
+                        [disabled]="isLoading()"
+                        (click)="actualizarTecnologiaDesarrollador()" 
+                    >
+                            Actualizar nivel
+                    </button>
+                    <button type="button" routerLink="/technologies" class="cursor-pointer w-full px-4 py-2 bg-transparent border-2 border-[#464554]/30 rounded-sm text-[#C0C1FF]">
+                            Cancelar
+                    </button>
                 </div>
-                <button 
-                    type="submit"
-                    class="w-full disabled:cursor-not-allowed cursor-pointer px-4 py-2 bg-[#C0C1FF]/10 rounded-sm text-[#C0C1FF]"
-                    [disabled]="isLoading()"
-                    (click)="actualizarTecnologiaDesarrollador()" 
-                >
-                        Actualizar nivel
-                </button>
-                <button routerLink="/technologies" class="cursor-pointer w-full px-4 py-2 bg-transparent border-2 border-[#464554]/30 rounded-sm text-[#C0C1FF]">
-                        Cancelar
-                </button>
+                <adsterra-banner />
             </div>
-        </div>
+        </div>    
     </main>
 </div>
 

@@ -9,13 +9,13 @@ import { ProfessionalTechnologyService } from '@devVault-administrativa/professi
 import { Loading } from '@shared/components/loading/loading';
 import { AlertService } from '@shared/services/alert-service';
 import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overlay';
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 
 type Nivel = 'básico' | 'intermedio' | 'avanzado';
 
 @Component({
-  selector: 'app-edit-professional-technology',
-  imports: [Loading, LoadingOverlay, RouterLink, TitleCasePipe],
+  imports: [Loading, LoadingOverlay, RouterLink, TitleCasePipe, AdsterraBanner],
   templateUrl: './edit-professional-technology.html',
 })
 export class EditProfessionalTechnology {

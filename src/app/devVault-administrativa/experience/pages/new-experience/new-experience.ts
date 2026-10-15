@@ -12,10 +12,10 @@ import { ExperienceService } from '@devVault-administrativa/experience/services/
 import { CreateExperienceRequest } from '@devVault-administrativa/experience/interfaces/experience.dto';
 import { Loading } from "@shared/components/loading/loading";
 import { AlertService } from '@shared/services/alert-service';
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 @Component({
-  selector: 'app-new-experience',
-  imports: [FormInputField, ReactiveFormsModule, SectionCardComponent, PageHeader, FormTextAreaField, Loading],
+  imports: [FormInputField, ReactiveFormsModule, SectionCardComponent, PageHeader, FormTextAreaField, Loading, AdsterraBanner],
   templateUrl: './new-experience.html'  
 })
 export class NewExperience {

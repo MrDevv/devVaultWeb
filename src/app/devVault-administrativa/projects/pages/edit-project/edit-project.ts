@@ -19,10 +19,11 @@ import { FormTextAreaField } from '@devVault-administrativa/shared/components/fo
 import { FormInputField } from '@devVault-administrativa/shared/components/form-input-field/form-input-field';
 import { PageHeader } from '@devVault-administrativa/shared/components/page-header/page-header';
 import { LoadingOverlay } from '@shared/components/loading-overlay/loading-overlay';
+import { AdsterraBanner } from '@shared/components/adsterra-banner/adsterra-banner';
 
 @Component({
   selector: 'edit-project',
-  imports: [Loading, SectionCardComponent, LogoPreviewComponent, LoaderInput, FormIconInputField, FormTextAreaField, FormInputField, ReactiveFormsModule, TitleCasePipe, LoadingOverlay],
+  imports: [Loading, SectionCardComponent, LogoPreviewComponent, LoaderInput, FormIconInputField, FormTextAreaField, FormInputField, ReactiveFormsModule, TitleCasePipe, LoadingOverlay, AdsterraBanner],
   templateUrl: './edit-project.html'
 })
 export class EditProject {
