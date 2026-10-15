@@ -13,8 +13,8 @@ export interface AnalyticsConfig {
 export const DEVVAULT_ANALYTICS_CONFIG: AnalyticsConfig = {
   enabled: environment.production,
   measurementId: 'G-8KFNVMPW5X',
-  productionOrigin: 'https://devvault.netlify.app',
-  allowedHosts: ['devvault.netlify.app'],
+  productionOrigin: 'https://devvaultmrdevv.netlify.app',
+  allowedHosts: ['devvaultmrdevv.netlify.app'],
   publicPages: {
     '/': 'DevVault | Gestiona tu portafolio mediante una API',
     '/guide': 'Guia de integración de la API | DevVault',
