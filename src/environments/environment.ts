@@ -1,3 +1,3 @@
 export const environment = {
-    API_URL: 'http://192.168.1.2:8080/api/v1'
+    API_URL: 'https://servermrdevv2.duckdns.org/devvault/api/v1'
 };
