@@ -40,7 +40,7 @@ export class GuidePage {
 
   codigo =`const API_KEY = "TU_API_KEY";
 
-fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/datos", {
+fetch("https://servermrdevv2.duckdns.org/devvault/api/v1/dev/me/datos", {
   headers: {
     "Authorization": \`Bearer \${\API_KEY\}\`
   }
@@ -50,7 +50,7 @@ fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/datos", {
 
   codigo_tecnologias =`const API_KEY = "TU_API_KEY";
 
-fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/tecnologias", {
+fetch("https://servermrdevv2.duckdns.org/devvault/api/v1/dev/me/tecnologias", {
   headers: {
     "Authorization": \`Bearer \${\API_KEY\}\`
   }
@@ -60,7 +60,7 @@ fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/tecnologias", {
 
   codigo_experiencias =`const API_KEY = "TU_API_KEY";
 
-fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/experiencias", {
+fetch("https://servermrdevv2.duckdns.org/devvault/api/v1/dev/me/experiencias", {
   headers: {
     "Authorization": \`Bearer \${\API_KEY\}\`
   }
@@ -70,7 +70,7 @@ fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/experiencias", 
 
   codigo_proyectos =`const API_KEY = "TU_API_KEY";
 
-fetch("https://servermrdevv2.duckdns.org/portfolio/api/v1/dev/me/proyectos", {
+fetch("https://servermrdevv2.duckdns.org/devvault/api/v1/dev/me/proyectos", {
   headers: {
     "Authorization": \`Bearer \${\API_KEY\}\`
   }
