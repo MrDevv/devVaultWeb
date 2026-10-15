@@ -16,15 +16,15 @@ const dataEndpoints = [
   },
   {
     url: "/dev/me/tecnologias",
-    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+    description: "Obten las tecnologías que dominas."
   },
   {
     url: "/dev/me/experiencia",
-    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+    description: "Obten tus experiencias profesionales."
   },
   {
     url: "/dev/me/proyectos",
-    description: "Obten tus datos profesionales como nombres, correo, github url, linkedin url y más."
+    description: "Obten tus proyectos profesionales vinculados a tus experiencias."
   }
 ]
 
