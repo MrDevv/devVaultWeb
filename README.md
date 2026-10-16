@@ -6,6 +6,8 @@ La aplicación ofrece un panel para gestionar perfiles profesionales, experienci
 
 **[Visitar DevVault](https://devvaultmrdevv.netlify.app)** · **[Guía de integración](https://devvaultmrdevv.netlify.app/guide)**
 
+![](public/portada_1.webp)
+
 ## Funcionalidades
 
 - Registro e inicio de sesión.
