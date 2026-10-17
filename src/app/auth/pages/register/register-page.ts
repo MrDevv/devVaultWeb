@@ -39,7 +39,7 @@ export class RegisterPage {
     const newUser = {
       nombres: firstName!,
       apellidos: lastName!,
-      email: email!,
+      email: email?.toLowerCase()!,
       password: password!,
       confirmarPassword: confirmPassword!
     };
