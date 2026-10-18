@@ -160,6 +160,15 @@
     
                 <span class="px-4 text-[14px] font-bold text-[#727272]">Administración</span>
     
+                <div 
+                    class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer"
+                    routerLink="/dashboard"
+                    routerLinkActive="bg-card border-[#6366F1] text-[#C0C1FF]!"
+                    (click)="sideBarService.close()"
+                >
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <a>Dashboard</a>
+                </div>
     
                 <div class="flex items-center gap-3 border-r-2 border-[#0e0e0f] px-4 py-3 text-[#c7c4d7] hover:bg-[#201f20] hover:text-[#e5e2e3] transition-all rounded-lg cursor-pointer">
                     <i class="fa-solid fa-users"></i>

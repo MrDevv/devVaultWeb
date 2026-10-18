@@ -16,6 +16,8 @@ import { ListProfessionalTechnologies } from "./professional-technologies/pages/
 import { EditProfessionalTechnology } from "./professional-technologies/pages/edit-professional-technology/edit-professional-technology";
 import { ManageAPI } from "./public-api/pages/manage-api/manage-api";
 import { UnderConstruction } from "../shared/pages/under-construction/under-construction";
+import { Dashboard } from "./dashboard/pages/dashboard/dashboard";
+import { adminGuard } from "../core/guards/admin-guard";
 
 export const routes: Routes = [
     {
@@ -97,6 +99,11 @@ export const routes: Routes = [
             {
                 path: 'config',
                 component: UnderConstruction
+            },
+            {
+                path: 'dashboard',
+                component: Dashboard,
+                canActivate: [adminGuard]
             },
             {
                 path: '**',
