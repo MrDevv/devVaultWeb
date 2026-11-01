@@ -70,6 +70,28 @@ export class AuthService {
     );
   }
 
+  public recoverPassword(email: string) {
+    return this._http.post<APIResponse<null>>(`${BASEURL}/auth/recuperar-password`, { email }).pipe(
+      delay(3000),
+      tap(() => this.clearData()),
+      catchError((error: HttpErrorResponse) => {
+        this.clearData();
+        return throwError(() =>  error.error)
+      })
+    );
+  }
+
+  public resetPassword(token: string, password: string) {
+    return this._http.patch<APIResponse<null>>(`${BASEURL}/auth/reset-password`, { token, password }).pipe(
+      delay(3000),
+      tap(() => this.clearData()),
+      catchError((error: HttpErrorResponse) => {
+        this.clearData();
+        return throwError(() =>  error.error)
+      })
+    );
+  }
+
   public validateToken() {
     const token = localStorage.getItem('token_devVault');
 

@@ -8,6 +8,8 @@ import { registerFlowGuard } from "../core/guards/register-flow-guard";
 import { loginFlowGuard } from "../core/guards/login-flow-guard";
 import { ConfirmEmail } from "./pages/confirm-email/confirm-email";
 import { SuspendedAccount } from "./pages/suspended-account/suspended-account";
+import { RecoverPassword } from "./pages/recover-password/recover-password";
+import { ResetPassword } from "./pages/reset-password/reset-password";
 
 export const routes: Routes = [
     {
@@ -36,6 +38,16 @@ export const routes: Routes = [
         component: SuspendedAccount,
         canActivate: [loginFlowGuard],
         title: 'Cuenta suspendida | DevVault'
+    },
+    {
+        path: 'recover-password',
+        component: RecoverPassword,
+        title: 'Recuperar contraseña | DevVault'
+    },
+    {
+        path: 'reset-password/:token',
+        component: ResetPassword,
+        title: 'Restablecer contraseña | DevVault'
     }
 ]
 
